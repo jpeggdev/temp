@@ -1,0 +1,15 @@
+#!/usr/bin/env php
+<?php
+
+$extensions = [
+    'dbase',
+];
+
+foreach($extensions as $extension) {
+    if (extension_loaded($extension)) {
+        echo "The $extension extension is installed.\n";
+    } else {
+        echo "The $extension extension is not installed.\n";
+        exit(1);
+    }
+}

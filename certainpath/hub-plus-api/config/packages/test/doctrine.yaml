@@ -1,0 +1,21 @@
+doctrine:
+    dbal:
+        connections:
+            default:
+                # Disable persistent connections for tests to allow database drops
+                persistent: false
+                # Connection options
+                options:
+                    # Don't use persistent connections in test environment
+                    !php/const PDO::ATTR_PERSISTENT: false
+                    !php/const PDO::ATTR_ERRMODE: !php/const PDO::ERRMODE_EXCEPTION
+                    # PostgreSQL specific option to limit statement execution time
+                    statement_timeout: 30000  # 30 seconds
+            messenger:
+                persistent: false
+                options:
+                    !php/const PDO::ATTR_PERSISTENT: false
+            generic_ingest:
+                persistent: false
+                options:
+                    !php/const PDO::ATTR_PERSISTENT: false

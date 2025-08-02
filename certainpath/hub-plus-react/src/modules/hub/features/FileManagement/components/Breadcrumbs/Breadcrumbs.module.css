@@ -1,0 +1,141 @@
+/* Breadcrumbs.module.css */
+.breadcrumbsContainer {
+    position: relative;
+    margin-bottom: 1.25rem;
+}
+
+.breadcrumbsList {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 0.25rem;
+    padding: 0.75rem 1rem;
+    background-color: #f8fafc;
+    border-radius: 6px;
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.03);
+    overflow-x: auto;
+    scrollbar-width: thin;
+    white-space: nowrap;
+    border: 1px solid #e2e8f0;
+}
+
+.breadcrumbItem {
+    display: inline-flex;
+    align-items: center;
+    padding: 0.35rem 0.75rem;
+    border-radius: 4px;
+    font-size: 0.9rem;
+    color: #64748b;
+    font-weight: 500;
+    transition: background-color 0.15s ease, color 0.15s ease;
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    max-width: 180px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.breadcrumbItem:hover {
+    background-color: #f1f5f9;
+    color: #475569;
+}
+
+.homeItem {
+    display: inline-flex;
+    align-items: center;
+    background-color: #f1f5f9;
+    color: #3b82f6;
+    font-weight: 600;
+}
+
+.homeItem:hover {
+    background-color: #e2e8f0;
+}
+
+.homeIcon {
+    margin-right: 0.35rem;
+    flex-shrink: 0;
+}
+
+.folderIcon {
+    margin-right: 0.35rem;
+    color: #f59e0b;
+    flex-shrink: 0;
+}
+
+.breadcrumbText {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.currentItem {
+    background-color: white;
+    color: #334155;
+    font-weight: 600;
+    border: 1px solid #e2e8f0;
+}
+
+.currentItem:hover {
+    background-color: white;
+    color: #334155;
+}
+
+.separator {
+    color: #cbd5e1;
+    flex-shrink: 0;
+}
+
+/* Dark mode styles */
+@media (prefers-color-scheme: dark) {
+    .breadcrumbsList {
+        background-color: #1e293b;
+        border-color: #334155;
+    }
+
+    .breadcrumbItem {
+        color: #94a3b8;
+    }
+
+    .breadcrumbItem:hover {
+        background-color: #0f172a;
+        color: #cbd5e1;
+    }
+
+    .homeItem {
+        background-color: #0f172a;
+        color: #60a5fa;
+    }
+
+    .homeItem:hover {
+        background-color: #0f172a;
+    }
+
+    .currentItem {
+        background-color: #334155;
+        color: #e2e8f0;
+        border-color: #475569;
+    }
+
+    .currentItem:hover {
+        background-color: #334155;
+    }
+
+    .separator {
+        color: #64748b;
+    }
+}
+
+/* Responsive adjustments */
+@media (max-width: 640px) {
+    .breadcrumbsList {
+        padding: 0.5rem 0.75rem;
+    }
+
+    .breadcrumbItem {
+        padding: 0.25rem 0.5rem;
+        max-width: 120px;
+        font-size: 0.85rem;
+    }
+}

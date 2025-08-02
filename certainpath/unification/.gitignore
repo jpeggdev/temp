@@ -1,0 +1,71 @@
+/.env.local
+/.env.test.local
+/.idea
+.DS_Store
+/.phpunit.result.cache
+/.*.pid
+
+# Email spool folder
+/app/spool/*
+
+# Logs (Symfony4)
+/var/cache/*
+!var/cache/.gitkeep
+
+/var/data/*
+!var/data/.gitkeep
+
+/var/log/*
+!var/log/.gitkeep
+
+/var/tmp/*
+!var/tmp/.gitkeep
+
+/var/tailwind/*
+!var/tailwind/.gitkeep
+
+# Parameters
+/app/config/parameters.yml
+/app/config/parameters.ini
+
+# Managed by Composer
+/app/bootstrap.php.cache
+/var/bootstrap.php.cache
+/bin/*
+!bin/console
+!bin/symfony_requirements
+/vendor/
+
+# Assets and user uploads
+/web/bundles/
+/web/uploads/
+/public/assets/*
+!public/assets/.gitkeep
+
+# Node modules
+/node_modules/*
+!node_modules/.gitkeep
+
+# PHPUnit
+/app/phpunit.xml
+/phpunit.xml
+
+# Build data
+/build/
+
+# Composer PHAR
+/composer.phar
+
+# Backup entities generated with doctrine:generate:entities command
+**/Entity/*~
+
+# Embedded web-server pid file
+/.web-server-pid
+.aider*
+
+/docker/postgres
+
+###> squizlabs/php_codesniffer ###
+/.phpcs-cache
+/phpcs.xml
+###< squizlabs/php_codesniffer ###

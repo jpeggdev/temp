@@ -1,0 +1,101 @@
+***************************
+** The following story was pasted from:
+** https://dev.azure.com/SuccessGroupInternational/Hub/_workitems/edit/3990
+***************************
+
+https://integration.servicetitan.com/#/new/dashboards/modular-dashboard
+https://developer.servicetitan.io/docs/get-going-manage-client-id-and-secret/
+Service Titan API Integration - Automated Report Extraction
+
+Summary
+
+Replace manual report generation and upload process with automated API integration to Service Titan for customer and invoice data extraction.
+
+Background
+
+Currently, users manually:
+
+Run customer reports in Service Titan
+Run invoice reports in Service Titan
+Upload these reports to our system
+Our logic processes and ingests the data into our database
+With access to Service Titan APIs, we can automate this entire process.
+
+Service Titan Authentication Flow
+
+Service Titan requires a specific authentication process:
+
+For App Developers: Must register the app in the Developer Portal and add each client's Tenant ID
+For Tenant Admins: Must allow the app through ServiceTitan's Integrations > API Application Access
+Credential Generation: Can be done either by:
+App developers through the Developer Portal (recommended approach)
+Tenant admins through their ServiceTitan interface
+Each tenant requires unique Client ID/Secret pairs that are environment-specific
+Objectives
+
+Eliminate manual report generation and upload process
+Implement automated data extraction via Service Titan APIs
+Enable recurring automated data pulls (weekly/monthly)
+Improve data freshness from monthly to potentially weekly updates
+Requirements
+
+Authentication & Authorization
+
+Build UI for clients to securely input their Service Titan credentials
+Tenant ID input field
+Client ID input field
+Client Secret input field (secure/masked)
+Environment selector (Integration/Production)
+Implement secure storage for client credentials
+Note: Each Tenant ID requires its own unique Client ID and Client Secret pair
+Credentials are environment-specific (Integration vs Production)
+API Integration
+
+Implement Service Titan API client
+Create endpoints to fetch:
+Customer data
+Invoice data
+Handle API rate limits and pagination
+Implement error handling and retry logic
+Data Processing
+
+Maintain compatibility with existing data ingestion logic
+Map API response data to match current report format
+Validate data integrity before database insertion
+Scheduling & Automation
+
+Implement configurable scheduling system
+Support multiple frequency options:
+Weekly
+Monthly
+Custom intervals
+Add monitoring and alerting for failed syncs
+User Interface
+
+Client credential management screen
+Sync status dashboard showing:
+Last sync timestamp
+Next scheduled sync
+Sync history and logs
+Manual sync trigger option
+Technical Considerations
+
+Service Titan Authentication Requirements:
+App must be registered in Service Titan Developer Portal
+Each client's Tenant ID must be added to our app
+Clients must allow our app through their API Application Access settings
+Client ID/Secret are specific to each tenant and environment
+Must handle "Not Connected Yet" status until tenant approves
+Plan for managing multiple tenant connections
+Implement environment-specific credential storage (Integration vs Production)
+Consider UI to show connection status for each tenant
+Plan for credential rotation and security best practices
+Success Criteria
+
+Automated data extraction running successfully on schedule
+Zero manual intervention required for regular data updates
+Improved data freshness (weekly vs monthly)
+Secure credential management implemented
+Monitoring and alerting in place
+
+

@@ -1,0 +1,100 @@
+Job Number,Invoice Number,Job Type,Invoice Summary,Zone,Customer ID,Customer Name,Customer PO Number,Customer First Name,Customer Last Name,Customer Phone Number(s),Street,Unit,City,State,Zip,Country,Campaign,Type,First Appointment,Last Appointment,# of Appointments,Technician(s),Sold By,Status,Hold Reason,Hold Memo,Cancel Reason,Cancel Memo,Total,Balance,Total Material Cost,Completed On,Canceled On,Summary,Business Unit,Tag(s),Customer Email Address(es),Location Email Address(es),Payment Type(s),No Charge,Recall,Warranty,TGL,Manually Booked Job,Did I Offer HHC?,Dig Crew,How would you like us to reach out?,Owner/Occupant?,Permit Jurisdiction,Reason for date,Sub Cost,Year of Home
+113353493,113353493,sample-job-type,sample-invoice-summary,sample-zone,4595546,Micah Marsh,,Micah,Marsh,(303) 909-4530,4670 Osceola Street,,Denver,CO,80212,USA,Organic (Old Scorpion),Pipe Repair,2022-05-27T08:00:00,2022-05-27T08:00:00,1,Kyle Sweeney,,Completed,,,,,3076.95,0,1.78,2022-05-27T16:59:00,,"05/27 - Pipe is needing replace and leaking in a crawl space. 
+Arrival window given: 8am - 5pm 
+Pricing: $49 dispatch for non-members
+Water/Gas line: Water Line or Pipe 
+Location of break:  in the pipe  leading up to wash room and dishwasher he says.
+Age of home: 1955
+Notes: Customer doesn't feel ok running water in sink and wash room - maybe interested in a whole pipe replacement.",Plumbing Service,Potential Member,marshmb@yahoo.com,marshmb@yahoo.com,Credit Card,FALSE,FALSE,FALSE,FALSE,FALSE,,,Call,,,YES,,
+114297893,114297893,sample-job-type,sample-invoice-summary,sample-zone,4557152,Russ & Diane Kyncl,,Russ & Diane,Kyncl,(303) 503-9770,3372 Vivian Drive,,Wheat Ridge,CO,80033,USA,7X Direct,Faucet Repair/Replace,2022-06-02T08:00:00,2022-06-02T08:00:00,1,Evan Hunter,,Completed,,,,,655,0,41.55,2022-06-02T09:39:00,,"06/02 Our issue is a outside hose spigot valve, I think. No problem when closed, when open no water comes out of spigot, but runs into the wall and basement
+Arrival window given: 8a-5p 
+Pricing: $49 dispatch for non-members
+Location of faucet:
+Age of home: 1973 
+Notes:",Plumbing Service,Potential Member,Rgkyncl@comcast.net,Rgkyncl@comcast.net,Credit Card,FALSE,FALSE,FALSE,FALSE,TRUE,,,Call,,,YES,,
+114580468,114580468,sample-job-type,sample-invoice-summary,sample-zone,84641649,Valerie Kummer,,Valerie,Kummer,(701) 570-1201,11473 West Asbury Court,,Lakewood,CO,80228,USA,LMBA Email Content,HVAC Electrical Reconnect,2022-06-03T08:00:00,2022-06-03T08:00:00,1,Greg Deringer,,Completed,,,,,0,0,0,2022-06-03T10:23:00,,"COORDINATOR ONLY
+
+Install Goodman 80% 80K 2-stg and 80% 100L 2-stg with 2 16Seer 3 Ton AC's",HVAC Install,Trial membership,genparkholdings@gmail.com,genparkholdings@gmail.com,,TRUE,FALSE,FALSE,FALSE,TRUE,,,Call,,,YES,,
+115519770,115519770,sample-job-type,sample-invoice-summary,sample-zone,39801264,Anthony Gonzales,,Anthony,Gonzales,(303) 909-8982,830 South Wheeling Street,,Aurora,CO,80012,USA,Organic (Old Scorpion),HVAC Install,2022-06-14T08:00:00,2022-06-14T08:00:00,1,"Jason Jonas, Jairo Medrano, Marques Novak",Christian Vassilaros,Completed,,,,,13149,0,0,2022-06-14T15:37:00,,"COORDINATOR ONLY
+
+Date: 6/14
+Sold by: Christian V
+System Type: AC
+Pricing: 13,149
+Electric: Reconnect
+Notes: Install Goodman 2.5 Ton, 16 SEER, Single stage Condenser",HVAC Install,Potential Membership Renewal,"ajgonz@comcast.net, Ajgonz@comcast.net","ajgonz@comcast.net, Ajgonz@comcast.net","Service Finance Funding, Service Finance Funding, Finance Fees",TRUE,FALSE,FALSE,FALSE,TRUE,,,Call,,,YES,,
+115554964,115554964,sample-job-type,sample-invoice-summary,sample-zone,4621928,Susan Bittan,,Susan,Bittan,(720) 255-4978,3177 South Monaco Circle,,Denver,CO,80222,USA,Main Number,10+ AC Not Working,2022-06-15T10:00:00,2022-06-15T10:00:00,1,Reid McGowan,,Completed,,,,,49,0,0,2022-06-15T11:31:00,,"Sales Lead Opportunity 
+6/15
+Arrival window given: 8-5
+Pricing: $49 dispatch for non-member
+Location of unit: outside on left side
+Age of unit: 16 years old 
+Notes: Blowing out luke  warm air",HVAC Service,"Potential Member, Unit Down, 10+ Equipment, UPDATED",sldenver@aol.com,sldenver@aol.com,Credit Card,FALSE,FALSE,FALSE,FALSE,TRUE,,,Call,,,NO,,
+115658923,115658923,sample-job-type,sample-invoice-summary,sample-zone,115659946,Juana Rodriguez,,Juana,Rodriguez,(720) 532-4601,2310 South Sheridan Boulevard,,Denver,CO,80227,USA,Outbounding,10+ AC Not Working,2022-06-20T11:00:00,2022-06-20T11:00:00,1,Matt Gibbons,,Completed,,,,,49,0,0,2022-06-20T12:29:00,,"Sales Lead Opportunity 
+6/20
+not blowing cold air
+Arrival window given: 8a-5p
+Pricing: $49 dispatch for non-member
+Location of unit: backyard
+Age of unit: 1955, unit hasn't been replaced since she moved in
+Notes:",HVAC Service,"Potential Member, Unit Down, 10+ Equipment, UPDATED",ivonnerodriguez07@yahoo.com,ivonnerodriguez07@yahoo.com,Credit Card,FALSE,FALSE,FALSE,FALSE,FALSE,,,Call,,,YES,,
+116090037,116090037,sample-job-type,sample-invoice-summary,sample-zone,110256788,Mathew Czajkowski,,Mathew,Czajkowski,(702) 344-6481,7700 West Glasgow Place,23-C,Littleton,CO,80128,USA,$50 Gift Card,Faucet Repair/Replace,2022-06-23T08:00:00,2022-06-23T08:00:00,1,John Johnson,,Completed,,,,,1342,0,58.85,2022-06-23T10:29:00,,"06/23 - Faucet repair 
+Arrival window given: 8am  -5pm 
+Pricing: $49 dispatch for non-members
+Location of faucet: Shower 
+Age of home: 1973 
+Notes: Kitchen sink has a smell and only with hot water - shower faucet",Plumbing Service,"Potential Member, UPDATED",ski003_30@msn.com,"ski003_30@msn.com, bronesski@comcast.net",Credit Card,FALSE,FALSE,FALSE,FALSE,TRUE,,,Call,,,NO,,
+116119198,116119198,,,,98557290,Randy Houchen & Krista Hale,,Randy Houchen & Krista,Hale,(303) 249-2596,2424 West Houstoun Waring Circle,,Littleton,CO,80120,USA,Main Number,Technician Requesting Camera,2022-06-21T10:00:00,2022-06-21T10:00:00,1,Kyle Pelton,,Completed,,,,,0,0,0,2022-06-21T13:02:00,,"6/21 Josiah requesting a camera. Line is open. Pulled back roots and hair. No rough spots. Clean out in basement but went through a pulled toilet
+-------------------------------------------
+6/21
+Arrival window given: 8-5 
+Pricing: $49 dispatch for non-members
+Type of repair: Active back up for man drain
+Age of home: 1977 
+Notes: Active back up",Sewer Install,"Potential Member, UPDATED",rwhouchen@comcast.net,rwhouchen@comcast.net,,TRUE,FALSE,FALSE,TRUE,TRUE,,,,,,,,
+113357723,113357723,,,,18877182,Craig & Charmaine Ellison,,Craig & Charmaine,Ellison,"(303) 883-0786, (303) 669-2366",2260 Elm Street,,Denver,CO,80207,USA,Organic (Old Scorpion),Technician Requesting Camera,2022-05-26T09:30:00,2022-05-26T09:30:00,1,Jim Anderson,,Completed,,,,,0,0,0,2022-05-26T11:11:00,,"5.26 TP Jason --Floor drain. Found roots, not sure if its' from main or secondary
+
+***Is there an active backup?: Yes 
+If so, where?: Floor drain 
+Pricing: $79 main drain, $199 secondary, $45 toilet pull
+Single Family Home?: Yes 
+Age of home: 1955
+Location of cleanout: Back driveway in yard and one in floor drain 
+Notes: Customer has active backup from floor drain, has been getting worse over time now backing up active",Sewer Install,"Potential Member, Main","ellisoncc@msn.com, charmaine1366@gmail.com",,,FALSE,FALSE,FALSE,TRUE,TRUE,,,,,,,,
+114145839,114145839,,,,4577704,Lila Sandoval,,Lila,Sandoval,(303) 922-2298,235 Meade Street,,Denver,CO,80219,USA,Organic (Old Scorpion),Technician Requesting Camera,2022-05-31T09:30:00,2022-05-31T09:30:00,1,Jim Anderson,,Completed,,,,,0,0,0,2022-05-31T11:33:00,,"5/31 8-5 Josiah requesting a camera. Line is open, Pulled back roots and worms. Rough spots at 30-40 ft. Clean out is between toilet and shower.
+-----------------------------------------------------------------------------
+05/29 - Main Drain  Adv special offer $79 - $99 sec drain also 
+***Is there an active backup?: Y If so, where?: Shower Basement 
+Pricing: $79 main drain, $199 secondary, $45 toilet pull
+Single Family Home?: y 
+Age of home:1954
+Location of cleanout: Shower in basement 
+Notes:",Sewer Install,"Potential Member, Main",lilah.sandoval@yahoo.com,lilah.sandoval@yahoo.com,,TRUE,FALSE,FALSE,TRUE,TRUE,,,,,,,,
+114294292,114294292,,,,114293012,Kendall Phillps,,Kendall,Phillps,(307) 359-2792,4205 Genoa Street,,Denver,CO,80249,USA,Outbounding,Electrical Repair,2022-06-06T10:00:00,2022-06-06T10:00:00,1,Austin Staples,,Completed,,,,,524,0,83.56,2022-06-06T10:48:00,,"06/06 There is a couple plugs ungrounded and breaker box needs to be wired correctly 
+Arrival window given: 8a-5p 
+Pricing: $49 dispatch for non-members
+Age of unit:
+Location of unit: Towards the back of the home outside 
+Notes:",Electric Service,"Potential Member, UPDATED",blsoomhill77@yahoo.com,blsoomhill77@yahoo.com,Check,FALSE,FALSE,FALSE,FALSE,FALSE,,,Call,,,YES,,
+114305593,114305593,,,,114306068,Mark Fall,,Mark,Fall,(719) 251-8311,3075 South Birch Street,,Denver,CO,80222,USA,Google Local Services - Plumbing,Technician Requesting Camera,2022-05-31T13:00:00,2022-05-31T13:00:00,1,Jim Anderson,,Completed,,,,,0,0,0,2022-05-31T15:09:00,,"5.31 Josiah requesting cam for ML backup 1950 home
+--
+05/31 Toilet is backing up into the shower with sewage 
+Arrival window given: 8a-5p 
+Pricing: $79 main line, $99 Secondary, $45 toilet pull, secondary jetting $439
+What line: toilet backing up into the shower 
+Single Family Home?: yes 
+Age of home: 1950 
+Notes:",Sewer Install,"Potential Member, Main","onceamarine@comcast.net, Amorganmd@comcast.net","onceamarine@comcast.net, Amorganmd@comcast.net",,FALSE,FALSE,FALSE,TRUE,TRUE,,,,,,,,
+113257110,113257110,,,,112541204,Myrna French,,Myrna,French,(303) 547-7885,10983 Bannock Street,,Northglenn,CO,80234,USA,7X Direct,HVAC Electrical Reconnect,2022-05-31T15:00:00,2022-06-01T08:00:00,2,"Greg Deringer, Beau Ames",,Completed,,,,,0,0,466,2022-06-01T11:42:00,,"COORDINATOR ONLY
+
+Reconnect
+80% 80K
+16S 2T",HVAC Install,Potential Member,jaye.french40@gmail.com,jaye.french40@gmail.com,,TRUE,FALSE,FALSE,FALSE,TRUE,,,Call,,,YES,,
+114735550,114735550,,,,4616886,Mildred Barton,,Mildred,Barton,(303) 870-8922,9028 West Harvard Place,,Lakewood,CO,80227,USA,7X Direct,Secondary Drain,2022-06-05T10:00:00,2022-06-05T10:00:00,1,Josiah Rios,,Completed,,,,,260,0,0,2022-06-05T12:03:00,,"06/05 - Main Drain - early Morning 
+***Is there an active backup?: Y 
+If so, where?: Laundry room in basement 
+n drain, $199 secondary, $45 toilet pull
+Single Family Home?:
+Year home was built:  1970 something 
+Location of cleanout: Main drain 
+Notes: No Covid  - if something opens up move up for today,.",Drains Service,UPDATED,milb@comcast.net,milb@comcast.net,Credit Card,FALSE,FALSE,FALSE,FALSE,TRUE,,,Call,,,YES,,

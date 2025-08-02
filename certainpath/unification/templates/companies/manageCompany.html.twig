@@ -1,0 +1,95 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Manage Company: {{ company.name }}{% endblock %}
+{% block page_heading %}Manage Company: {{ company.name }}{% endblock %}
+
+{% block javascripts %}
+    <script src="https://hotglue.xyz/widgetv2.js"></script>
+    <script>
+    HotGlue.mount({
+    "api_key": "{{ app_config.get('HOTGLUE_API_KEY') }}",
+    "env_id": "{{ app_config.get('HOTGLUE_ENV_ID') }}"
+    });
+    </script>
+{% endblock %}
+
+{% block body %}
+    <div>
+        <div class="px-4 sm:px-0">
+            <h3 class="text-base font-semibold leading-7 text-gray-900">{{ company.name }} [{{ company.identifier }}]</h3>
+            <p class="mt-1 max-w-2xl text-sm leading-6 text-gray-500">Details and actions.</p>
+        </div>
+        <div class="px-4 py-5 sm:px-6">
+            <a
+                    type="button"
+                    href="{{ path('app_company_prospects', {'identifier': company.identifier}) }}"
+                    class="rounded-md bg-indigo-500 px-3 py-2 text-center text-sm font-semibold text-white shadow-sm hover:bg-indigo-400 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-500"
+            >
+                List Recent Prospects
+            </a>
+            <a
+                    type="button"
+                    href="{{ path('app_company_prospects_query_builder', {'identifier': company.identifier}) }}"
+                    class="ml-2 rounded-md bg-indigo-500 px-3 py-2 text-center text-sm font-semibold text-white shadow-sm hover:bg-indigo-400 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-500"
+            >
+                Create a Prospect Export
+            </a>
+        </div>
+        <div class="mt-6 border-t border-gray-100">
+            <dl class="divide-y divide-gray-100">
+                <div class="px-4 py-6 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0">
+                    <dt class="text-sm font-medium leading-6 text-gray-900">Company name</dt>
+                    <dd class="mt-1 text-sm leading-6 text-gray-700 sm:col-span-2 sm:mt-0">{{ company.name }}</dd>
+                </div>
+                <div class="px-4 py-6 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0">
+                    <dt class="text-sm font-medium leading-6 text-gray-900">Company identifier</dt>
+                    <dd class="mt-1 text-sm leading-6 text-gray-700 sm:col-span-2 sm:mt-0">{{ company.identifier }}</dd>
+                </div>
+                <div class="px-4 py-6 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0">
+                    <dt class="text-sm font-medium leading-6 text-gray-900">Company Created</dt>
+                    <dd class="mt-1 text-sm leading-6 text-gray-700 sm:col-span-2 sm:mt-0">{{ company.createdAt|date('Y-m-d') }}</dd>
+                </div>
+                <div class="px-4 py-6 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0">
+                    <dt class="text-sm font-medium leading-6 text-gray-900">
+                        <script>
+                            function launchHG() {
+                                HotGlue.open('{{ company.externalIdentifier }}', {});
+                            }
+                        </script>
+                        <button
+                                onclick="launchHG()"
+                                type="button"
+                                class="relative inline-flex items-center rounded-md bg-rose-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-rose-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-rose-600"
+                        >
+                            <span>Open The Hotglue Widget</span>
+                        </button>
+                    </dt>
+                    <dd class="mt-1 text-sm leading-6 text-gray-700 sm:col-span-2 sm:mt-0">
+                        The Hotglue upload utility allows you to upload a data file to a pre-configured workflow so that
+                        it can be ingested into the {{ app_config.get('APP_PROPER_NAME') }} database.
+                    </dd>
+                </div>
+                {#<div class="px-4 py-6 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0">
+                    <dt class="text-sm font-medium leading-6 text-gray-900">ServiceTitan Members Pending Processing</dt>
+                    <dd class="mt-1 text-sm leading-6 text-gray-700 sm:col-span-2 sm:mt-0">{{ membersCount|number_format }}</dd>
+                </div>
+                <div class="px-4 py-6 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0">
+                    <dt class="text-sm font-medium leading-6 text-gray-900">ServiceTitan Invoices Pending Processing</dt>
+                    <dd class="mt-1 text-sm leading-6 text-gray-700 sm:col-span-2 sm:mt-0">{{ invoicesCount|number_format }}</dd>
+                </div>
+                <div class="px-4 py-6 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0">
+                    <dt class="text-sm font-medium leading-6 text-gray-900">Latest Member Record</dt>
+                    <dd class="mt-1 text-sm leading-6 text-gray-700 sm:col-span-2 sm:mt-0">
+                        <code>{{ lastMember|json_encode(constant('JSON_PRETTY_PRINT'))  }}</code>
+                    </dd>
+                </div>
+                <div class="px-4 py-6 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0">
+                    <dt class="text-sm font-medium leading-6 text-gray-900">Latest Invoice Record</dt>
+                    <dd class="mt-1 text-sm leading-6 text-gray-700 sm:col-span-2 sm:mt-0">
+                        <code>{{ lastInvoice|json_encode(constant('JSON_PRETTY_PRINT'))  }}</code>
+                    </dd>
+                </div>#}
+            </dl>
+        </div>
+    </div>
+{% endblock %}

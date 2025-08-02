@@ -1,0 +1,626 @@
+/* src/modules/hub/features/FileManagement/components/FileManagementHeader/FileManagementHeader.module.css */
+.container {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    position: sticky;
+    top: 64px;
+    z-index: 40;
+    margin-bottom: 1rem;
+    gap: 1rem;
+    padding: 1rem;
+    border-radius: 0.75rem;
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    background-color: rgba(255, 255, 255, 0.95);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+}
+
+.container.sticky {
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05), 0 1px 2px rgba(0, 0, 0, 0.1);
+    background-color: rgba(255, 255, 255, 0.85);
+    padding: 0.75rem 1rem;
+    gap: 0.75rem;
+}
+
+/* Compact breadcrumbs for sticky header */
+.compactBreadcrumbs {
+    display: flex;
+    align-items: center;
+    gap: 0.375rem;
+    font-size: 0.8125rem;
+    margin-bottom: 0.5rem;
+    overflow-x: auto;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+    white-space: nowrap;
+    opacity: 0;
+    max-height: 0;
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.container.sticky .compactBreadcrumbs {
+    opacity: 1;
+    max-height: 2rem;
+}
+
+.compactBreadcrumbs::-webkit-scrollbar {
+    display: none;
+}
+
+.compactBreadcrumbHome {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    color: #3b82f6;
+    background: rgba(59, 130, 246, 0.08);
+    border: none;
+    padding: 0.3rem;
+    border-radius: 0.375rem;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.compactBreadcrumbHome:hover {
+    background: rgba(59, 130, 246, 0.15);
+}
+
+.compactBreadcrumbItem {
+    display: inline-flex;
+    align-items: center;
+    border: none;
+    background: transparent;
+    color: #6b7280;
+    font-size: 0.8125rem;
+    padding: 0.3rem 0.6rem;
+    border-radius: 0.375rem;
+    cursor: pointer;
+    max-width: 150px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    transition: all 0.2s ease;
+}
+
+.compactBreadcrumbItem:hover {
+    background-color: rgba(0, 0, 0, 0.03);
+    color: #374151;
+}
+
+.compactCurrentItem {
+    background-color: rgba(59, 130, 246, 0.08);
+    color: #1e40af;
+    font-weight: 500;
+}
+
+.compactCurrentItem:hover {
+    background-color: rgba(59, 130, 246, 0.12);
+}
+
+.compactSeparator {
+    color: #d1d5db;
+    flex-shrink: 0;
+}
+
+.compactFolderIcon {
+    color: #f59e0b;
+    margin-right: 0.375rem;
+    flex-shrink: 0;
+}
+
+.compactBreadcrumbText {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.compactEllipsis {
+    color: #9ca3af;
+    margin: 0 0.25rem;
+}
+
+/* Header content wrapper */
+.headerContent {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    gap: 0.875rem;
+    transition: gap 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.container.sticky .headerContent {
+    gap: 0.625rem;
+}
+
+/* Search row */
+.searchRow {
+    width: 100%;
+}
+
+.searchWrapper {
+    width: 100%;
+}
+
+.searchContainer {
+    position: relative;
+    width: 100%;
+}
+
+.searchIcon {
+    position: absolute;
+    left: 1rem;
+    top: 50%;
+    transform: translateY(-50%);
+    color: #9ca3af;
+    pointer-events: none;
+}
+
+.searchInput {
+    width: 100%;
+    padding: 0.625rem 1rem 0.625rem 2.75rem;
+    border: 1px solid #e5e7eb;
+    border-radius: 0.5rem;
+    font-size: 0.9375rem;
+    transition: all 0.2s ease;
+    background-color: rgba(255, 255, 255, 0.8);
+    color: #1f2937;
+}
+
+.container.sticky .searchInput {
+    padding: 0.5rem 1rem 0.5rem 2.75rem;
+    background-color: rgba(255, 255, 255, 0.9);
+}
+
+.searchInput:focus {
+    outline: none;
+    border-color: #3b82f6;
+    box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
+    background-color: white;
+}
+
+.searchInput::placeholder {
+    color: #9ca3af;
+}
+
+/* Actions row */
+.actionsRow {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 0.625rem;
+}
+
+.standardActions, .selectionActions {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    flex: 1;
+}
+
+.selectionActions {
+    animation: fadeIn 0.3s ease forwards;
+}
+
+/* Button styling */
+.buttonIcon {
+    flex-shrink: 0;
+    transition: transform 0.2s ease;
+}
+
+.spinningIcon {
+    animation: spin 1s linear infinite;
+}
+
+/* More options dropdown */
+.moreOptionsWrapper {
+    display: none;
+    position: relative;
+}
+
+.moreOptionsButton {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.dropdownMenu {
+    position: absolute;
+    top: 100%;
+    right: 0;
+    margin-top: 0.5rem;
+    background-color: white;
+    border: 1px solid rgba(0, 0, 0, 0.08);
+    border-radius: 0.75rem;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+    min-width: 200px;
+    z-index: 50;
+    overflow: hidden;
+}
+
+.dropdownMenuItem {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    padding: 0.625rem 1rem;
+    width: 100%;
+    text-align: left;
+    font-size: 0.875rem;
+    color: #4b5563;
+    background: none;
+    border: none;
+    cursor: pointer;
+    transition: all 0.15s ease;
+}
+
+.dropdownMenuItem:hover:not(:disabled) {
+    background-color: rgba(59, 130, 246, 0.05);
+    color: #1f2937;
+}
+
+.dropdownMenuItem:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+
+.activeMenuItem {
+    background-color: rgba(59, 130, 246, 0.08);
+    font-weight: 500;
+    color: #2563eb;
+}
+
+.menuItemIcon {
+    color: #6b7280;
+}
+
+.activeMenuItem .menuItemIcon {
+    color: #2563eb;
+}
+
+.dropdownDivider {
+    height: 1px;
+    margin: 0.25rem 0;
+    background-color: rgba(0, 0, 0, 0.06);
+}
+
+/* Buttons styling */
+.primaryAction, .secondaryAction {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    transition: all 0.2s ease;
+    font-weight: 500;
+    font-size: 0.875rem;
+    padding: 0.5rem 1rem;
+    border-radius: 0.5rem;
+}
+
+.container.sticky .primaryAction,
+.container.sticky .secondaryAction {
+    padding: 0.4375rem 0.875rem;
+}
+
+.buttonText {
+    white-space: nowrap;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.container.sticky .buttonText {
+    font-size: 0.8125rem;
+}
+
+.uploadButton {
+    background: linear-gradient(135deg, #3b82f6 0%, #2563eb 100%);
+    color: white;
+    border: none;
+    box-shadow: 0 1px 3px rgba(37, 99, 235, 0.3);
+}
+
+.uploadButton:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 4px 6px rgba(37, 99, 235, 0.25);
+}
+
+.uploadButton:active {
+    transform: translateY(0);
+}
+
+.folderButton {
+    background: linear-gradient(135deg, #8b5cf6 0%, #7c3aed 100%);
+    color: white;
+    border: none;
+    box-shadow: 0 1px 3px rgba(124, 58, 237, 0.3);
+}
+
+.folderButton:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 4px 6px rgba(124, 58, 237, 0.25);
+}
+
+.folderButton:active {
+    transform: translateY(0);
+}
+
+.selectButton, .selectAllButton, .downloadButton, .cancelButton {
+    border: 1px solid rgba(0, 0, 0, 0.08);
+    color: #4b5563;
+    background-color: white;
+}
+
+.selectButton:hover, .selectAllButton:hover, .downloadButton:hover, .cancelButton:hover {
+    background-color: rgba(0, 0, 0, 0.02);
+    border-color: rgba(0, 0, 0, 0.12);
+    transform: translateY(-1px);
+}
+
+.selectButton:active, .selectAllButton:active, .downloadButton:active, .cancelButton:active {
+    transform: translateY(0);
+}
+
+.deleteButton {
+    background: linear-gradient(135deg, #ef4444 0%, #dc2626 100%);
+    color: white;
+    font-weight: 500;
+    border: none;
+    box-shadow: 0 1px 3px rgba(220, 38, 38, 0.3);
+}
+
+.deleteButton:hover:not(:disabled) {
+    transform: translateY(-1px);
+    box-shadow: 0 4px 6px rgba(220, 38, 38, 0.25);
+}
+
+.deleteButton:active {
+    transform: translateY(0);
+}
+
+.deleteButton:disabled, .downloadButton:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+    transform: none;
+    box-shadow: none;
+}
+
+.selectionCount {
+    padding: 0.375rem 0.75rem;
+    font-size: 0.875rem;
+    font-weight: 600;
+    color: #1f2937;
+    background-color: rgba(59, 130, 246, 0.08);
+    border-radius: 0.375rem;
+}
+
+/* View toggle */
+.viewToggle {
+    display: flex;
+    border: 1px solid rgba(0, 0, 0, 0.08);
+    border-radius: 0.5rem;
+    overflow: hidden;
+    margin-left: auto;
+    background-color: rgba(0, 0, 0, 0.02);
+}
+
+.viewToggleButton {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0.4375rem 0.625rem;
+    background-color: transparent;
+    color: #6b7280;
+    border: none;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.viewToggleButton:hover {
+    background-color: rgba(0, 0, 0, 0.03);
+}
+
+.viewToggleButtonActive {
+    background: linear-gradient(135deg, #3b82f6 0%, #2563eb 100%);
+    color: white;
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
+}
+
+/* Animations */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(-8px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes spin {
+    0% {
+        transform: rotate(0deg);
+    }
+    100% {
+        transform: rotate(360deg);
+    }
+}
+
+/* Responsive adjustments */
+@media (max-width: 1023px) {
+    .secondaryAction {
+        display: none;
+    }
+
+    .moreOptionsWrapper {
+        display: block;
+    }
+}
+
+@media (max-width: 767px) {
+    .container {
+        padding: 0.75rem;
+    }
+
+    .container.sticky {
+        padding: 0.625rem;
+    }
+
+    .buttonText {
+        display: none;
+    }
+
+    .primaryAction {
+        padding: 0.5rem;
+    }
+
+    .container.sticky .primaryAction {
+        padding: 0.4375rem;
+    }
+
+    .viewToggle {
+        display: none;
+    }
+
+    .compactBreadcrumbItem {
+        max-width: 100px;
+        font-size: 0.75rem;
+    }
+
+    .searchInput {
+        font-size: 0.875rem;
+        padding: 0.5rem 1rem 0.5rem 2.5rem;
+    }
+
+    .container.sticky .searchInput {
+        padding: 0.4375rem 1rem 0.4375rem 2.5rem;
+    }
+}
+
+/* Dark mode support */
+@media (prefers-color-scheme: dark) {
+    .container {
+        background-color: rgba(31, 41, 55, 0.95);
+        backdrop-filter: blur(10px);
+        -webkit-backdrop-filter: blur(10px);
+    }
+
+    .container.sticky {
+        background-color: rgba(31, 41, 55, 0.85);
+        box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2), 0 1px 2px rgba(0, 0, 0, 0.3);
+    }
+
+    .compactBreadcrumbHome {
+        background: rgba(59, 130, 246, 0.15);
+        color: #60a5fa;
+    }
+
+    .compactBreadcrumbHome:hover {
+        background: rgba(59, 130, 246, 0.25);
+    }
+
+    .compactBreadcrumbItem {
+        color: #9ca3af;
+    }
+
+    .compactBreadcrumbItem:hover {
+        background-color: rgba(255, 255, 255, 0.05);
+        color: #e5e7eb;
+    }
+
+    .compactCurrentItem {
+        background-color: rgba(59, 130, 246, 0.15);
+        color: #93bbfc;
+    }
+
+    .compactCurrentItem:hover {
+        background-color: rgba(59, 130, 246, 0.2);
+    }
+
+    .compactSeparator {
+        color: #4b5563;
+    }
+
+    .searchInput {
+        background-color: rgba(17, 24, 39, 0.5);
+        border-color: rgba(75, 85, 99, 0.3);
+        color: #f9fafb;
+    }
+
+    .container.sticky .searchInput {
+        background-color: rgba(17, 24, 39, 0.7);
+    }
+
+    .searchInput:focus {
+        border-color: #60a5fa;
+        box-shadow: 0 0 0 3px rgba(96, 165, 250, 0.1);
+        background-color: rgba(17, 24, 39, 0.9);
+    }
+
+    .searchInput::placeholder {
+        color: #6b7280;
+    }
+
+    .dropdownMenu {
+        background-color: #1f2937;
+        border-color: rgba(75, 85, 99, 0.3);
+        box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.3), 0 2px 4px -1px rgba(0, 0, 0, 0.4);
+    }
+
+    .dropdownMenuItem {
+        color: #e5e7eb;
+    }
+
+    .dropdownMenuItem:hover:not(:disabled) {
+        background-color: rgba(59, 130, 246, 0.1);
+        color: #f9fafb;
+    }
+
+    .activeMenuItem {
+        background-color: rgba(59, 130, 246, 0.15);
+        color: #60a5fa;
+    }
+
+    .dropdownDivider {
+        background-color: rgba(75, 85, 99, 0.3);
+    }
+
+    .menuItemIcon {
+        color: #9ca3af;
+    }
+
+    .activeMenuItem .menuItemIcon {
+        color: #60a5fa;
+    }
+
+    .selectButton, .selectAllButton, .downloadButton, .cancelButton {
+        border-color: rgba(75, 85, 99, 0.3);
+        color: #e5e7eb;
+        background-color: rgba(31, 41, 55, 0.5);
+    }
+
+    .selectButton:hover, .selectAllButton:hover, .downloadButton:hover, .cancelButton:hover {
+        background-color: rgba(55, 65, 81, 0.5);
+        border-color: rgba(107, 114, 128, 0.5);
+    }
+
+    .selectionCount {
+        background-color: rgba(59, 130, 246, 0.15);
+        color: #93bbfc;
+    }
+
+    .viewToggle {
+        border-color: rgba(75, 85, 99, 0.3);
+        background-color: rgba(0, 0, 0, 0.2);
+    }
+
+    .viewToggleButton {
+        color: #d1d5db;
+    }
+
+    .viewToggleButton:hover {
+        background-color: rgba(255, 255, 255, 0.05);
+    }
+
+    .viewToggleButtonActive {
+        background: linear-gradient(135deg, #3b82f6 0%, #2563eb 100%);
+        color: white;
+    }
+}

@@ -1,0 +1,23 @@
+{
+    "KPlugin": {
+        "Authors": [
+            {
+                "Name": "Eyeball Wallpaper Developer",
+                "Email": "developer@example.com"
+            }
+        ],
+        "Name": "Eyeball Wallpaper",
+        "Name[x-test]": "xxEyeball Wallpaperxx",
+        "Description": "A wallpaper with an eyeball that follows your mouse cursor",
+        "Description[x-test]": "xxA wallpaper with an eyeball that follows your mouse cursorxx",
+        "Id": "org.kde.plasma.eyeball",
+        "Version": "1.0",
+        "Category": "Appearance",
+        "EnabledByDefault": true,
+        "License": "GPL-2.0+",
+        "Website": "https://example.com",
+        "Icon": "view-preview",
+        "ServiceTypes": ["Plasma/Wallpaper"]
+    },
+    "X-Plasma-API": "declarativeappletscript"
+}

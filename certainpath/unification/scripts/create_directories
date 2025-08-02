@@ -1,0 +1,28 @@
+#!/bin/bash
+
+# Function to create a directory if it does not exist and set permissions to 777
+create_directory() {
+  local PERMISSIONS="$1"
+  local DIR_PATH="$2"
+
+  # Check if the directory exists
+  if [ ! -d "$DIR_PATH" ]; then
+    # If the directory does not exist, create it
+    mkdir -p "$DIR_PATH"
+    echo "Directory created: $DIR_PATH"
+  else
+    echo "Directory already exists: $DIR_PATH"
+  fi
+
+  # Set permissions to 777
+  chmod "$PERMISSIONS" "$DIR_PATH"
+  echo "Permissions set to $PERMISSIONS for: $DIR_PATH"
+}
+
+# Call the function with the directory path as an argument
+create_directory "755" "./public/assets"
+create_directory "777" "./var/cache"
+create_directory "777" "./var/data"
+create_directory "777" "./var/log"
+create_directory "777" "./var/tailwind"
+create_directory "777" "./var/tmp"

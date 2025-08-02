@@ -1,0 +1,30 @@
+#!/usr/bin/env bash
+
+# Interactive "Are you sure?" prompt
+read -p "Are you sure you want to drop and recreate the databases and users? This will destroy all data. (y/n): " -n 1 -r
+echo
+
+# Check if the response is 'y' or 'Y'
+if [[ ! $REPLY =~ ^[Yy]$ ]]
+then
+    echo "Operation cancelled."
+    exit 1
+fi
+
+# Create Databases
+echo 'Dropping existing databases' &&
+dropdb --if-exists hubplus
+dropdb --if-exists hubplus_test
+
+echo 'Dropping existing users' &&
+dropuser --if-exists -U$USER hubplus
+
+echo 'Creating users' &&
+createuser -d -hlocalhost -gpg_read_server_files -gpg_write_server_files hubplus
+
+echo 'Creating databases' &&
+createdb -E 'UTF-8' -O hubplus -hlocalhost -Uhubplus hubplus &&
+createdb -E 'UTF-8' -O hubplus -hlocalhost -Uhubplus hubplus_test &&
+
+
+echo 'Databases provisioned'

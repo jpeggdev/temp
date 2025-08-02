@@ -1,0 +1,6 @@
+@HeyDav.Api_HostAddress = http://localhost:5038
+
+GET {{HeyDav.Api_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###

@@ -1,0 +1,162 @@
+# This file is the entry point to configure your own services.
+# Files in the packages/ subdirectory configure your dependencies.
+
+# Put parameters here that don't need to change on each machine where the app is deployed
+# https://symfony.com/doc/current/best_practices.html#use-parameters-for-application-configuration
+parameters:
+
+services:
+    # default configuration for services in *this* file
+    _defaults:
+        autowire: true      # Automatically injects dependencies in your services.
+        autoconfigure: true # Automatically registers your services as commands, event subscribers, etc.
+
+    # makes classes in src/ available to be used as services
+    # this creates a service per class whose id is the fully-qualified class name
+    App\:
+        resource: '../src/'
+        exclude:
+            - '../src/DependencyInjection/'
+            - '../src/Entity/'
+            - '../src/Kernel.php'
+
+    App\EventListener\ExceptionListener:
+        tags:
+            - { name: 'kernel.event_subscriber' }
+
+    App\Security\ApiKeyAuthenticator:
+        arguments:
+            $apiKey: '%env(APP_API_KEY)%'
+
+    App\Services\Address\AddressService:
+        arguments:
+            $addressVerificationService: '@App\Services\AddressVerification\BypassingAddressVerificationService'
+        public: true
+
+    App\Services\AddressVerification\SmartyAddressVerificationService:
+        arguments:
+            $serializer: '@serializer'
+        public: true
+
+    App\Services\AddressVerification\USPSAddressVerificationService:
+        arguments:
+            $uspsApiClientId: '%env(USPS_API_CLIENT_ID)%'
+            $uspsApiClientSecret: '%env(USPS_API_CLIENT_SECRET)%'
+            $settingRepository: '@App\Repository\SettingRepository'
+        public: true
+
+    App\Services\CampaignEventService:
+        public: true
+
+    App\Services\CustomerMetricsService:
+        public: true
+
+    App\Services\CompanyStatusService:
+        public: true
+
+    App\Services\DataStreamDigestingService:
+        arguments:
+            $companyRepository: '@App\Repository\CompanyRepository'
+            $fieldEdgeRepository: '@App\Repository\Unmanaged\FieldEdgeRepository'
+            $genericIngestRepository: '@App\Repository\Unmanaged\GenericIngestRepository'
+            $serviceTitanRepository: '@App\Repository\Unmanaged\ServiceTitanRepository'
+            $successwareRepository: '@App\Repository\Unmanaged\SuccesswareRepository'
+        public: true
+
+    App\Services\FileConverter:
+        arguments:
+            $in2csvBinary: '%env(APP_IN2CSV_BINARY)%'
+
+    App\Services\FileWriter:
+        arguments:
+            $temporaryDataPath: '%kernel.project_dir%/var/tmp'
+            $persistentDataPath: '%kernel.project_dir%/var/data'
+
+    App\Services\LifeFileService:
+        public: true
+
+    App\Services\CompanyJobService:
+        public: true
+
+    App\Services\OneDriveService:
+        arguments:
+            $graphClient: '@Microsoft\Graph\Graph'
+            $env: '%kernel.environment%'
+        public: true
+
+    App\Services\PostProcessingService:
+        public: true
+
+    App\Services\ProspectExportService:
+        public: true
+
+    App\Services\ApplicationSignalingService:
+        public: true
+
+    App\Commands\DigestRemoteSourcesCommand:
+        arguments:
+            $databaseConsumer: '@App\Services\DataStreamDigestingService'
+            $projectDirectory: '%kernel.project_dir%'
+        tags:
+            - { name: 'console.command' }
+        public: true
+
+    App\Commands\ExportCommand:
+        arguments:
+        tags:
+            - { name: 'console.command' }
+        public: true
+
+    App\Commands\PopulateDataCommand:
+        arguments:
+            $dataProvisioner: '@App\Services\DataProvisioner'
+        tags:
+            - { name: 'console.command' }
+        public: true
+
+    App\Commands\PostProcessCommand:
+        arguments:
+            $postProcessingService: '@App\Services\PostProcessingService'
+            $projectDirectory: '%kernel.project_dir%'
+        tags:
+            - { name: 'console.command' }
+        public: true
+
+    App\AbstractMigrator:
+        calls:
+            - method: setFileWriter
+              arguments:
+                - '@App\Services\FileWriter'
+            - method: setFileConverter
+              arguments:
+                - '@App\Services\FileConverter'
+
+    App\Security\UserProvider:
+        arguments:
+            $auth0Provider: '@Auth0\Symfony\Security\UserProvider'
+            $userRepository: '@App\Repository\UserRepository'
+        public: true
+
+    App\Client\FileClient:
+        arguments:
+            $awsAccessKeyId: '%env(resolve:AWS_ACCESS_KEY_ID)%'
+            $awsSecretAccessKey: '%env(resolve:AWS_SECRET_ACCESS_KEY)%'
+            $tempDirectory: '%kernel.project_dir%/var/tmp'
+
+    League\Fractal\Manager:
+        public: true
+
+    SmartyStreets\PhpSdk\US_Street\Client:
+        public: true
+        factory: [ 'App\Factory\SmartyStreetsClientFactory', 'createClient' ]
+        arguments:
+            $authId: '%env(SMARTY_AUTH_ID)%'
+            $authToken: '%env(SMARTY_AUTH_TOKEN)%'
+
+    Microsoft\Graph\Graph:
+        public: true
+        factory: ['App\Factory\MSGraphProviderFactory', 'createGraphClient']
+        arguments:
+            - '%env(MS_GRAPH_API_TENANT_ID)%'
+            - '%env(MS_GRAPH_API_CLIENT_ID)%'
+            - '%env(MS_GRAPH_API_CLIENT_SECRET)%'

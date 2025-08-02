@@ -1,0 +1,156 @@
+import {
+  HomeIcon,
+  UsersIcon,
+  DocumentIcon,
+  CircleStackIcon,
+  KeyIcon,
+  BookOpenIcon,
+  Cog6ToothIcon,
+  FolderIcon,
+  TagIcon,
+} from "@heroicons/react/24/outline";
+import { NavigationItem } from "./types";
+
+const navigation: NavigationItem[] = [
+  {
+    name: "Home",
+    href: "/hub",
+    icon: HomeIcon,
+    current: false,
+    internalName: "home",
+    permissions: [],
+  },
+  {
+    name: "Resource Library",
+    href: "/hub/resources",
+    icon: BookOpenIcon,
+    current: false,
+    internalName: "resource_library",
+    permissions: [],
+  },
+  // {
+  //   name: "Dashboards",
+  //   href: "#",
+  //   icon: ChartBarIcon,
+  //   current: false,
+  //   internalName: "dashboards",
+  //   permissions: [],
+  //   children: [
+  //     {
+  //       name: "Field Labor",
+  //       href: "/hub/dashboards/field-labor",
+  //       icon: UsersIcon,
+  //       current: false,
+  //       internalName: "field_labor",
+  //       permissions: [],
+  //     },
+  //   ],
+  // },
+  {
+    name: "User Management",
+    href: "#",
+    icon: UsersIcon,
+    current: false,
+    internalName: "user_management",
+    permissions: ["CAN_MANAGE_USERS"],
+    children: [
+      {
+        name: "User List",
+        href: "/hub/users",
+        icon: UsersIcon,
+        current: false,
+        internalName: "user_list",
+        permissions: ["CAN_VIEW_USERS"],
+      },
+      {
+        name: "Business Roles and Permissions",
+        href: "/hub/users/business-roles-permissions",
+        icon: KeyIcon,
+        current: false,
+        internalName: "business_roles_permissions",
+        permissions: ["CAN_MANAGE_ROLES_AND_PERMISSIONS"],
+        isCertainPathOnly: true,
+      },
+    ],
+  },
+  {
+    name: "Document Library",
+    href: "/hub/document-library",
+    icon: DocumentIcon,
+    current: false,
+    internalName: "document_library",
+    permissions: ["CAN_ACCESS_DOCUMENT_LIBRARY"],
+    children: [
+      {
+        name: "Monthly Balance Sheet",
+        href: "/hub/document-library/monthly-balance-sheet",
+        icon: DocumentIcon,
+        current: false,
+        internalName: "monthly_balance_sheet",
+        permissions: ["CAN_ACCESS_MONTHLY_BALANCE_SHEET"],
+      },
+      {
+        name: "Profit and Loss",
+        href: "/hub/document-library/profit-and-loss",
+        icon: DocumentIcon,
+        current: false,
+        internalName: "profit_and_loss",
+        permissions: ["CAN_ACCESS_PROFIT_AND_LOSS"],
+      },
+      {
+        name: "Transaction List",
+        href: "/hub/document-library/transaction-list",
+        icon: DocumentIcon,
+        current: false,
+        internalName: "transaction_list",
+        permissions: ["CAN_ACCESS_TRANSACTION_LIST"],
+      },
+    ],
+  },
+  {
+    name: "Data Connector",
+    href: "/hub/data-connector",
+    icon: CircleStackIcon,
+    current: false,
+    internalName: "data_connector",
+    permissions: ["CAN_ACCESS_DATA_CONNECTOR"],
+  },
+  {
+    name: "Admin",
+    href: "#",
+    icon: Cog6ToothIcon,
+    current: false,
+    internalName: "hub_admin",
+    permissions: [],
+    roles: ["ROLE_SUPER_ADMIN"],
+    isCertainPathOnly: true,
+    children: [
+      {
+        name: "Resource Categories",
+        href: "/hub/admin/resource-categories",
+        icon: FolderIcon,
+        current: false,
+        internalName: "resourceCategories",
+        permissions: [],
+        roles: ["ROLE_SUPER_ADMIN"],
+      },
+      {
+        name: "Resource Tags",
+        href: "/hub/admin/resource-tags",
+        icon: TagIcon,
+        current: false,
+        internalName: "resourceTags",
+        permissions: [],
+        roles: ["ROLE_SUPER_ADMIN"],
+      },
+    ],
+  },
+];
+
+const hubConfig = {
+  sectionName: "hub",
+  defaultRoute: "/hub",
+  navigation,
+};
+
+export default hubConfig;

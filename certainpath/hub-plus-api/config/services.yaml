@@ -1,0 +1,145 @@
+# This file is the entry point to configure your own services.
+# Files in the packages/ subdirectory configure your dependencies.
+
+# Put parameters here that don't need to change on each machine where the app is deployed
+# https://symfony.com/doc/current/best_practices.html#use-parameters-for-application-configuration
+parameters:
+
+services:
+    # default configuration for services in *this* file
+    _defaults:
+        autowire: true      # Automatically injects dependencies in your services.
+        autoconfigure: true # Automatically registers your services as commands, event subscribers, etc.
+        bind:
+            $auth0Domain: '%env(resolve:AUTH0_DOMAIN)%'
+            $auth0ClientId: '%env(resolve:AUTH0_CLIENT_ID)%'
+            $auth0ClientSecret: '%env(resolve:AUTH0_CLIENT_SECRET)%'
+            $auth0Audience: '%env(resolve:AUTH0_AUDIENCE)%'
+            $auth0MachineToMachineClientId: '%env(resolve:AUTH0_MACHINE_TO_MACHINE_CLIENT_ID)%'
+            $auth0MachineToMachineClientSecret: '%env(resolve:AUTH0_MACHINE_TO_MACHINE_CLIENT_SECRET)%'
+            $awsAccessKeyId: '%env(resolve:AWS_ACCESS_KEY_ID)%'
+            $awsSecretAccessKey: '%env(resolve:AWS_SECRET_ACCESS_KEY)%'
+            $awsDefaultRegion: '%env(resolve:AWS_DEFAULT_REGION)%'
+            $tempDirectory: '%kernel.project_dir%/var/tmp'
+            $unificationApiBaseUri: '%env(resolve:UNIFICATION_API_BASE_URI)%'
+            $unificationApiKey: '%env(resolve:UNIFICATION_API_KEY)%'
+            $authorizeNetApiLoginId: '%env(resolve:AUTHORIZENET_API_LOGIN_ID)%'
+            $authorizeNetTransactionKey: '%env(resolve:AUTHORIZENET_TRANSACTION_KEY)%'
+            $authorizeNetUrl: '%env(resolve:AUTHORIZENET_URL)%'
+            $serviceTitanClientId: '%env(resolve:SERVICETITAN_CLIENT_ID)%'
+            $serviceTitanClientSecret: '%env(resolve:SERVICETITAN_CLIENT_SECRET)%'
+            $serviceTitanAppKey: '%env(resolve:SERVICETITAN_APP_KEY)%'
+            $serviceTitanEncryptionKey: '%env(resolve:SERVICETITAN_ENCRYPTION_KEY)%'
+
+    # makes classes in src/ available to be used as services
+    # this creates a service per class whose id is the fully-qualified class name
+    App\:
+        resource: '../src/'
+        exclude:
+            - '../src/DependencyInjection/'
+            - '../src/Entity/'
+            - '../src/Kernel.php'
+
+    # add more service definitions when explicit configuration is needed
+    # please note that last definitions always *replace* previous ones
+
+    App\Service\ExcelAnalyzerService:
+        public: true
+    App\Service\FieldServicesUploadService:
+        public: true
+    App\Service\AccountApplicationCompanyIngestionService:
+        public: true
+    App\Service\StochasticCompanyIngestionService:
+        public: true
+    App\Service\StochasticRosterLoaderService:
+        public: true
+    App\Module\CraftMigration\Repository\CraftMigrationRepository:
+        public: true
+        arguments:
+            - '@doctrine.dbal.craft_cms_connection'
+    App\Repository\External\IngestRepository:
+        public: true
+        arguments:
+            - '@doctrine.dbal.generic_ingest_connection'
+    App\Repository\External\AccountApplicationRepository:
+        public: true
+        arguments:
+            - '@doctrine.dbal.certainpath_connection'
+    App\Client\FileClient:
+        public: true
+    App\Client\UnificationClient:
+        arguments:
+            - '@http_client'
+            - '%env(resolve:UNIFICATION_API_BASE_URI)%'
+            - '%env(resolve:UNIFICATION_API_KEY)%'
+        public: true
+    App\Client\CaraClient:
+        arguments:
+            - '@http_client'
+            - '%env(resolve:CARA_API_BASE_URI)%'
+            - '%env(resolve:CARA_API_KEY)%'
+        public: true
+    App\Service\CARA\TransactionSyncService:
+        arguments:
+            - '@App\Client\CaraClient'
+            - '@App\Repository\InvoiceRepository'
+        public: true
+    App\Service\CARA\CampaignInvoiceService:
+        arguments:
+            - '@App\Client\CaraClient'
+        public: true
+    App\Doctrine\MultiSchemaMigrationSubscriber:
+        tags:
+            - { name: doctrine.event_subscriber, connection: default }
+    App\Client\MailchimpTransactionalClient:
+        arguments:
+            $apiKey: '%env(MAILCHIMP_API_KEY)%'
+    App\Module\EmailManagement\Feature\EmailCampaignManagement\Service\SendCampaignEmailService:
+        arguments:
+            $appEmailAddress: '%env(APP_EMAIL_ADDRESS)%'
+    App\Client\SalesforceClient:
+        public: true
+        arguments:
+            $clientId: '%env(SALESFORCE_CLIENT_ID)%'
+            $clientSecret: '%env(SALESFORCE_CLIENT_SECRET)%'
+            $username: '%env(SALESFORCE_USERNAME)%'
+            $password: '%env(SALESFORCE_PASSWORD)%%env(SALESFORCE_SECURITY_TOKEN)%'
+    App\Service\SalesforceRosterService:
+        public: true
+
+    App\Service\Company\CompanyRosterService:
+        public: true
+
+    App\Service\Company\CompanyRosterSyncService:
+        public: true
+
+    App\Module\Stochastic\Feature\PostageUploadsSftp\Service\SftpBatchPostageProcessorService:
+        public: true
+
+    App\Module\EventRegistration\Feature\EventRegistration\Service\Validator\EventCheckoutValidationService:
+        arguments:
+            $validators: !tagged_iterator 'app.event_checkout_validator'
+
+    App\Module\EventRegistration\Feature\EventRegistration\Service\PostProcessor\EventCheckoutPostProcessingService:
+        arguments:
+            $postProcessors: !tagged_iterator 'app.event_checkout_post_processor'
+
+    App\Module\ServiceTitan\Service\ServiceTitanCredentialEncryptionService:
+        public: true
+        arguments:
+            $rawEncryptionKey: '%env(resolve:SERVICETITAN_ENCRYPTION_KEY)%'
+
+    App\Module\ServiceTitan\Feature\DataSynchronization\Service\ServiceTitanSyncService:
+        public: true
+
+    App\Module\ServiceTitan\Feature\DataSynchronization\Service\ServiceTitanSyncProgressService:
+        public: true
+
+    App\Module\ServiceTitan\Feature\DataSynchronization\Service\ServiceTitanAlertService:
+        public: true
+
+    App\Module\ServiceTitan\Service\ServiceTitanAuthService:
+        public: true
+
+    App\Module\ServiceTitan\Client\ServiceTitanClient:
+        public: true

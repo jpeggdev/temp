@@ -1,0 +1,5 @@
+customerfirstname,country,customerid,customerphonenumberprimary,createdat,trade,city,software,street,invoicenumber,total,firstappointment,customerphonenumbers,customerlastname,customername,zip,jobnumber,unit,processed,summary,tenant,state,id
+Jim,,1679461,"(940) 368-9292","2025-02-05 20:26:16.149637 +00:00",hvac,Justin,ServiceTitan,"1336 Valley Dr.",10279723,0,1517961600,,Smith,"Jim Smith",76247,10279723,,false,,SM000250,Tx.,29
+Jim,,1679461,"(940) 368-9292","2025-02-05 20:26:16.149637 +00:00",hvac,Justin,ServiceTitan,"1336 Valley Dr.",10279846,0,1517961600,,Smith,"Jim Smith",76247,10279846,,false,,SM000250,Tx.,30
+Jim,,1679461,"(940) 368-9292","2025-02-05 20:26:16.149637 +00:00",hvac,Justin,ServiceTitan,"1336 Valley Dr.",1069,69,1517788800,,Smith,"Jim Smith",76247,10246075,,false,,SM000250,Tx.,86
+Jim,,1679461,"(940) 368-9292","2025-02-05 20:26:16.149637 +00:00",hvac,Justin,ServiceTitan,"1336 Valley Dr.",1122,89,1523577600,,Smith,"Jim Smith",76247,11525816,,false,,SM000250,Tx.,143

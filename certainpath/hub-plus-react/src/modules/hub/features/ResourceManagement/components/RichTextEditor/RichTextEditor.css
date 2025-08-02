@@ -1,0 +1,52 @@
+.my-rich-text-editor ul {
+    list-style: disc;
+    margin-left: 1.5rem;
+    padding-left: 0;
+}
+
+.my-rich-text-editor ol {
+    list-style: decimal;
+    margin-left: 1.5rem;
+    padding-left: 0;
+}
+
+.my-rich-text-editor h1 {
+    font-size: 2em;
+    margin: 0.5em 0;
+    font-weight: bold;
+}
+
+.my-rich-text-editor h2 {
+    font-size: 1.5em;
+    margin: 0.5em 0;
+    font-weight: bold;
+}
+
+.my-rich-text-editor h3 {
+    font-size: 1.25em;
+    margin: 0.5em 0;
+    font-weight: bold;
+}
+
+.my-rich-text-editor h4 {
+    font-size: 1.125em;
+    margin: 0.5em 0;
+    font-weight: bold;
+}
+
+.my-rich-text-editor h5 {
+    font-size: 1em;
+    margin: 0.5em 0;
+    font-weight: bold;
+}
+
+.my-rich-text-editor h6 {
+    font-size: 0.875em;
+    margin: 0.5em 0;
+    font-weight: bold;
+}
+
+.my-rich-text-editor a {
+    color: #1e40af;
+    text-decoration: underline;
+}

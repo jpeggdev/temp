@@ -1,0 +1,60 @@
+version: '3.8'
+
+services:
+  php:
+    container_name: unification-php
+    build:
+      context: ./docker
+    ports:
+      - '9001:9000'
+    expose:
+      - '6001'
+    volumes:
+      - ./:/var/www
+      - ./docker/php/docker-php-memlimit.ini:/usr/local/etc/php/conf.d/docker-php-memlimit.ini
+    environment:
+      XDEBUG_CONFIG: client_host=host.docker.internal
+      SHELL: /bin/bash
+      DATABASE_URL: "postgresql://unification:unification@unification-postgres:5432/unification?serverVersion=16&charset=utf8"
+    depends_on:
+      - postgres
+    networks:
+      - certainpath-shared-network
+
+  nginx:
+    container_name: unification-nginx
+    image: nginx:stable-alpine
+    ports:
+      - '8002:80'
+    volumes:
+      - ./:/var/www:cached
+      - ./docker/nginx/default.conf:/etc/nginx/conf.d/default.conf
+    depends_on:
+      - php
+      - postgres
+    networks:
+      - certainpath-shared-network
+
+  postgres:
+    container_name: unification-postgres
+    image: postgres:16
+    restart: always
+    volumes:
+      - unification-postgres-data:/var/lib/postgresql/data
+      - ./:/var/www:cached
+    ports:
+      - '5431:5432'
+    environment:
+      POSTGRES_USER: unification
+      POSTGRES_PASSWORD: unification
+      POSTGRES_DB: unification
+    networks:
+      - certainpath-shared-network
+
+networks:
+  certainpath-shared-network:
+    external: true
+
+volumes:
+  unification-postgres-data:
+    driver: local

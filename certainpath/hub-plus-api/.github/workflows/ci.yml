@@ -1,0 +1,113 @@
+name: CI
+
+on:
+  pull_request:
+
+jobs:
+  unit_tests:
+    name: Run Unit Tests
+    runs-on: ubuntu-latest
+
+    services:
+      postgres:
+        image: postgres:15
+        env:
+          POSTGRES_USER: postgres
+          POSTGRES_PASSWORD: postgres
+          POSTGRES_DB: postgres
+        options: >-
+          --health-cmd pg_isready
+          --health-interval 10s
+          --health-timeout 5s
+          --health-retries 5
+        ports:
+          - 5432:5432
+
+    environment: qa  # This loads secrets from the "qa" environment
+
+    steps:
+      - uses: actions/checkout@v3
+      - name: Set up PHP
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: '8.3.10'
+          tools: composer
+          extensions: pdo_pgsql
+      - name: Install dependencies
+        run: composer install --no-progress --no-suggest --prefer-dist --optimize-autoloader --no-scripts
+      - name: Create .env file from environment secret
+        env:
+          ENV_FILE: ${{ secrets.ENV_FILE }}
+        run: |
+          echo $ENV_FILE | base64 --decode > .env
+      - name: Rename .env.test.local.ci to .env.test.local
+        run: |
+          cp .env.test.local.ci .env.test.local
+      - name: Create test databases
+        env:
+          PGPASSWORD: postgres
+        run: |
+          psql -h localhost -U postgres -c "CREATE DATABASE hubplus_test;"
+          psql -h localhost -U postgres -c "CREATE DATABASE unification_ingest_generic_test;"
+      - name: Setup unification_ingest_generic_test database
+        env:
+          PGPASSWORD: postgres
+        run: |
+          # Run SQL files from sql folder
+          for file in sql/*.sql; do
+            if [ -f "$file" ]; then
+              echo "Running $file on unification_ingest_generic_test..."
+              psql -h localhost -U postgres -d unification_ingest_generic_test -f "$file"
+            fi
+          done
+
+          # Run SQL files from migrations-ingestdb folder
+          for file in migrations-ingestdb/*.sql; do
+            if [ -f "$file" ]; then
+              echo "Running $file on unification_ingest_generic_test..."
+              psql -h localhost -U postgres -d unification_ingest_generic_test -f "$file"
+            fi
+          done
+      - name: Run Unit Tests
+        run: |
+          vendor/bin/phpunit
+
+  phpstan:
+    name: Run PHPStan
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Set up PHP
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: '8.3.10'
+          tools: composer
+
+      - name: Install dependencies
+        run: composer install --no-progress --no-suggest --prefer-dist --optimize-autoloader --no-scripts
+
+      - name: Run PHPStan
+        run: |
+          vendor/bin/phpstan analyse
+
+  php_cs_fixer:
+    name: Run PHP CS Fixer (Dry-Run)
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Set up PHP
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: '8.3.10'
+          tools: composer
+
+      - name: Install dependencies
+        run: composer install --no-progress --no-suggest --prefer-dist --optimize-autoloader --no-scripts
+
+      - name: Run PHP CS Fixer in dry-run mode
+        run: |
+          vendor/bin/php-cs-fixer fix --dry-run --diff

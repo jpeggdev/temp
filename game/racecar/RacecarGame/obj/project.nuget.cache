@@ -1,0 +1,11 @@
+{
+  "version": 2,
+  "dgSpecHash": "CByaH8yDuhM=",
+  "success": true,
+  "projectFilePath": "/home/jpegg/code/game/racecar/RacecarGame/RacecarGame.csproj",
+  "expectedPackageFiles": [
+    "/home/jpegg/.nuget/packages/raylib-cs/6.1.1/raylib-cs.6.1.1.nupkg.sha512",
+    "/home/jpegg/.nuget/packages/system.numerics.vectors/4.5.0/system.numerics.vectors.4.5.0.nupkg.sha512"
+  ],
+  "logs": []
+}

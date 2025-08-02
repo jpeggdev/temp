@@ -1,0 +1,126 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Manage Batches{% endblock %}
+{% block page_heading %}Manage Batches{% endblock %}
+
+{% block body %}
+    {{ form_start(form, {'attr': {'novalidate': 'novalidate'}}) }}
+        <div class="space-y-12">
+            <div class="border-gray-900/10 pb-12">
+                <h2 class="text-base font-semibold leading-7 text-gray-900">Create a Batch For Export</h2>
+                <div class="mt-1 grid grid-cols-1 sm:grid-cols-12 gap-4">
+                    <div class="sm:col-span-4">
+                        {{ form_row(form.name, {
+                            'label': 'What would you like to call this batch?',
+                            'label_attr': {'class': 'block text-sm font-medium text-gray-900'},
+                            'attr': {
+                                'placeholder': 'Q3 Mailing'
+                            }
+                        }) }}
+                    </div>
+                    <div class="sm:col-span-4">
+                        {{ form_row(form.recordStart, {
+                            'label': 'Which record should we start with?',
+                            'label_attr': {'class': 'block text-sm font-medium text-gray-900'},
+                            'attr': {
+                                'placeholder': '1'
+                            }
+                        }) }}
+                    </div>
+                    <div class="sm:col-span-4">
+                        {{ form_row(form.numberOfRecords, {
+                            'label': 'How many records do you want?',
+                            'label_attr': {'class': 'block text-sm font-medium text-gray-900'},
+                            'attr': {
+                                'placeholder': '500'
+                            }
+                        }) }}
+                    </div>
+                    <div class="mt-4 sm:col-span-12 ">
+                        {{ form_row(form.description, {
+                            'label': 'Description',
+                            'label_attr': {'class': 'block text-sm font-medium text-gray-900'},
+                            'attr': {
+                                'placeholder': 'Used for initial mailing on ' ~ date() | date_modify("-1 month") |  date("m/d/Y"),
+                                'style': 'width: 100%',
+                            }
+                        }) }}
+                    </div>
+                </div>
+
+                <div class="mt-6 flex items-center justify-end gap-x-6">
+                    {{ form_row(form.submit, {
+                        'label': 'Save',
+                        'attr': {
+                            'class': 'rounded-md bg-indigo-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600'
+                        }
+                    }) }}
+                </div>
+            </div>
+        </div>
+    {{ form_end(form) }}
+
+    {% if savedQueries|length > 0 %}
+        <div class="mt-8 flow-root">
+            <div class="-mx-4 -my-2 overflow-x-auto sm:-mx-6 lg:-mx-8">
+                <div class="inline-block min-w-full py-2 align-middle sm:px-6 lg:px-8">
+                    <table class="min-w-full divide-y divide-gray-300">
+                        <thead>
+                        <tr>
+                            <th scope="col" class="py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 sm:pl-0">Name</th>
+                            <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">Record Count</th>
+                            <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">Last Run</th>
+                            <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">Created</th>
+                        </tr>
+                        </thead>
+                        <tbody class="divide-y divide-gray-200">
+                        {% for savedQuery in savedQueries %}
+                            <tr>
+                                <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">{{ savedQuery.name }}</td>
+                                <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">{{ savedQuery.recordCount }}</td>
+                                <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
+                                    {% if savedQuery.lastRun %}
+                                        {{ savedQuery.lastRun|date }}
+                                    {% endif %}
+                                </td>
+                                <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">{{ savedQuery.createdAt|date }}</td>
+                                <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500 text-right">
+                                    <a href="{{ path('app_export_saved_query', {
+                                        savedQueryId: savedQuery.id,
+                                        dataType: 'prospects',
+                                        dataTarget: 'mailmanager'
+                                    }) }}" class="rounded-md bg-rose-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-rose-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-rose-600">Export as .DBF</a>
+                                </td>
+                            </tr>
+                            {% if savedQuery.description|length > 0 %}
+                                <tr class="border-none">
+                                    <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500 col-span-5 text-right" colspan="5">
+                                        {{ savedQuery.description }}
+                                    </td>
+                                </tr>
+                            {% endif %}
+                        {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <nav class="flex items-center justify-between border-t border-gray-200 bg-white px-4 py-3 sm:px-6" aria-label="Pagination">
+                <div class="hidden sm:block">
+                    <p class="text-sm text-gray-700">
+                        Showing
+                        <span class="font-medium">{{ offset + 1}}</span>
+                        to
+                        <span class="font-medium">{{ next }}</span>
+                        of
+                        <span class="font-medium">{{ savedQueries|length }}</span>
+                        results
+                    </p>
+                </div>
+                <div class="flex flex-1 justify-between sm:justify-end">
+                    <a href="{{ path('app_company_prospects_query_builder', { identifier: company.identifier, offset: previous }) }}" class="relative inline-flex items-center rounded-md bg-white px-3 py-2 text-sm font-semibold text-gray-900 ring-1 ring-inset ring-gray-300 hover:bg-gray-50 focus-visible:outline-offset-0">Previous</a>
+                    <a href="{{ path('app_company_prospects_query_builder', { identifier: company.identifier, offset: next }) }}" class="relative ml-3 inline-flex items-center rounded-md bg-white px-3 py-2 text-sm font-semibold text-gray-900 ring-1 ring-inset ring-gray-300 hover:bg-gray-50 focus-visible:outline-offset-0">Next</a>
+                </div>
+            </nav>
+        </div>
+    {% endif %}
+{% endblock %}

@@ -1,0 +1,521 @@
+/* src/modules/hub/features/FileManagement/components/FilterSidebar/FilePickerFilterSidebar.module.css */
+.backdrop {
+    position: fixed;
+    inset: 0;
+    background-color: rgba(0, 0, 0, 0.5);
+    z-index: 40;
+    animation: fadeIn 0.2s forwards;
+}
+
+.sidebar {
+    position: relative;
+    height: 100%;
+    width: 280px;
+    background-color: #f5f5f7;
+    border-right: 1px solid #d1d1d1;
+    z-index: 50;
+    overflow-y: auto;
+    transition: transform 0.3s ease;
+    display: flex;
+    flex-direction: column;
+}
+
+.sidebarOpen {
+    transform: translateX(0);
+}
+
+.sidebarClosed {
+    transform: translateX(-100%);
+}
+
+.sidebarHeader {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background: linear-gradient(to bottom, #f3f3f3, #e5e5e5);
+    border-bottom: 1px solid #d1d1d1;
+    height: 40px;
+    padding: 0 12px;
+    flex-shrink: 0;
+}
+
+.sidebarTitle {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 14px;
+    font-weight: 600;
+    color: #303030;
+    margin: 0;
+}
+
+.titleIcon {
+    color: #505050;
+}
+
+.filterBadge {
+    background-color: #ef4444;
+    color: white;
+    border-radius: 10px;
+    min-width: 16px;
+    height: 16px;
+    font-size: 10px;
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0 4px;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+.closeButton {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #505050;
+    background: none;
+    border: none;
+    width: 28px;
+    height: 28px;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.2s ease, color 0.2s ease;
+}
+
+.closeButton:hover {
+    background-color: rgba(0, 0, 0, 0.05);
+    color: #303030;
+}
+
+.activeFiltersContainer {
+    padding: 12px;
+    background-color: rgba(0, 0, 0, 0.02);
+}
+
+/* Section headers with collapsible functionality */
+.filterSection {
+    margin-bottom: 0;
+}
+
+.sectionHeader {
+    padding: 6px 12px;
+    cursor: pointer;
+    user-select: none;
+    transition: background-color 0.2s ease;
+}
+
+.sectionHeader:hover {
+    background-color: rgba(0, 0, 0, 0.05);
+}
+
+.sectionHeader:hover .collapseIcon {
+    opacity: 1;
+}
+
+.sectionTitle {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 11px;
+    font-weight: 600;
+    color: #505050;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    margin: 0;
+    justify-content: space-between;
+}
+
+.collapseIconContainer {
+    width: 16px;
+    height: 16px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-left: auto;
+}
+
+.collapseIcon {
+    color: #505050;
+    opacity: 0;
+    transition: opacity 0.2s ease;
+}
+
+.sectionIcon {
+    color: #505050;
+    margin-right: 2px;
+}
+
+.sectionContent {
+    max-height: 500px; /* Large enough to fit most content */
+    overflow: hidden;
+    transition: max-height 0.3s ease;
+}
+
+.sectionContent.collapsed {
+    max-height: 0;
+}
+
+.activeFiltersList {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+    margin-bottom: 10px;
+}
+
+.activeFilterTag {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    padding: 3px 8px;
+    background-color: rgba(0, 0, 0, 0.05);
+    color: #505050;
+    border-radius: 4px;
+    font-size: 12px;
+    font-weight: 500;
+    border: 1px solid rgba(0, 0, 0, 0.1);
+    transition: all 0.2s ease;
+}
+
+.filterTagIcon {
+    color: #505050;
+}
+
+.filterTagText {
+    max-width: 160px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.removeFilterButton {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #505050;
+    background: none;
+    border: none;
+    padding: 0;
+    cursor: pointer;
+    transition: color 0.2s ease;
+}
+
+.removeFilterButton:hover {
+    color: #303030;
+}
+
+.clearFiltersButton {
+    width: 100%;
+    padding: 6px 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 12px;
+    font-weight: 500;
+    color: #505050;
+    background-color: rgba(0, 0, 0, 0.05);
+    border: 1px solid rgba(0, 0, 0, 0.1);
+    border-radius: 4px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.clearFiltersButton:hover {
+    background-color: rgba(0, 0, 0, 0.08);
+    color: #303030;
+}
+
+.divider {
+    height: 1px;
+    background-color: #e5e5e5;
+    margin: 0;
+}
+
+.loadingState {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 40px 0;
+    color: #505050;
+    font-size: 13px;
+    gap: 10px;
+}
+
+.loadingSpinner {
+    width: 20px;
+    height: 20px;
+    border: 2px solid rgba(80, 80, 80, 0.2);
+    border-top-color: #505050;
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+}
+
+.filterOptions {
+    display: flex;
+    flex-direction: column;
+    padding: 6px 12px 12px 12px;
+}
+
+.filterOption, .tagOption {
+    display: flex;
+    align-items: center;
+    padding: 6px 8px;
+    border-radius: 4px;
+    transition: background-color 0.2s ease;
+    cursor: pointer;
+    margin-bottom: 2px;
+}
+
+.filterOption:hover, .tagOption:hover {
+    background-color: rgba(0, 0, 0, 0.05);
+}
+
+.filterOptionSelected, .tagOptionSelected {
+    background-color: rgba(0, 0, 0, 0.05);
+}
+
+.checkboxContainer {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 16px;
+    height: 16px;
+    margin-right: 8px;
+}
+
+.checkbox {
+    width: 14px;
+    height: 14px;
+    border: 1px solid #d1d1d1;
+    border-radius: 3px;
+    background-color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: border-color 0.2s ease, background-color 0.2s ease;
+}
+
+.checkboxSelected {
+    border-color: #3b82f6;
+    background-color: #3b82f6;
+}
+
+.checkIcon {
+    color: white;
+}
+
+.filterLabel, .tagLabel {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    cursor: pointer;
+    font-size: 13px;
+    color: #303030;
+}
+
+.filterLabelContent, .tagLabelContent {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    max-width: calc(100% - 40px);
+}
+
+.iconWrapper {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 18px;
+    height: 18px;
+    color: #505050;
+    flex-shrink: 0;
+}
+
+.typeName, .tagName {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.filterCount, .tagCount {
+    font-size: 11px;
+    color: #505050;
+    background-color: rgba(0, 0, 0, 0.05);
+    padding: 1px 6px;
+    border-radius: 10px;
+    font-weight: 500;
+}
+
+.tagColorDot {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    flex-shrink: 0;
+}
+
+.emptyState {
+    padding: 12px;
+    color: #505050;
+    font-style: italic;
+    font-size: 13px;
+    text-align: center;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+@keyframes spin {
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+/* Responsive adjustments */
+@media (min-width: 1024px) {
+    .backdrop {
+        display: none;
+    }
+
+    .sidebar {
+        position: sticky;
+    }
+
+    .closeButton {
+        display: none;
+    }
+}
+
+/* Full-screen sidebar on mobile */
+@media (max-width: 1023px) {
+    .sidebar {
+        width: 100%;
+        height: 100%;
+        position: relative;
+        border-right: none;
+    }
+
+    .closeButton {
+        display: flex;
+    }
+}
+
+/* Dark mode */
+@media (prefers-color-scheme: dark) {
+    .sidebar {
+        background-color: #1e1e1e;
+        border-color: #1a1a1a;
+    }
+
+    .sidebarHeader {
+        background: linear-gradient(to bottom, #313131, #252525);
+        border-color: #1a1a1a;
+    }
+
+    .sidebarTitle {
+        color: #e5e5e5;
+    }
+
+    .titleIcon,
+    .sectionIcon,
+    .collapseIcon {
+        color: #c8c8c8;
+    }
+
+    .closeButton {
+        color: #c8c8c8;
+    }
+
+    .closeButton:hover {
+        background-color: rgba(255, 255, 255, 0.1);
+        color: #ffffff;
+    }
+
+    .sectionHeader:hover {
+        background-color: rgba(255, 255, 255, 0.05);
+    }
+
+    .activeFiltersContainer {
+        background-color: rgba(255, 255, 255, 0.03);
+    }
+
+    .divider {
+        background-color: #252525;
+    }
+
+    .sectionTitle {
+        color: #c8c8c8;
+    }
+
+    .activeFilterTag {
+        background-color: rgba(255, 255, 255, 0.1);
+        color: #e0e0e0;
+        border-color: rgba(255, 255, 255, 0.1);
+    }
+
+    .filterTagIcon {
+        color: #a0a0a0;
+    }
+
+    .removeFilterButton {
+        color: #a0a0a0;
+    }
+
+    .removeFilterButton:hover {
+        color: #e0e0e0;
+    }
+
+    .clearFiltersButton {
+        background-color: rgba(255, 255, 255, 0.1);
+        color: #e0e0e0;
+        border-color: rgba(255, 255, 255, 0.1);
+    }
+
+    .clearFiltersButton:hover {
+        background-color: rgba(255, 255, 255, 0.15);
+    }
+
+    .loadingState {
+        color: #a0a0a0;
+    }
+
+    .loadingSpinner {
+        border-color: rgba(160, 160, 160, 0.2);
+        border-top-color: #a0a0a0;
+    }
+
+    .filterOption:hover, .tagOption:hover {
+        background-color: rgba(255, 255, 255, 0.05);
+    }
+
+    .filterOptionSelected, .tagOptionSelected {
+        background-color: rgba(255, 255, 255, 0.05);
+    }
+
+    .checkbox {
+        border-color: #3a3a3a;
+        background-color: #252525;
+    }
+
+    .filterLabel, .tagLabel {
+        color: #e5e5e5;
+    }
+
+    .iconWrapper {
+        color: #a0a0a0;
+    }
+
+    .filterCount, .tagCount {
+        color: #c8c8c8;
+        background-color: rgba(255, 255, 255, 0.1);
+    }
+
+    .emptyState {
+        color: #a0a0a0;
+    }
+}

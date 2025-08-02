@@ -1,0 +1,75 @@
+def determine_stream_name(df):
+    columns = set(df.columns.str.lower())
+
+    # Check for members file
+    if {'customer',
+        'email',
+        'phone',
+        'active_member',
+        'street',
+        'apt_suite',
+        'city',
+        'state',
+        'zip_code',
+        'membership_status',
+        'program',
+        'systems',
+        'since',
+        'ends',}.issubset(columns):
+        return "members_stream"
+
+
+    # Check for invoices file
+    elif {'job_number',
+          'invoice_number',
+          'customer_id',
+          'customer_name',
+          'customer_po_number',
+          'customer_first_name',
+          'customer_last_name',
+          'customer_phone_numbers',
+          'street',
+          'unit',
+          'city',
+          'state',
+          'zip',
+          'country',
+          'campaign',
+          'type',
+          'first_appointment',
+          'last_appointment',
+          'num_of_appointments',
+          'technicians',
+          'sold_by',
+          'status',
+          'hold_reason',
+          'hold_memo',
+          'cancel_reason',
+          'cancel_memo',
+          'total',
+          'balance',
+          'total_material_cost',
+          'completed_on',
+          'canceled_on',
+          'summary',
+          'business_unit',
+          'tags',
+          'customer_email_addresses',
+          'location_email_addresses',
+          'payment_types',
+          'no_charge',
+          'recall',
+          'warranty',
+          'tgl',
+          'manually_booked_job',
+          'age',
+          'home_warranty',
+          'homeowner',
+          'money_mover',
+          'price_quoted',
+          'repair_price',
+          'unit_location'}.issubset(columns):
+        return "invoices_stream"
+
+    else:
+        return "unknown_stream"

@@ -1,0 +1,14 @@
+includes:
+    - vendor/phpstan/phpstan-mockery/extension.neon
+
+parameters:
+    ignoreErrors:
+        - '#no value type specified in iterable type array#'
+    level: 6
+    paths:
+        - bin/
+        - config/
+        - public/
+        - src/
+        - tests/
+    treatPhpDocTypesAsCertain: false

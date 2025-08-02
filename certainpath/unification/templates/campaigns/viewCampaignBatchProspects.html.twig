@@ -1,0 +1,37 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Batch Prospects{% endblock %}
+{% block page_heading %}Batch Prospects{% endblock %}
+
+{% block body %}
+    {% if prospects|length > 0 %}
+        <div class="mt-8 flow-root">
+            <div class="-mx-4 -my-2 overflow-x-auto sm:-mx-6 lg:-mx-8">
+                <div class="inline-block min-w-full py-2 align-middle sm:px-6 lg:px-8">
+                    <table class="min-w-full divide-y divide-gray-300">
+                        <thead>
+                        <tr>
+                            <th scope="col" class="py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 sm:pl-0">First Name</th>
+                            <th scope="col" class="py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 sm:pl-0">Last Name</th>
+                            <th scope="col" class="py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 sm:pl-0">City</th>
+                            <th scope="col" class="py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 sm:pl-0">State</th>
+                            <th scope="col" class="py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 sm:pl-0">Postal Code</th>
+                        </tr>
+                        </thead>
+                        <tbody class="divide-y divide-gray-200">
+                        {% for prospect in prospects %}
+                            <tr>
+                                <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">{{ prospect.firstName }}</td>
+                                <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">{{ prospect.lastName }}</td>
+                                <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">{{ prospect.city }}</td>
+                                <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">{{ prospect.state }}</td>
+                                <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">{{ prospect.postalCodeShort }}</td>
+                            </tr>
+                        {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    {% endif %}
+{% endblock %}

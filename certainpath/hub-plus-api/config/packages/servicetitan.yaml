@@ -1,0 +1,35 @@
+# Environment variable defaults for ServiceTitan configuration
+# These can be overridden in .env.local or environment-specific .env files
+parameters:
+    # Default rate limits (based on ServiceTitan documentation)
+    env(SERVICETITAN_RATE_LIMIT_PER_MINUTE): 120
+    env(SERVICETITAN_RATE_LIMIT_PER_HOUR): 3600
+    env(SERVICETITAN_BURST_LIMIT): 20
+    
+    # Integration environment defaults
+    env(SERVICETITAN_INTEGRATION_RPM): 120
+    env(SERVICETITAN_INTEGRATION_RPH): 3600
+    env(SERVICETITAN_INTEGRATION_BURST): 20
+    
+    # Production environment defaults
+    env(SERVICETITAN_PRODUCTION_RPM): 120
+    env(SERVICETITAN_PRODUCTION_RPH): 3600
+    env(SERVICETITAN_PRODUCTION_BURST): 20
+    
+    # HTTP client defaults
+    env(SERVICETITAN_HTTP_TIMEOUT): 30
+    env(SERVICETITAN_CONNECT_TIMEOUT): 10
+    
+    # Retry defaults
+    env(SERVICETITAN_MAX_RETRIES): 4
+    env(SERVICETITAN_RETRY_DELAY_MULTIPLIER): 2.0
+
+# ServiceTitan services configuration
+services:
+    # ServiceTitan Rate Limit Manager
+    App\Module\ServiceTitan\Service\ServiceTitanRateLimitManager:
+        arguments:
+            $config:
+                requests_per_minute: '%env(int:SERVICETITAN_RATE_LIMIT_PER_MINUTE)%'
+                requests_per_hour: '%env(int:SERVICETITAN_RATE_LIMIT_PER_HOUR)%'
+                burst_limit: '%env(int:SERVICETITAN_BURST_LIMIT)%'

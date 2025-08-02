@@ -1,0 +1,87 @@
+name: 'QA Deployment'
+on:
+  push:
+    branches:
+      - qa
+  workflow_dispatch:
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    environment: qa
+
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+
+      - name: Install Dependencies
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y python3-pip jq
+          pip3 install linode-cli
+
+      - name: Setup Linode Cloud Firewall
+        uses: linode/action-linode-cli@v1
+        with:
+          token: "${{ secrets.LINODE_CLI_TOKEN }}"
+
+      - name: Get GitHub Runner IP
+        id: ip
+        uses: candidob/get-runner-ip@v1.0.0
+
+      - name: Open Linode Cloud Firewall for GitHub Actions
+        env:
+          LINODE_FW_ID: "${{ secrets.LINODE_FW_ID }}"
+          GH_RUNNER_IP: "${{ steps.ip.outputs.ipv4 }}/32"
+        run: |
+          bash ./.github/linode.sh -a
+
+      - name: Setup SSH
+        id: ssh-setup
+        run: |
+          mkdir -p ~/.ssh
+          touch ~/.ssh/known_hosts
+          echo "${{ secrets.LINODEFINGERPRINT }}" >> ~/.ssh/known_hosts
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v1
+        with:
+          node-version: "20.12.2"
+
+      - name: Create .env file from environment secret
+        env:
+          ENV_FILE: ${{ secrets.ENV_FILE }}
+        run: |
+          echo $ENV_FILE | base64 --decode > .env
+
+      - name: Base64 decode and echo ENV contents
+        env:
+          ENV_FILE: ${{ secrets.ENV_FILE }}
+        run: |
+          DECODED=$(echo "$ENV_FILE" | base64 --decode)
+          echo "Decoded .env contents below:"
+          echo "$DECODED"
+
+      - name: Install dependencies
+        run: yarn install
+
+      - name: Build
+        run: yarn build
+
+      - name: Deploy to Linode
+        uses: burnett01/rsync-deployments@5.2.1
+        with:
+          switches: -avr
+          path: ./build/
+          remote_path: /home/deployer/hub-qa.mycertainpath.com
+          remote_host: ${{ secrets.LINODEHOST }}
+          remote_port: 22
+          remote_user: ${{ secrets.LINODEUSER }}
+          remote_key: ${{ secrets.LINODESSHKEY }}
+
+      - name: Close Linode Cloud Firewall for GitHub Actions
+        env:
+          LINODE_FW_ID: "${{ secrets.LINODE_FW_ID }}"
+          GH_RUNNER_IP: "${{ steps.ip.outputs.ipv4 }}/32"
+        run: |
+          bash ./.github/linode.sh -d

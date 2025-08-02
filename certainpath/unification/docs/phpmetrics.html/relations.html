@@ -1,0 +1,4032 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>PhpMetrics report</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="css/milligram.min.css?v=v2.8.2">
+    <link rel="stylesheet" href="css/style.css?v=v2.8.2">
+    <link rel="stylesheet" href="css/roboto.css?v=v2.8.2">
+    <link rel="stylesheet" href="css/normalize.css?v=v2.8.2">
+    <link rel="stylesheet" href="css/material-icons.css?v=v2.8.2">
+</head>
+<body>
+
+
+<header class="headerbar">
+    <div class="headerbarInner">
+        <div class="float-left navigation-title">
+            <a href="index.html">
+                <h1 class="title">PhpMetrics</h1>
+                <span class="subtitle">
+                Static analyzer for PHP
+            </span>
+            </a>
+        </div>
+        <ul class="navigation-list float-right">
+            <li class="navigation-item">
+                <a class="navigation-link" href="https://github.com/phpmetrics/phpmetrics">Support</a>
+                <a class="navigation-link" href="https://phpmetrics.github.io/website/">Documentation</a>
+            </li>
+        </ul>
+    </div>
+</header>
+
+<a class="hidden-xs github" href="https://github.com/phpmetrics/phpmetrics"
+   title="PhpMetrics on Github" target="blank">
+    <svg width="80" height="80" viewBox="0 0 250 250" class="github">
+        <path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path>
+        <path
+            d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2"
+            fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path>
+        <path
+            d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z"
+            fill="currentColor" class="octo-body"></path>
+    </svg>
+</a>
+
+
+<div class="page">
+    <div class="content content-first">
+        <div class="report-details">
+            Created at 2025-03-05 08:29:49        , with PHPMetrics v2.8.2 (<a href="https://twitter.com/Halleck45">Jean-François Lépine</a>).
+        </div>
+
+        
+
+
+<div class="row">
+    <div class="column">
+        <div class="bloc">
+            <h4>Object relations</h4>
+            <div id="chart-relations"></div>
+        </div>
+    </div>
+</div>
+
+</div>
+
+<!-- Sidebar -->
+<div id="sidebar">
+    <div class="content">
+        <div class="logo">
+            <a href="index.html"><img src="images/phpmetrics-maintenability.png"
+                                                 alt="Logo PhpMetrics"></a>
+            <h1>PhpMetrics</h1>
+        </div>
+        <div class="links">
+            <ul>
+                <li>
+                    <a href="index.html">
+                        <svg fill="#FFFFFF" height="24" viewBox="0 0 24 24" width="24"
+                             xmlns="http://www.w3.org/2000/svg">
+                            <path d="M0 0h24v24H0z" fill="none">
+                            <path
+                                d="M12 4.5C7 4.5 2.73 7.61 1 12c1.73 4.39 6 7.5 11 7.5s9.27-3.11 11-7.5c-1.73-4.39-6-7.5-11-7.5zM12 17c-2.76 0-5-2.24-5-5s2.24-5 5-5 5 2.24 5 5-2.24 5-5 5zm0-8c-1.66 0-3 1.34-3 3s1.34 3 3 3 3-1.34 3-3-1.34-3-3-3z">
+                        </svg>
+                        Overview
+                    </a>
+                </li>
+                <li>
+                    <a href="violations.html">
+                        <svg fill="#FFFFFF" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M0 0h24v24H0z" fill="none">
+                            <path d="M20 8h-2.81c-.45-.78-1.07-1.45-1.82-1.96L17 4.41 15.59 3l-2.17 2.17C12.96 5.06 12.49 5 12 5c-.49 0-.96.06-1.41.17L8.41 3 7 4.41l1.62 1.63C7.88 6.55 7.26 7.22 6.81 8H4v2h2.09c-.05.33-.09.66-.09 1v1H4v2h2v1c0 .34.04.67.09 1H4v2h2.81c1.04 1.79 2.97 3 5.19 3s4.15-1.21 5.19-3H20v-2h-2.09c.05-.33.09-.66.09-1v-1h2v-2h-2v-1c0-.34-.04-.67-.09-1H20V8zm-6 8h-4v-2h4v2zm0-4h-4v-2h4v2z">
+                        </svg>
+                        Violations (87)
+                    </a>
+                </li>
+                                    <li>
+                        <a href="composer.html">
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="white" width="24px" height="24px"><path d="M0 0h24v24H0z" fill="none"><path d="M3.9 12c0-1.71 1.39-3.1 3.1-3.1h4V7H7c-2.76 0-5 2.24-5 5s2.24 5 5 5h4v-1.9H7c-1.71 0-3.1-1.39-3.1-3.1zM8 13h8v-2H8v2zm9-6h-4v1.9h4c1.71 0 3.1 1.39 3.1 3.1s-1.39 3.1-3.1 3.1h-4V17h4c2.76 0 5-2.24 5-5s-2.24-5-5-5z"></svg>
+                            Composer
+                        </a>
+                    </li>
+                                                <li>
+                    <a href="loc.html">
+                        <svg fill="#FFFFFF" height="24" viewBox="0 0 24 24" width="24"
+                             xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+                            <defs>
+                                <path d="M0 0h24v24H0z" id="a">
+                            </defs>
+                            <clipPath id="b">
+                                <use overflow="visible" xlink:href="#a">
+                            </clipPath>
+                            <path clip-path="url(#b)"
+                                  d="M11 5.08V2c-5 .5-9 4.81-9 10s4 9.5 9 10v-3.08c-3-.48-6-3.4-6-6.92s3-6.44 6-6.92zM18.97 11H22c-.47-5-4-8.53-9-9v3.08C16 5.51 18.54 8 18.97 11zM13 18.92V22c5-.47 8.53-4 9-9h-3.03c-.43 3-2.97 5.49-5.97 5.92z">
+                        </svg>
+                        Size &amp; volume
+                    </a>
+                </li>
+                <li>
+                    <a href="complexity.html">
+                        <svg fill="#FFFFFF" height="24" viewBox="0 0 24 24" width="24"
+                             xmlns="http://www.w3.org/2000/svg">
+                            <path d="M0 0h24v24H0V0z" fill="none">
+                            <path
+                                d="M19.07 4.93l-1.41 1.41C19.1 7.79 20 9.79 20 12c0 4.42-3.58 8-8 8s-8-3.58-8-8c0-4.08 3.05-7.44 7-7.93v2.02C8.16 6.57 6 9.03 6 12c0 3.31 2.69 6 6 6s6-2.69 6-6c0-1.66-.67-3.16-1.76-4.24l-1.41 1.41C15.55 9.9 16 10.9 16 12c0 2.21-1.79 4-4 4s-4-1.79-4-4c0-1.86 1.28-3.41 3-3.86v2.14c-.6.35-1 .98-1 1.72 0 1.1.9 2 2 2s2-.9 2-2c0-.74-.4-1.38-1-1.72V2h-1C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10c0-2.76-1.12-5.26-2.93-7.07z">
+                        </svg>
+                        Complexity &amp; defects
+                    </a>
+                </li>
+                <li>
+                    <a href="oop.html">
+                        <svg fill="#FFFFFF" height="24" viewBox="0 0 24 24" width="24"
+                             xmlns="http://www.w3.org/2000/svg">
+                            <path d="M0 0h24v24H0z" fill="none">
+                            <path
+                                d="M17 6c-3.31 0-6 2.69-6 6s2.69 6 6 6 6-2.69 6-6-2.69-6-6-6zM5 8c-2.21 0-4 1.79-4 4s1.79 4 4 4 4-1.79 4-4-1.79-4-4-4zm0 6c-1.1 0-2-.9-2-2s.9-2 2-2 2 .9 2 2-.9 2-2 2z">
+                        </svg>
+                        Object oriented metrics
+                    </a>
+                </li>
+                <li>
+                    <a href="relations.html">
+                        <svg fill="#FFFFFF" height="24" viewBox="0 0 24 24" width="24"
+                             xmlns="http://www.w3.org/2000/svg">
+                            <path d="M0 0h24v24H0z" fill="none">
+                            <path
+                                d="M14 4l2.29 2.29-2.88 2.88 1.42 1.42 2.88-2.88L20 10V4zm-4 0H4v6l2.29-2.29 4.71 4.7V20h2v-8.41l-5.29-5.3z">
+                        </svg>
+                        Object relations
+                    </a>
+                </li>
+                <li>
+                    <a href="coupling.html">
+                        <svg fill="#FFFFFF" height="24" viewBox="0 0 24 24" width="24"
+                             xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+                            <defs>
+                                <path d="M0 0h24v24H0V0z" id="a">
+                            </defs>
+                            <clipPath id="b">
+                                <use overflow="visible" xlink:href="#a">
+                            </clipPath>
+                            <path clip-path="url(#b)"
+                                  d="M9.01 14H2v2h7.01v3L13 15l-3.99-4v3zm5.98-1v-3H22V8h-7.01V5L11 9l3.99 4z">
+                        </svg>
+                        Coupling
+                    </a>
+                </li>
+                <li>
+                    <a href="packages.html">
+                        <svg fill="#FFFFFF" height="24" viewBox="0 0 24 24" width="24"
+                             xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+                            <path d="M11 9.16V2c-5 .5-9 4.79-9 10s4 9.5 9 10v-7.16c-1-.41-2-1.52-2-2.84s1-2.43 2-2.84zM14.86 11H22c-.48-4.75-4-8.53-9-9v7.16c1 .3 1.52.98 1.86 1.84zM13 14.84V22c5-.47 8.52-4.25 9-9h-7.14c-.34.86-.86 1.54-1.86 1.84z">
+                        </svg>
+                        Package oriented metrics
+                    </a>
+                </li>
+                <li>
+                    <a href="package_relations.html">
+                        <svg fill="#FFFFFF" height="24" viewBox="0 0 24 24" width="24"
+                             xmlns="http://www.w3.org/2000/svg">
+                            <path d="M17 20.41L18.41 19 15 15.59 13.59 17 17 20.41zM7.5 8H11v5.59L5.59 19 7 20.41l6-6V8h3.5L12 3.5 7.5 8z">
+                        </svg>
+                        Package relations
+                    </a>
+                </li>
+                                <!--<li>
+                    <a href="all.html">
+                        <svg fill="#FFFFFF" height="24" viewBox="0 0 24 24" width="24"
+                             xmlns="http://www.w3.org/2000/svg">
+                            <path d="M3 3v18h18V3H3zm8 16H5v-6h6v6zm0-8H5V5h6v6zm8 8h-6v-6h6v6zm0-8h-6V5h6v6z">
+                            <path d="M0 0h24v24H0z" fill="none">
+                        </svg>
+                        All metrics
+                    </a>
+                </li>-->
+                <!--                <li>-->
+                <!--                    <a href="#">-->
+                <!--                        <svg fill="#FFFFFF" height="24" viewBox="0 0 24 24" width="24"-->
+                <!--                             xmlns="http://www.w3.org/2000/svg">-->
+                <!--                            <path-->
+                <!--                                d="M12 1L3 5v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V5l-9-4zm0 10.99h7c-.53 4.12-3.28 7.79-7 8.94V12H5V6.3l7-3.11v8.8z">-->
+                <!--                            <path d="M0 0h24v24H0z" fill="none">-->
+                <!--                        </svg>-->
+                <!--                        Third party-->
+                <!--                    </a>-->
+                <!--                </li>-->
+                <!--<li class="sep">
+                    <a href="panel.html">
+                        <svg fill="#FFFFFF" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M0 0h24v24H0z" fill="none">
+                            <path d="M21 3H3c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h5v2h8v-2h5c1.1 0 1.99-.9 1.99-2L23 5c0-1.1-.9-2-2-2zm0 14H3V5h18v12z">
+                        </svg>
+                        TV Panel
+                    </a>
+                </li>-->
+            </ul>
+        </div>
+    </div>
+</div>
+</div>
+
+<script src="js/functions.js?v=v2.8.2"></script>
+<script src="js/d3.v3.js"></script>
+<script src="js/d3.hexbin.v0.js"></script>
+<script src="js/sort-table.min.js?v=v2.8.2"></script>
+<script src="js/graph-maintainability.js?v=v2.8.2"></script>
+<script src="js/graph-licenses.js?v=v2.8.2"></script>
+<script src="js/FileSaver.min.js?v=v2.8.2"></script>
+
+<script src="js/clusterize.min.js?v=v2.8.2"></script>
+<link rel="stylesheet" href="css/clusterize.css?v=v2.8.2">
+
+<script src="classes.js?v=v2.8.2"></script>
+
+<script>
+    var accessibilityEnabled = false;
+</script>
+
+</body>
+</html>
+
+
+<script>
+
+
+    var relations = [
+    {
+        "name": "\\App\\DTO\\Response\\CampaignFileListResponseDTO",
+        "size": 3000,
+        "relations": []
+    },
+    {
+        "name": "\\App\\Entity\\CampaignFile",
+        "size": 3000,
+        "relations": []
+    },
+    {
+        "name": "\\App\\DTO\\Response\\AddressResponseDTO",
+        "size": 3000,
+        "relations": []
+    },
+    {
+        "name": "\\App\\Entity\\Address",
+        "size": 3000,
+        "relations": []
+    },
+    {
+        "name": "\\App\\DTO\\Response\\CustomerListResponseDTO",
+        "size": 3000,
+        "relations": []
+    },
+    {
+        "name": "\\App\\Entity\\Customer",
+        "size": 3000,
+        "relations": []
+    },
+    {
+        "name": "\\App\\DTO\\Response\\TagListResponseDTO",
+        "size": 3000,
+        "relations": []
+    },
+    {
+        "name": "\\App\\Entity\\Tag",
+        "size": 3000,
+        "relations": []
+    },
+    {
+        "name": "\\App\\DTO\\Request\\StochasticClientMailDataQueryDTO",
+        "size": 3000,
+        "relations": []
+    },
+    {
+        "name": "\\App\\DTO\\Request\\Batch\\PatchBatchDTO",
+        "size": 3000,
+        "relations": []
+    },
+    {
+        "name": "\\App\\DTO\\Request\\Address\\RestrictedAddressEditDTO",
+        "size": 3000,
+        "relations": []
+    },
+    {
+        "name": "\\App\\Entity\\RestrictedAddress",
+        "size": 3000,
+        "relations": []
+    },
+    {
+        "name": "\\static",
+        "size": 3000,
+        "relations": []
+    },
+    {
+        "name": "\\App\\DTO\\Request\\Address\\AddressEditDTO",
+        "size": 3000,
+        "relations": []
+    },
+    {
+        "name": "\\App\\DTO\\Request\\Address\\RestrictedAddressQueryDTO",
+        "size": 3000,
+        "relations": []
+    },
+    {
+        "name": "\\App\\DTO\\Request\\Address\\AddressQueryDTO",
+        "size": 3000,
+        "relations": []
+    },
+    {
+        "name": "\\App\\DTO\\Request\\Campaign\\CreateCampaignFileDTO",
+        "size": 3000,
+        "relations": []
+    },
+    {
+        "name": "\\App\\DTO\\Request\\Campaign\\PatchCampaignDTO",
+        "size": 3000,
+        "relations": []
+    },
+    {
+        "name": "\\App\\DTO\\Request\\Campaign\\CreateCampaignDTO",
+        "size": 3000,
+        "relations": []
+    },
+    {
+        "name": "\\App\\DTO\\Domain\\ProspectFilterRulesDTO",
+        "size": 3000,
+        "relations": []
+    },
+    {
+        "name": "\\App\\DTO\\Request\\Customer\\CustomerQueryDTO",
+        "size": 3000,
+        "relations": []
+    },
+    {
+        "name": "\\App\\DTO\\Query\\Chart\\TotalSalesNewVsExistingCustomerChartDTO",
+        "size": 3000,
+        "relations": []
+    },
+    {
+        "name": "\\App\\DTO\\Query\\Chart\\TotalSalesAgeDistributionChartDTO",
+        "size": 3000,
+        "relations": []
+    },
+    {
+        "name": "\\Symfony\\Component\\Validator\\Constraints\\Type",
+        "size": 3000,
+        "relations": []
+    },
+    {
+        "name": "\\App\\DTO\\Query\\Chart\\TotalSalesByYearAndMonthChartDTO",
+        "size": 3000,
+        "relations": []
+    },
+    {
+        "name": "\\App\\DTO\\Query\\PaginationDTO",
+        "size": 3000,
+        "relations": []
+    },
+    {
+        "name": "\\App\\DTO\\Query\\Batch\\BatchesQueryDTO",
+        "size": 3000,
+        "relations": []
+    },
+    {
+        "name": "\\App\\DTO\\Query\\Campaign\\CampaignQueryDTO",
+        "size": 3000,
+        "relations": []
+    },
+    {
+        "name": "\\App\\DTO\\Query\\Campaign\\CampaignFileQueryDTO",
+        "size": 3000,
+        "relations": []
+    },
+    {
+        "name": "\\App\\DTO\\Query\\Tag\\TagQueryDTO",
+        "size": 3000,
+        "relations": []
+    },
+    {
+        "name": "\\App\\DTO\\Query\\Invoice\\DailySalesQueryDTO",
+        "size": 3000,
+        "relations": []
+    },
+    {
+        "name": "\\DateTimeInterface",
+        "size": 3000,
+        "relations": []
+    },
+    {
+        "name": "\\App\\DTO\\Domain\\StochasticRosterDTO",
+        "size": 3000,
+        "relations": []
+    },
+    {
+        "name": "\\App\\DTO\\Domain\\RestrictedAddressDTO",
+        "size": 3000,
+        "relations": []
+    },
+    {
+        "name": "\\App\\DTO\\Domain\\StatusDTO",
+        "size": 3000,
+        "relations": []
+    },
+    {
+        "name": "\\App\\DTO\\Domain\\AddressDTO",
+        "size": 3000,
+        "relations": []
+    },
+    {
+        "name": "\\App\\DTO\\Reports\\DMERDailySalesDTO",
+        "size": 3000,
+        "relations": []
+    },
+    {
+        "name": "\\Illuminate\\Contracts\\Support\\Arrayable",
+        "size": 3000,
+        "relations": []
+    },
+    {
+        "name": "\\App\\Repository\\CampaignEventRepository",
+        "size": 3000,
+        "relations": []
+    },
+    {
+        "name": "\\App\\Repository\\AbstractRepository",
+        "size": 3000,
+        "relations": []
+    },
+    {
+        "name": "\\Doctrine\\Persistence\\ManagerRegistry",
+        "size": 3000,
+        "relations": []
+    },
+    {
+        "name": "\\App\\QueryBuilder\\CampaignEventQueryBuilder",
+        "size": 3000,
+        "relations": [
+            "\\App\\QueryBuilder\\AbstractQueryBuilder",
+            "\\Doctrine\\ORM\\QueryBuilder"
+        ]
+    },
+    {
+        "name": "\\App\\Entity\\CampaignEvent",
+        "size": 3000,
+        "relations": []
+    },
+    {
+        "name": "\\Doctrine\\Common\\Collections\\ArrayCollection",
+        "size": 3000,
+        "relations": []
+    },
+    {
+        "name": "\\App\\Repository\\CampaignStatusRepository",
+        "size": 3000,
+        "relations": []
+    },
+    {
+        "name": "\\App\\Services\\PaginatorService",
+        "size": 3000,
+        "relations": [
+            "\\Knp\\Component\\Pager\\PaginatorInterface"
+        ]
+    },
+    {
+        "name": "\\App\\QueryBuilder\\CampaignStatusQueryBuilder",
+        "size": 3000,
+        "relations": [
+            "\\App\\QueryBuilder\\AbstractQueryBuilder",
+            "\\Doctrine\\ORM\\QueryBuilder"
+        ]
+    },
+    {
+        "name": "\\App\\Entity\\CampaignStatus",
+        "size": 3000,
+        "relations": []
+    },
+    {
+        "name": "\\App\\Exceptions\\NotFoundException\\CampaignStatusNotFoundException",
+        "size": 3000,
+        "relations": [
+            "\\App\\Exceptions\\AppException"
+        ]
+    },
+    {
+        "name": "\\App\\Repository\\CampaignIterationRepository",
+        "size": 3000,
+        "relations": []
+    },
+    {
+        "name": "\\App\\QueryBuilder\\CampaignIterationQueryBuilder",
+        "size": 3000,
+        "relations": [
+            "\\App\\QueryBuilder\\AbstractQueryBuilder",
+            "\\Doctrine\\ORM\\QueryBuilder",
+            "\\DateTime"
+        ]
+    },
+    {
+        "name": "\\App\\Entity\\CampaignIteration",
+        "size": 3000,
+        "relations": []
+    },
+    {
+        "name": "\\App\\ValueObjects\\CampaignIterationObject",
+        "size": 3000,
+        "relations": [
+            "\\App\\ValueObjects\\AbstractObject"
+        ]
+    },
+    {
+        "name": "\\DateTime",
+        "size": 3000,
+        "relations": []
+    },
+    {
+        "name": "\\App\\Repository\\TagRepository",
+        "size": 3000,
+        "relations": []
+    },
+    {
+        "name": "\\App\\Entity\\Company",
+        "size": 3000,
+        "relations": []
+    },
+    {
+        "name": "\\Doctrine\\ORM\\QueryBuilder",
+        "size": 3000,
+        "relations": []
+    },
+    {
+        "name": "\\App\\Repository\\CustomerRepository",
+        "size": 3000,
+        "relations": []
+    },
+    {
+        "name": "\\Symfony\\Component\\Validator\\Validator\\ValidatorInterface",
+        "size": 3000,
+        "relations": []
+    },
+    {
+        "name": "\\App\\QueryBuilder\\CustomerQueryBuilder",
+        "size": 3000,
+        "relations": [
+            "\\App\\QueryBuilder\\AbstractQueryBuilder",
+            "\\Doctrine\\ORM\\QueryBuilder"
+        ]
+    },
+    {
+        "name": "\\App\\Exceptions\\EntityValidationException",
+        "size": 3000,
+        "relations": [
+            "\\App\\Exceptions\\AppException"
+        ]
+    },
+    {
+        "name": "\\App\\Repository\\EmailRepository",
+        "size": 3000,
+        "relations": [
+            "\\App\\Repository\\AbstractRepository",
+            "\\Doctrine\\Persistence\\ManagerRegistry"
+        ]
+    },
+    {
+        "name": "\\App\\Repository\\CampaignRepository",
+        "size": 3000,
+        "relations": []
+    },
+    {
+        "name": "\\App\\QueryBuilder\\CampaignQueryBuilder",
+        "size": 3000,
+        "relations": [
+            "\\App\\QueryBuilder\\AbstractQueryBuilder",
+            "\\Doctrine\\ORM\\QueryBuilder"
+        ]
+    },
+    {
+        "name": "\\App\\Entity\\Campaign",
+        "size": 3000,
+        "relations": []
+    },
+    {
+        "name": "\\App\\Exceptions\\NotFoundException\\CampaignNotFoundException",
+        "size": 3000,
+        "relations": []
+    },
+    {
+        "name": "\\App\\Repository\\InvoiceRepository",
+        "size": 3000,
+        "relations": []
+    },
+    {
+        "name": "\\App\\QueryBuilder\\InvoiceQueryBuilder",
+        "size": 3000,
+        "relations": [
+            "\\App\\QueryBuilder\\AbstractQueryBuilder",
+            "\\Doctrine\\ORM\\QueryBuilder",
+            "\\App\\DTO\\Query\\Invoice\\DailySalesQueryDTO",
+            "\\DateTimeInterface",
+            "\\DateTime"
+        ]
+    },
+    {
+        "name": "\\App\\StatementBuilder\\UnificationStatementBuilderBuilder",
+        "size": 3000,
+        "relations": [
+            "\\App\\StatementBuilder\\AbstractStatementBuilder"
+        ]
+    },
+    {
+        "name": "\\App\\Entity\\Invoice",
+        "size": 3000,
+        "relations": []
+    },
+    {
+        "name": "\\App\\Entity\\Prospect",
+        "size": 3000,
+        "relations": []
+    },
+    {
+        "name": "\\App\\ValueObjects\\InvoiceObject",
+        "size": 3000,
+        "relations": [
+            "\\App\\ValueObjects\\AbstractObject"
+        ]
+    },
+    {
+        "name": "\\App\\Collections\\Reporting\\DMERSalesCollection",
+        "size": 3000,
+        "relations": [
+            "\\Illuminate\\Support\\Collection",
+            "\\Carbon\\Carbon",
+            "\\Carbon\\CarbonPeriod",
+            "\\App\\DTO\\Reports\\DMERDailySalesDTO"
+        ]
+    },
+    {
+        "name": "\\DateInterval",
+        "size": 3000,
+        "relations": []
+    },
+    {
+        "name": "\\DatePeriod",
+        "size": 3000,
+        "relations": []
+    },
+    {
+        "name": "\\App\\Repository\\RestrictedAddressRepository",
+        "size": 3000,
+        "relations": []
+    },
+    {
+        "name": "\\App\\QueryBuilder\\RestrictedAddressQueryBuilder",
+        "size": 3000,
+        "relations": [
+            "\\App\\QueryBuilder\\AbstractQueryBuilder",
+            "\\Doctrine\\ORM\\QueryBuilder",
+            "\\App\\DTO\\Request\\Address\\RestrictedAddressQueryDTO",
+            "\\App\\DTO\\Query\\PaginationDTO"
+        ]
+    },
+    {
+        "name": "\\Doctrine\\ORM\\Query",
+        "size": 3000,
+        "relations": []
+    },
+    {
+        "name": "\\Doctrine\\Bundle\\DoctrineBundle\\Repository\\ServiceEntityRepository",
+        "size": 3000,
+        "relations": []
+    },
+    {
+        "name": "\\Doctrine\\DBAL\\Connection",
+        "size": 3000,
+        "relations": []
+    },
+    {
+        "name": "\\App\\Repository\\CampaignFileRepository",
+        "size": 3000,
+        "relations": []
+    },
+    {
+        "name": "\\App\\Repository\\SettingRepository",
+        "size": 3000,
+        "relations": []
+    },
+    {
+        "name": "\\App\\QueryBuilder\\SettingQueryBuilder",
+        "size": 3000,
+        "relations": [
+            "\\App\\QueryBuilder\\AbstractQueryBuilder",
+            "\\Doctrine\\ORM\\QueryBuilder"
+        ]
+    },
+    {
+        "name": "\\App\\Entity\\Setting",
+        "size": 3000,
+        "relations": []
+    },
+    {
+        "name": "\\App\\Repository\\CompanyJobEventRepository",
+        "size": 3000,
+        "relations": []
+    },
+    {
+        "name": "\\App\\Entity\\CompanyJobEvent",
+        "size": 3000,
+        "relations": []
+    },
+    {
+        "name": "\\App\\Repository\\TradeRepository",
+        "size": 3000,
+        "relations": []
+    },
+    {
+        "name": "\\App\\QueryBuilder\\TradeQueryBuilder",
+        "size": 3000,
+        "relations": [
+            "\\App\\QueryBuilder\\AbstractQueryBuilder",
+            "\\Doctrine\\ORM\\QueryBuilder"
+        ]
+    },
+    {
+        "name": "\\App\\Entity\\Trade",
+        "size": 3000,
+        "relations": []
+    },
+    {
+        "name": "\\App\\Repository\\CampaignIterationWeekRepository",
+        "size": 3000,
+        "relations": []
+    },
+    {
+        "name": "\\App\\QueryBuilder\\CampaignIterationWeekQueryBuilder",
+        "size": 3000,
+        "relations": [
+            "\\App\\QueryBuilder\\AbstractQueryBuilder",
+            "\\Doctrine\\ORM\\QueryBuilder",
+            "\\Doctrine\\Common\\Collections\\ArrayCollection"
+        ]
+    },
+    {
+        "name": "\\App\\Entity\\CampaignIterationWeek",
+        "size": 3000,
+        "relations": []
+    },
+    {
+        "name": "\\App\\ValueObjects\\CampaignIterationWeekObject",
+        "size": 3000,
+        "relations": [
+            "\\App\\ValueObjects\\AbstractObject"
+        ]
+    },
+    {
+        "name": "\\App\\Exceptions\\NotFoundException\\CampaignIterationWeekNotFoundException",
+        "size": 3000,
+        "relations": [
+            "\\App\\Exceptions\\AppException"
+        ]
+    },
+    {
+        "name": "\\App\\Repository\\SubscriptionRepository",
+        "size": 3000,
+        "relations": []
+    },
+    {
+        "name": "\\App\\Entity\\Subscription",
+        "size": 3000,
+        "relations": []
+    },
+    {
+        "name": "\\App\\Repository\\BusinessUnitRepository",
+        "size": 3000,
+        "relations": [
+            "\\App\\Repository\\AbstractRepository",
+            "\\Doctrine\\Persistence\\ManagerRegistry"
+        ]
+    },
+    {
+        "name": "\\App\\Repository\\BatchStatusRepository",
+        "size": 3000,
+        "relations": []
+    },
+    {
+        "name": "\\App\\QueryBuilder\\BatchStatusQueryBuilder",
+        "size": 3000,
+        "relations": [
+            "\\App\\QueryBuilder\\AbstractQueryBuilder",
+            "\\Doctrine\\ORM\\QueryBuilder"
+        ]
+    },
+    {
+        "name": "\\App\\Entity\\BatchStatus",
+        "size": 3000,
+        "relations": []
+    },
+    {
+        "name": "\\App\\Exceptions\\NotFoundException\\BatchStatusNotFoundException",
+        "size": 3000,
+        "relations": []
+    },
+    {
+        "name": "\\App\\Repository\\CampaignIterationStatusRepository",
+        "size": 3000,
+        "relations": []
+    },
+    {
+        "name": "\\App\\QueryBuilder\\CampaignIterationStatusQueryBuilder",
+        "size": 3000,
+        "relations": [
+            "\\App\\QueryBuilder\\AbstractQueryBuilder",
+            "\\Doctrine\\ORM\\QueryBuilder"
+        ]
+    },
+    {
+        "name": "\\App\\Entity\\CampaignIterationStatus",
+        "size": 3000,
+        "relations": []
+    },
+    {
+        "name": "\\App\\Exceptions\\NotFoundException\\CampaignIterationStatusNotFoundException",
+        "size": 3000,
+        "relations": [
+            "\\App\\Exceptions\\AppException"
+        ]
+    },
+    {
+        "name": "\\App\\Repository\\MailPackageRepository",
+        "size": 3000,
+        "relations": []
+    },
+    {
+        "name": "\\App\\Entity\\MailPackage",
+        "size": 3000,
+        "relations": []
+    },
+    {
+        "name": "\\App\\Repository\\Unmanaged\\ServiceTitanRepository",
+        "size": 3000,
+        "relations": []
+    },
+    {
+        "name": "\\App\\Repository\\Unmanaged\\AbstractUnmanagedRepository",
+        "size": 3000,
+        "relations": []
+    },
+    {
+        "name": "\\App\\Repository\\Unmanaged\\FieldEdgeRepository",
+        "size": 3000,
+        "relations": []
+    },
+    {
+        "name": "\\App\\Repository\\Unmanaged\\HubPlusRepository",
+        "size": 3000,
+        "relations": []
+    },
+    {
+        "name": "\\InvalidArgumentException",
+        "size": 3000,
+        "relations": []
+    },
+    {
+        "name": "\\App\\Repository\\Unmanaged\\GenericIngestRepository",
+        "size": 3000,
+        "relations": []
+    },
+    {
+        "name": "\\App\\Repository\\Unmanaged\\SuccesswareRepository",
+        "size": 3000,
+        "relations": []
+    },
+    {
+        "name": "\\App\\Repository\\EventStatusRepository",
+        "size": 3000,
+        "relations": []
+    },
+    {
+        "name": "\\App\\Entity\\EventStatus",
+        "size": 3000,
+        "relations": []
+    },
+    {
+        "name": "\\App\\Repository\\ReportRepository",
+        "size": 3000,
+        "relations": [
+            "\\App\\Repository\\AbstractRepository",
+            "\\Doctrine\\Persistence\\ManagerRegistry",
+            "\\App\\Entity\\Company",
+            "\\App\\Entity\\Report"
+        ]
+    },
+    {
+        "name": "\\App\\Entity\\Report",
+        "size": 3000,
+        "relations": [
+            "\\DateTimeInterface"
+        ]
+    },
+    {
+        "name": "\\App\\Repository\\EventRepository",
+        "size": 3000,
+        "relations": [
+            "\\Doctrine\\Bundle\\DoctrineBundle\\Repository\\ServiceEntityRepository",
+            "\\Doctrine\\Persistence\\ManagerRegistry"
+        ]
+    },
+    {
+        "name": "\\App\\Repository\\LocationRepository",
+        "size": 3000,
+        "relations": [
+            "\\App\\Repository\\AbstractRepository",
+            "\\Doctrine\\Persistence\\ManagerRegistry"
+        ]
+    },
+    {
+        "name": "\\App\\Repository\\SavedQueryRepository",
+        "size": 3000,
+        "relations": []
+    },
+    {
+        "name": "\\Doctrine\\ORM\\Tools\\Pagination\\Paginator",
+        "size": 3000,
+        "relations": []
+    },
+    {
+        "name": "\\App\\Repository\\CompanyRepository",
+        "size": 3000,
+        "relations": []
+    },
+    {
+        "name": "\\App\\QueryBuilder\\CompanyQueryBuilder",
+        "size": 3000,
+        "relations": [
+            "\\App\\QueryBuilder\\AbstractQueryBuilder",
+            "\\Doctrine\\ORM\\QueryBuilder"
+        ]
+    },
+    {
+        "name": "\\App\\Exceptions\\NotFoundException\\CompanyNotFoundException",
+        "size": 3000,
+        "relations": []
+    },
+    {
+        "name": "\\App\\Repository\\PhoneRepository",
+        "size": 3000,
+        "relations": [
+            "\\App\\Repository\\AbstractRepository",
+            "\\Doctrine\\Persistence\\ManagerRegistry"
+        ]
+    },
+    {
+        "name": "\\App\\Repository\\BatchRepository",
+        "size": 3000,
+        "relations": []
+    },
+    {
+        "name": "\\App\\QueryBuilder\\BatchQueryBuilder",
+        "size": 3000,
+        "relations": [
+            "\\App\\QueryBuilder\\BatchProspectQueryBuilder",
+            "\\Doctrine\\ORM\\QueryBuilder",
+            "\\Carbon\\Carbon",
+            "\\App\\Entity\\BatchStatus"
+        ]
+    },
+    {
+        "name": "\\App\\Entity\\Batch",
+        "size": 3000,
+        "relations": []
+    },
+    {
+        "name": "\\App\\ValueObjects\\BatchObject",
+        "size": 3000,
+        "relations": [
+            "\\App\\ValueObjects\\AbstractObject"
+        ]
+    },
+    {
+        "name": "\\App\\Exceptions\\NotFoundException\\BatchNotFoundException",
+        "size": 3000,
+        "relations": []
+    },
+    {
+        "name": "\\Carbon\\Carbon",
+        "size": 3000,
+        "relations": []
+    },
+    {
+        "name": "\\App\\Repository\\FileRepository",
+        "size": 3000,
+        "relations": [
+            "\\App\\Repository\\AbstractRepository",
+            "\\Doctrine\\Persistence\\ManagerRegistry"
+        ]
+    },
+    {
+        "name": "\\App\\Repository\\AddressRepository",
+        "size": 3000,
+        "relations": []
+    },
+    {
+        "name": "\\App\\Repository\\UserRepository",
+        "size": 3000,
+        "relations": []
+    },
+    {
+        "name": "\\App\\QueryBuilder\\UserQueryBuilder",
+        "size": 3000,
+        "relations": [
+            "\\App\\QueryBuilder\\AbstractQueryBuilder",
+            "\\Doctrine\\ORM\\QueryBuilder",
+            "\\App\\Entity\\User"
+        ]
+    },
+    {
+        "name": "\\App\\Entity\\User",
+        "size": 3000,
+        "relations": []
+    },
+    {
+        "name": "\\App\\Form\\BatchType",
+        "size": 3000,
+        "relations": [
+            "\\Symfony\\Component\\Form\\AbstractType",
+            "\\Symfony\\Component\\Form\\FormBuilderInterface",
+            "\\Symfony\\Component\\Validator\\Constraints\\NotBlank",
+            "\\Symfony\\Component\\Validator\\Constraints\\Type",
+            "\\Symfony\\Component\\Validator\\Constraints\\Positive",
+            "\\Symfony\\Component\\Validator\\Constraints\\PositiveOrZero",
+            "\\Symfony\\Component\\Validator\\Constraints\\Length",
+            "\\Symfony\\Component\\OptionsResolver\\OptionsResolver"
+        ]
+    },
+    {
+        "name": "\\Symfony\\Component\\Form\\AbstractType",
+        "size": 3000,
+        "relations": []
+    },
+    {
+        "name": "\\Symfony\\Component\\Form\\FormBuilderInterface",
+        "size": 3000,
+        "relations": []
+    },
+    {
+        "name": "\\Symfony\\Component\\Validator\\Constraints\\NotBlank",
+        "size": 3000,
+        "relations": []
+    },
+    {
+        "name": "\\Symfony\\Component\\Validator\\Constraints\\Positive",
+        "size": 3000,
+        "relations": []
+    },
+    {
+        "name": "\\Symfony\\Component\\Validator\\Constraints\\PositiveOrZero",
+        "size": 3000,
+        "relations": []
+    },
+    {
+        "name": "\\Symfony\\Component\\Validator\\Constraints\\Length",
+        "size": 3000,
+        "relations": []
+    },
+    {
+        "name": "\\Symfony\\Component\\OptionsResolver\\OptionsResolver",
+        "size": 3000,
+        "relations": []
+    },
+    {
+        "name": "\\App\\AbstractMigrator",
+        "size": 3000,
+        "relations": []
+    },
+    {
+        "name": "\\App\\ValueObjects\\CompanyObject",
+        "size": 3000,
+        "relations": [
+            "\\App\\ValueObjects\\AbstractObject",
+            "\\App\\Entity\\Company",
+            "\\static"
+        ]
+    },
+    {
+        "name": "\\Doctrine\\ORM\\EntityManagerInterface",
+        "size": 3000,
+        "relations": []
+    },
+    {
+        "name": "\\GuzzleHttp\\Handler\\CurlFactory",
+        "size": 3000,
+        "relations": []
+    },
+    {
+        "name": "\\GuzzleHttp\\Handler\\CurlHandler",
+        "size": 3000,
+        "relations": []
+    },
+    {
+        "name": "\\GuzzleHttp\\HandlerStack",
+        "size": 3000,
+        "relations": []
+    },
+    {
+        "name": "\\GuzzleHttp\\Client",
+        "size": 3000,
+        "relations": []
+    },
+    {
+        "name": "\\RuntimeException",
+        "size": 3000,
+        "relations": []
+    },
+    {
+        "name": "\\App\\Services\\FileWriter",
+        "size": 3000,
+        "relations": []
+    },
+    {
+        "name": "\\App\\Services\\FileConverter",
+        "size": 3000,
+        "relations": [
+            "\\App\\Services\\FileWriter",
+            "\\App\\Entity\\Company",
+            "\\App\\Exceptions\\FileConverterException"
+        ]
+    },
+    {
+        "name": "\\App\\ValueObjects\\AbstractObject",
+        "size": 3000,
+        "relations": []
+    },
+    {
+        "name": "\\App\\Parsers\\RecordParser",
+        "size": 3000,
+        "relations": []
+    },
+    {
+        "name": "\\PhpOffice\\PhpSpreadsheet\\IOFactory",
+        "size": 3000,
+        "relations": []
+    },
+    {
+        "name": "\\App\\Parsers\\MailManagerLife\\InvoiceParser",
+        "size": 3000,
+        "relations": [
+            "\\App\\Parsers\\MailManagerLife\\MailManagerLifeParser",
+            "\\App\\ValueObjects\\InvoiceObject",
+            "\\App\\ValueObjects\\ProspectObject",
+            "\\App\\ValueObjects\\CustomerObject",
+            "\\App\\ValueObjects\\AddressObject"
+        ]
+    },
+    {
+        "name": "\\App\\Parsers\\MailManagerLife\\MailManagerLifeParser",
+        "size": 3000,
+        "relations": []
+    },
+    {
+        "name": "\\App\\ValueObjects\\ProspectObject",
+        "size": 3000,
+        "relations": []
+    },
+    {
+        "name": "\\App\\ValueObjects\\CustomerObject",
+        "size": 3000,
+        "relations": [
+            "\\App\\ValueObjects\\AbstractObject"
+        ]
+    },
+    {
+        "name": "\\App\\ValueObjects\\AddressObject",
+        "size": 3000,
+        "relations": [
+            "\\App\\ValueObjects\\AbstractObject",
+            "\\App\\Entity\\AbstractAddress",
+            "\\static"
+        ]
+    },
+    {
+        "name": "\\App\\Parsers\\AbstractParser",
+        "size": 3000,
+        "relations": []
+    },
+    {
+        "name": "\\App\\Parsers\\MailManagerLife\\AddressParser",
+        "size": 3000,
+        "relations": [
+            "\\App\\Parsers\\MailManagerLife\\MailManagerLifeParser",
+            "\\App\\ValueObjects\\AddressObject",
+            "\\App\\ValueObjects\\ProspectObject"
+        ]
+    },
+    {
+        "name": "\\App\\Parsers\\MailManagerLife\\CustomerParser",
+        "size": 3000,
+        "relations": [
+            "\\App\\Parsers\\MailManagerLife\\MailManagerLifeParser",
+            "\\App\\ValueObjects\\CustomerObject",
+            "\\App\\ValueObjects\\ProspectObject"
+        ]
+    },
+    {
+        "name": "\\App\\Parsers\\Mixins\\InvoiceMixin",
+        "size": 3000,
+        "relations": []
+    },
+    {
+        "name": "\\App\\Parsers\\Mixins\\EmailAddressMixin",
+        "size": 3000,
+        "relations": []
+    },
+    {
+        "name": "\\App\\Parsers\\Mixins\\PhoneNumberMixin",
+        "size": 3000,
+        "relations": []
+    },
+    {
+        "name": "\\App\\Parsers\\MailManager\\MailManagerParser",
+        "size": 3000,
+        "relations": []
+    },
+    {
+        "name": "\\App\\Parsers\\MailManager\\AddressParser",
+        "size": 3000,
+        "relations": [
+            "\\App\\Parsers\\MailManager\\MailManagerParser",
+            "\\App\\ValueObjects\\AddressObject",
+            "\\App\\ValueObjects\\ProspectObject"
+        ]
+    },
+    {
+        "name": "\\App\\Parsers\\MailManager\\MailPackageParser",
+        "size": 3000,
+        "relations": [
+            "\\App\\Parsers\\MailManager\\MailManagerParser",
+            "\\App\\ValueObjects\\MailPackageObject",
+            "\\App\\ValueObjects\\ProspectObject"
+        ]
+    },
+    {
+        "name": "\\App\\ValueObjects\\MailPackageObject",
+        "size": 3000,
+        "relations": [
+            "\\App\\ValueObjects\\AbstractObject"
+        ]
+    },
+    {
+        "name": "\\App\\Parsers\\MailManager\\CustomerParser",
+        "size": 3000,
+        "relations": [
+            "\\App\\Parsers\\MailManager\\MailManagerParser",
+            "\\App\\ValueObjects\\CustomerObject",
+            "\\App\\ValueObjects\\ProspectObject"
+        ]
+    },
+    {
+        "name": "\\App\\Parsers\\FieldEdge\\InvoiceParser",
+        "size": 3000,
+        "relations": [
+            "\\App\\Parsers\\FieldEdge\\FieldEdgeParser",
+            "\\App\\ValueObjects\\InvoiceObject",
+            "\\App\\Parsers\\FieldEdge\\ProspectParser"
+        ]
+    },
+    {
+        "name": "\\App\\Parsers\\FieldEdge\\FieldEdgeParser",
+        "size": 3000,
+        "relations": [
+            "\\App\\Parsers\\AbstractParser"
+        ]
+    },
+    {
+        "name": "\\App\\Parsers\\FieldEdge\\ProspectParser",
+        "size": 3000,
+        "relations": []
+    },
+    {
+        "name": "\\App\\Parsers\\Successware\\SuccesswareParser",
+        "size": 3000,
+        "relations": [
+            "\\App\\Parsers\\AbstractParser"
+        ]
+    },
+    {
+        "name": "\\App\\Parsers\\ServiceTitan\\InvoiceParser",
+        "size": 3000,
+        "relations": [
+            "\\App\\Parsers\\ServiceTitan\\ServiceTitanParser",
+            "\\App\\ValueObjects\\InvoiceObject",
+            "\\App\\ValueObjects\\ProspectObject"
+        ]
+    },
+    {
+        "name": "\\App\\Parsers\\ServiceTitan\\ServiceTitanParser",
+        "size": 3000,
+        "relations": []
+    },
+    {
+        "name": "\\App\\Parsers\\ServiceTitan\\AddressParser",
+        "size": 3000,
+        "relations": [
+            "\\App\\Parsers\\ServiceTitan\\ServiceTitanParser",
+            "\\App\\ValueObjects\\AddressObject",
+            "\\App\\ValueObjects\\ProspectObject"
+        ]
+    },
+    {
+        "name": "\\App\\Parsers\\ServiceTitan\\InvoiceStreamInvoiceParser",
+        "size": 3000,
+        "relations": [
+            "\\App\\Parsers\\ServiceTitan\\ServiceTitanParser",
+            "\\App\\ValueObjects\\InvoiceObject",
+            "\\App\\ValueObjects\\ProspectObject"
+        ]
+    },
+    {
+        "name": "\\App\\Parsers\\ServiceTitan\\CustomerParser",
+        "size": 3000,
+        "relations": [
+            "\\App\\Parsers\\ServiceTitan\\ServiceTitanParser",
+            "\\App\\ValueObjects\\CustomerObject",
+            "\\App\\ValueObjects\\ProspectObject"
+        ]
+    },
+    {
+        "name": "\\App\\Parsers\\CsvRecordParser",
+        "size": 3000,
+        "relations": []
+    },
+    {
+        "name": "\\League\\Csv\\Reader",
+        "size": 3000,
+        "relations": []
+    },
+    {
+        "name": "\\League\\Csv\\Writer",
+        "size": 3000,
+        "relations": []
+    },
+    {
+        "name": "\\League\\Csv\\Statement",
+        "size": 3000,
+        "relations": []
+    },
+    {
+        "name": "\\this",
+        "size": 3000,
+        "relations": []
+    },
+    {
+        "name": "\\App\\Parsers\\GenericIngest\\GenericIngestParser",
+        "size": 3000,
+        "relations": []
+    },
+    {
+        "name": "\\App\\Parsers\\GenericIngest\\InvoiceStreamInvoiceParser",
+        "size": 3000,
+        "relations": [
+            "\\App\\Parsers\\GenericIngest\\GenericIngestParser",
+            "\\App\\ValueObjects\\InvoiceObject",
+            "\\App\\ValueObjects\\ProspectObject",
+            "\\DateTimeImmutable"
+        ]
+    },
+    {
+        "name": "\\DateTimeImmutable",
+        "size": 3000,
+        "relations": []
+    },
+    {
+        "name": "\\App\\QueryBuilder\\AbstractQueryBuilder",
+        "size": 3000,
+        "relations": []
+    },
+    {
+        "name": "\\App\\QueryBuilder\\BatchProspectQueryBuilder",
+        "size": 3000,
+        "relations": []
+    },
+    {
+        "name": "\\App\\Importers\\InvoiceImporter",
+        "size": 3000,
+        "relations": [
+            "\\App\\Importers\\AbstractImporter"
+        ]
+    },
+    {
+        "name": "\\App\\Importers\\AbstractImporter",
+        "size": 3000,
+        "relations": []
+    },
+    {
+        "name": "\\App\\Exceptions\\PartialProcessingException",
+        "size": 3000,
+        "relations": [
+            "\\App\\Exceptions\\AppException",
+            "\\App\\Importers\\AbstractImporter"
+        ]
+    },
+    {
+        "name": "\\App\\Importers\\MailPackageImporter",
+        "size": 3000,
+        "relations": [
+            "\\App\\Importers\\AbstractImporter"
+        ]
+    },
+    {
+        "name": "\\App\\Importers\\CustomerImporter",
+        "size": 3000,
+        "relations": [
+            "\\App\\Importers\\AbstractImporter"
+        ]
+    },
+    {
+        "name": "\\App\\Importers\\AddressImporter",
+        "size": 3000,
+        "relations": [
+            "\\App\\Importers\\AbstractImporter"
+        ]
+    },
+    {
+        "name": "\\App\\Importers\\ImportFactory",
+        "size": 3000,
+        "relations": []
+    },
+    {
+        "name": "\\ReflectionClass",
+        "size": 3000,
+        "relations": []
+    },
+    {
+        "name": "\\parser",
+        "size": 3000,
+        "relations": []
+    },
+    {
+        "name": "\\App\\DoctrineFunctions\\ExtractFunction",
+        "size": 3000,
+        "relations": [
+            "\\Doctrine\\ORM\\Query\\AST\\Functions\\FunctionNode",
+            "\\Doctrine\\ORM\\Query\\Parser",
+            "\\Doctrine\\ORM\\Query\\SqlWalker"
+        ]
+    },
+    {
+        "name": "\\Doctrine\\ORM\\Query\\AST\\Functions\\FunctionNode",
+        "size": 3000,
+        "relations": []
+    },
+    {
+        "name": "\\Doctrine\\ORM\\Query\\Parser",
+        "size": 3000,
+        "relations": []
+    },
+    {
+        "name": "\\Doctrine\\ORM\\Query\\SqlWalker",
+        "size": 3000,
+        "relations": []
+    },
+    {
+        "name": "\\App\\DoctrineFunctions\\CastFunction",
+        "size": 3000,
+        "relations": [
+            "\\Doctrine\\ORM\\Query\\AST\\Functions\\FunctionNode",
+            "\\Doctrine\\ORM\\Query\\Parser",
+            "\\Doctrine\\ORM\\Query\\SqlWalker"
+        ]
+    },
+    {
+        "name": "\\App\\DoctrineFunctions\\NowFunction",
+        "size": 3000,
+        "relations": [
+            "\\Doctrine\\ORM\\Query\\AST\\Functions\\FunctionNode",
+            "\\Doctrine\\ORM\\Query\\Parser",
+            "\\Doctrine\\ORM\\Query\\SqlWalker"
+        ]
+    },
+    {
+        "name": "\\App\\DoctrineFunctions\\IRegexFunction",
+        "size": 3000,
+        "relations": [
+            "\\Doctrine\\ORM\\Query\\AST\\Functions\\FunctionNode",
+            "\\Doctrine\\ORM\\Query\\Parser",
+            "\\Doctrine\\ORM\\Query\\SqlWalker"
+        ]
+    },
+    {
+        "name": "\\App\\DoctrineFunctions\\SimilarityFunction",
+        "size": 3000,
+        "relations": [
+            "\\Doctrine\\ORM\\Query\\AST\\Functions\\FunctionNode",
+            "\\Doctrine\\ORM\\Query\\SqlWalker",
+            "\\Doctrine\\ORM\\Query\\Parser"
+        ]
+    },
+    {
+        "name": "\\App\\DoctrineFunctions\\JsonExtractFunction",
+        "size": 3000,
+        "relations": [
+            "\\Doctrine\\ORM\\Query\\AST\\Functions\\FunctionNode",
+            "\\Doctrine\\ORM\\Query\\Parser",
+            "\\Doctrine\\ORM\\Query\\SqlWalker"
+        ]
+    },
+    {
+        "name": "\\App\\Security\\UserAuthenticator",
+        "size": 3000,
+        "relations": [
+            "\\Symfony\\Component\\Security\\Http\\Authenticator\\AbstractAuthenticator",
+            "\\Symfony\\Component\\HttpFoundation\\Request",
+            "\\Symfony\\Component\\Security\\Http\\Authenticator\\Passport\\Passport",
+            "\\Symfony\\Component\\Security\\Http\\Authenticator\\Passport\\Badge\\UserBadge",
+            "\\Symfony\\Component\\Security\\Http\\Authenticator\\Passport\\SelfValidatingPassport",
+            "\\Symfony\\Component\\Security\\Core\\Authentication\\Token\\TokenInterface",
+            "\\Symfony\\Component\\Security\\Core\\Exception\\AuthenticationException",
+            "\\Symfony\\Component\\HttpFoundation\\Response"
+        ]
+    },
+    {
+        "name": "\\Symfony\\Component\\Security\\Http\\Authenticator\\AbstractAuthenticator",
+        "size": 3000,
+        "relations": []
+    },
+    {
+        "name": "\\Symfony\\Component\\HttpFoundation\\Request",
+        "size": 3000,
+        "relations": []
+    },
+    {
+        "name": "\\Symfony\\Component\\Security\\Http\\Authenticator\\Passport\\Passport",
+        "size": 3000,
+        "relations": []
+    },
+    {
+        "name": "\\Symfony\\Component\\Security\\Http\\Authenticator\\Passport\\Badge\\UserBadge",
+        "size": 3000,
+        "relations": []
+    },
+    {
+        "name": "\\Symfony\\Component\\Security\\Http\\Authenticator\\Passport\\SelfValidatingPassport",
+        "size": 3000,
+        "relations": []
+    },
+    {
+        "name": "\\Symfony\\Component\\Security\\Core\\Authentication\\Token\\TokenInterface",
+        "size": 3000,
+        "relations": []
+    },
+    {
+        "name": "\\Symfony\\Component\\Security\\Core\\Exception\\AuthenticationException",
+        "size": 3000,
+        "relations": []
+    },
+    {
+        "name": "\\Symfony\\Component\\HttpFoundation\\Response",
+        "size": 3000,
+        "relations": []
+    },
+    {
+        "name": "\\App\\Security\\ApiUserProvider",
+        "size": 3000,
+        "relations": [
+            "\\Symfony\\Component\\Security\\Core\\User\\UserProviderInterface",
+            "\\Symfony\\Component\\Security\\Core\\User\\UserInterface",
+            "\\App\\Entity\\User"
+        ]
+    },
+    {
+        "name": "\\Symfony\\Component\\Security\\Core\\User\\UserProviderInterface",
+        "size": 3000,
+        "relations": []
+    },
+    {
+        "name": "\\Symfony\\Component\\Security\\Core\\User\\UserInterface",
+        "size": 3000,
+        "relations": []
+    },
+    {
+        "name": "\\App\\Security\\UserProvider",
+        "size": 3000,
+        "relations": [
+            "\\Symfony\\Component\\Security\\Core\\User\\UserProviderInterface",
+            "\\Auth0\\Symfony\\Contracts\\Security\\UserProviderInterface",
+            "\\Auth0\\Symfony\\Security\\UserProvider",
+            "\\App\\Repository\\UserRepository",
+            "\\Symfony\\Component\\Security\\Core\\User\\UserInterface",
+            "\\Auth0\\Symfony\\Models\\User",
+            "\\Symfony\\Component\\Security\\Core\\Exception\\UserNotFoundException"
+        ]
+    },
+    {
+        "name": "\\Auth0\\Symfony\\Contracts\\Security\\UserProviderInterface",
+        "size": 3000,
+        "relations": []
+    },
+    {
+        "name": "\\Auth0\\Symfony\\Security\\UserProvider",
+        "size": 3000,
+        "relations": []
+    },
+    {
+        "name": "\\Auth0\\Symfony\\Models\\User",
+        "size": 3000,
+        "relations": []
+    },
+    {
+        "name": "\\Symfony\\Component\\Security\\Core\\Exception\\UserNotFoundException",
+        "size": 3000,
+        "relations": []
+    },
+    {
+        "name": "\\App\\Security\\ApiKeyAuthenticator",
+        "size": 3000,
+        "relations": [
+            "\\Symfony\\Component\\Security\\Http\\Authenticator\\AbstractAuthenticator",
+            "\\Symfony\\Component\\HttpFoundation\\Request",
+            "\\Symfony\\Component\\Security\\Http\\Authenticator\\Passport\\Passport",
+            "\\Symfony\\Component\\Security\\Core\\Exception\\CustomUserMessageAuthenticationException",
+            "\\Symfony\\Component\\Security\\Http\\Authenticator\\Passport\\Badge\\UserBadge",
+            "\\Symfony\\Component\\Security\\Http\\Authenticator\\Passport\\SelfValidatingPassport",
+            "\\Symfony\\Component\\Security\\Core\\Authentication\\Token\\TokenInterface",
+            "\\Symfony\\Component\\Security\\Core\\Exception\\AuthenticationException",
+            "\\Symfony\\Component\\HttpFoundation\\JsonResponse"
+        ]
+    },
+    {
+        "name": "\\Symfony\\Component\\Security\\Core\\Exception\\CustomUserMessageAuthenticationException",
+        "size": 3000,
+        "relations": []
+    },
+    {
+        "name": "\\Symfony\\Component\\HttpFoundation\\JsonResponse",
+        "size": 3000,
+        "relations": []
+    },
+    {
+        "name": "\\App\\Security\\Voter\\SwitchToUserVoter",
+        "size": 3000,
+        "relations": [
+            "\\Symfony\\Component\\Security\\Core\\Authorization\\Voter\\Voter",
+            "\\Symfony\\Bundle\\SecurityBundle\\Security",
+            "\\Symfony\\Component\\Security\\Core\\Authentication\\Token\\TokenInterface"
+        ]
+    },
+    {
+        "name": "\\Symfony\\Component\\Security\\Core\\Authorization\\Voter\\Voter",
+        "size": 3000,
+        "relations": []
+    },
+    {
+        "name": "\\Symfony\\Bundle\\SecurityBundle\\Security",
+        "size": 3000,
+        "relations": []
+    },
+    {
+        "name": "\\App\\Entity\\Email",
+        "size": 3000,
+        "relations": []
+    },
+    {
+        "name": "\\Doctrine\\Common\\Collections\\Collection",
+        "size": 3000,
+        "relations": []
+    },
+    {
+        "name": "\\App\\Entity\\AbstractAddress",
+        "size": 3000,
+        "relations": []
+    },
+    {
+        "name": "\\App\\Entity\\Event",
+        "size": 3000,
+        "relations": [
+            "\\Doctrine\\Common\\Collections\\ArrayCollection",
+            "\\Doctrine\\Common\\Collections\\Collection",
+            "\\App\\Entity\\Prospect"
+        ]
+    },
+    {
+        "name": "\\App\\Entity\\ProspectFilterRule",
+        "size": 3000,
+        "relations": []
+    },
+    {
+        "name": "\\App\\Entity\\Traits\\PostProcessEntity",
+        "size": 3000,
+        "relations": []
+    },
+    {
+        "name": "\\App\\Entity\\Traits\\StatusEntity",
+        "size": 3000,
+        "relations": []
+    },
+    {
+        "name": "\\App\\Entity\\Traits\\ExternalIdEntity",
+        "size": 3000,
+        "relations": []
+    },
+    {
+        "name": "\\App\\Entity\\Traits\\TimestampableEntity",
+        "size": 3000,
+        "relations": [
+            "\\DateTimeImmutable"
+        ]
+    },
+    {
+        "name": "\\App\\Exceptions\\AddressIsInvalid",
+        "size": 3000,
+        "relations": [
+            "\\App\\Exceptions\\AppException"
+        ]
+    },
+    {
+        "name": "\\App\\Entity\\File",
+        "size": 3000,
+        "relations": []
+    },
+    {
+        "name": "\\Auth0\\Symfony\\Contracts\\Models\\UserInterface",
+        "size": 3000,
+        "relations": []
+    },
+    {
+        "name": "\\App\\Entity\\BusinessUnit",
+        "size": 3000,
+        "relations": [
+            "\\Doctrine\\Common\\Collections\\ArrayCollection",
+            "\\Doctrine\\Common\\Collections\\Collection",
+            "\\App\\Entity\\Location",
+            "\\App\\Entity\\Invoice"
+        ]
+    },
+    {
+        "name": "\\App\\Entity\\Location",
+        "size": 3000,
+        "relations": [
+            "\\Doctrine\\Common\\Collections\\ArrayCollection",
+            "\\Doctrine\\Common\\Collections\\Collection",
+            "\\App\\Entity\\Invoice"
+        ]
+    },
+    {
+        "name": "\\App\\Entity\\Phone",
+        "size": 3000,
+        "relations": []
+    },
+    {
+        "name": "\\App\\Entity\\SavedQuery",
+        "size": 3000,
+        "relations": []
+    },
+    {
+        "name": "\\App\\Exporters\\ExportFactory",
+        "size": 3000,
+        "relations": []
+    },
+    {
+        "name": "\\App\\Client\\FileClient",
+        "size": 3000,
+        "relations": []
+    },
+    {
+        "name": "\\App\\Exporters\\AbstractExporter",
+        "size": 3000,
+        "relations": []
+    },
+    {
+        "name": "\\App\\MessageHandler\\UpdateDMERHandler",
+        "size": 3000,
+        "relations": [
+            "\\App\\Services\\DMER\\DMERDataService",
+            "\\App\\Repository\\CompanyRepository",
+            "\\App\\Message\\UpdateDMERMessage"
+        ]
+    },
+    {
+        "name": "\\App\\Services\\DMER\\DMERDataService",
+        "size": 3000,
+        "relations": [
+            "\\App\\Services\\ExcelService",
+            "\\App\\Repository\\InvoiceRepository",
+            "\\Symfony\\Component\\Messenger\\MessageBusInterface",
+            "\\App\\Message\\UpdateDMERMessage",
+            "\\App\\Entity\\Company",
+            "\\Microsoft\\Graph\\Model\\WorkbookWorksheet",
+            "\\Microsoft\\Graph\\Model\\WorkbookSessionInfo",
+            "\\App\\DTO\\Query\\Invoice\\DailySalesQueryDTO",
+            "\\Illuminate\\Support\\Collection",
+            "\\Carbon\\Carbon",
+            "\\App\\Services\\DMER\\DMERTemplateFactory",
+            "\\App\\Exceptions\\DomainException\\DMER\\DMERProcessingException"
+        ]
+    },
+    {
+        "name": "\\App\\Message\\UpdateDMERMessage",
+        "size": 3000,
+        "relations": []
+    },
+    {
+        "name": "\\App\\MessageHandler\\MigrationHandler",
+        "size": 3000,
+        "relations": []
+    },
+    {
+        "name": "\\App\\Services\\MigrationService",
+        "size": 3000,
+        "relations": []
+    },
+    {
+        "name": "\\App\\Services\\CustomerMetricsService",
+        "size": 3000,
+        "relations": [
+            "\\App\\Repository\\CustomerRepository",
+            "\\Doctrine\\ORM\\EntityManagerInterface",
+            "\\Psr\\Log\\LoggerInterface",
+            "\\App\\Entity\\Company"
+        ]
+    },
+    {
+        "name": "\\App\\Message\\MigrationMessage",
+        "size": 3000,
+        "relations": []
+    },
+    {
+        "name": "\\Symfony\\Component\\Messenger\\Exception\\RecoverableMessageHandlingException",
+        "size": 3000,
+        "relations": []
+    },
+    {
+        "name": "\\Exception",
+        "size": 3000,
+        "relations": []
+    },
+    {
+        "name": "\\App\\MessageHandler\\SampleMessageHandler",
+        "size": 3000,
+        "relations": [
+            "\\App\\Message\\SampleMessage"
+        ]
+    },
+    {
+        "name": "\\App\\Message\\SampleMessage",
+        "size": 3000,
+        "relations": []
+    },
+    {
+        "name": "\\App\\MessageHandler\\CreateCampaignIterationsHandler",
+        "size": 3000,
+        "relations": [
+            "\\App\\Repository\\CampaignRepository",
+            "\\App\\Services\\CampaignIterationService",
+            "\\App\\Message\\CreateCampaignIterationsMessage"
+        ]
+    },
+    {
+        "name": "\\App\\Services\\CampaignIterationService",
+        "size": 3000,
+        "relations": [
+            "\\Psr\\Log\\LoggerInterface",
+            "\\Doctrine\\ORM\\EntityManagerInterface",
+            "\\App\\Repository\\ProspectRepository",
+            "\\App\\Repository\\CampaignIterationStatusRepository",
+            "\\App\\Repository\\CampaignIterationRepository",
+            "\\App\\Services\\CampaignIterationWeekService",
+            "\\App\\Services\\CampaignEventService",
+            "\\App\\Services\\BatchService",
+            "\\App\\Entity\\Campaign",
+            "\\App\\DTO\\Request\\Campaign\\CreateCampaignDTO",
+            "\\Carbon\\Carbon",
+            "\\Doctrine\\Common\\Collections\\ArrayCollection",
+            "\\Doctrine\\Common\\Collections\\Collection",
+            "\\App\\Entity\\CampaignIterationStatus",
+            "\\App\\Entity\\CampaignIteration",
+            "\\App\\Exceptions\\NotFoundException\\CampaignNotFoundException",
+            "\\App\\Exceptions\\NotFoundException\\CompanyNotFoundException",
+            "\\App\\DTO\\Domain\\ProspectFilterRulesDTO",
+            "\\App\\ValueObjects\\CampaignIterationObject",
+            "\\App\\Exceptions\\NotFoundException\\CampaignIterationNotFoundException",
+            "\\App\\Exceptions\\DomainException\\Campaign\\CampaignAlreadyCreatedException",
+            "\\App\\Exceptions\\DomainException\\Campaign\\CampaignAlreadyCompletedException",
+            "\\App\\Exceptions\\DomainException\\CampaignIteration\\CampaignIterationCannotBeCreatedException",
+            "\\App\\Exceptions\\DomainException\\CampaignIteration\\CampaignIterationCannotBeProcessedException",
+            "\\Exception"
+        ]
+    },
+    {
+        "name": "\\App\\Message\\CreateCampaignIterationsMessage",
+        "size": 3000,
+        "relations": []
+    },
+    {
+        "name": "\\App\\MessageHandler\\CompanyProcessingHandler",
+        "size": 3000,
+        "relations": [
+            "\\Psr\\Log\\LoggerInterface",
+            "\\App\\Services\\CompanyDigestingAndProcessingService",
+            "\\App\\Message\\CompanyProcessingMessage"
+        ]
+    },
+    {
+        "name": "\\Psr\\Log\\LoggerInterface",
+        "size": 3000,
+        "relations": []
+    },
+    {
+        "name": "\\App\\Services\\CompanyDigestingAndProcessingService",
+        "size": 3000,
+        "relations": [
+            "\\App\\Services\\DataStreamDigestingService",
+            "\\App\\Services\\PostProcessingService",
+            "\\App\\Services\\CustomerMetricsService",
+            "\\App\\Repository\\CompanyRepository",
+            "\\Symfony\\Component\\Messenger\\MessageBusInterface",
+            "\\App\\Services\\CompanyJobService",
+            "\\App\\Services\\TenantStreamAuditService",
+            "\\Doctrine\\ORM\\EntityManagerInterface",
+            "\\Psr\\Log\\LoggerInterface",
+            "\\App\\Message\\CompanyProcessingMessage",
+            "\\App\\Exceptions\\NotFoundException\\CompanyNotFoundException",
+            "\\Symfony\\Component\\Messenger\\Stamp\\DelayStamp",
+            "\\App\\Entity\\Company"
+        ]
+    },
+    {
+        "name": "\\App\\Message\\CompanyProcessingMessage",
+        "size": 3000,
+        "relations": []
+    },
+    {
+        "name": "\\App\\Resources\\BatchResource",
+        "size": 3000,
+        "relations": []
+    },
+    {
+        "name": "\\App\\Resources\\AbstractResource",
+        "size": 3000,
+        "relations": []
+    },
+    {
+        "name": "\\League\\Fractal\\Manager",
+        "size": 3000,
+        "relations": []
+    },
+    {
+        "name": "\\App\\Resources\\ProspectFilterRuleResource",
+        "size": 3000,
+        "relations": []
+    },
+    {
+        "name": "\\App\\Transformers\\BatchTransformer",
+        "size": 3000,
+        "relations": [
+            "\\League\\Fractal\\TransformerAbstract",
+            "\\App\\Resources\\ProspectFilterRuleResource",
+            "\\App\\Repository\\BatchRepository",
+            "\\App\\Entity\\Batch",
+            "\\App\\Transformers\\BatchStatusTransformer",
+            "\\App\\Transformers\\CampaignTransformer",
+            "\\App\\Transformers\\CampaignIterationTransformer",
+            "\\App\\Transformers\\CampaignIterationWeekTransformer"
+        ]
+    },
+    {
+        "name": "\\App\\Resources\\CampaignResource",
+        "size": 3000,
+        "relations": []
+    },
+    {
+        "name": "\\App\\Transformers\\CampaignTransformer",
+        "size": 3000,
+        "relations": []
+    },
+    {
+        "name": "\\App\\Resources\\CampaignStatusResource",
+        "size": 3000,
+        "relations": []
+    },
+    {
+        "name": "\\App\\Transformers\\CampaignStatusTransformer",
+        "size": 3000,
+        "relations": []
+    },
+    {
+        "name": "\\App\\Resources\\CampaignFileResource",
+        "size": 3000,
+        "relations": []
+    },
+    {
+        "name": "\\App\\Transformers\\CampaignFileTransformer",
+        "size": 3000,
+        "relations": [
+            "\\League\\Fractal\\TransformerAbstract",
+            "\\App\\Entity\\CampaignFile"
+        ]
+    },
+    {
+        "name": "\\App\\Resources\\CampaignIterationStatusResource",
+        "size": 3000,
+        "relations": []
+    },
+    {
+        "name": "\\App\\Transformers\\CampaignIterationStatusTransformer",
+        "size": 3000,
+        "relations": [
+            "\\League\\Fractal\\TransformerAbstract",
+            "\\App\\Entity\\CampaignIterationStatus"
+        ]
+    },
+    {
+        "name": "\\App\\Resources\\CampaignEventResource",
+        "size": 3000,
+        "relations": []
+    },
+    {
+        "name": "\\App\\Resources\\EventStatusResource",
+        "size": 3000,
+        "relations": []
+    },
+    {
+        "name": "\\App\\Transformers\\CampaignEventTransformer",
+        "size": 3000,
+        "relations": [
+            "\\League\\Fractal\\TransformerAbstract",
+            "\\App\\Resources\\EventStatusResource",
+            "\\App\\Entity\\CampaignEvent"
+        ]
+    },
+    {
+        "name": "\\App\\Resources\\BatchStatusResource",
+        "size": 3000,
+        "relations": []
+    },
+    {
+        "name": "\\App\\Transformers\\BatchStatusTransformer",
+        "size": 3000,
+        "relations": [
+            "\\League\\Fractal\\TransformerAbstract",
+            "\\App\\Entity\\BatchStatus"
+        ]
+    },
+    {
+        "name": "\\League\\Fractal\\Resource\\Collection",
+        "size": 3000,
+        "relations": []
+    },
+    {
+        "name": "\\League\\Fractal\\Resource\\Item",
+        "size": 3000,
+        "relations": []
+    },
+    {
+        "name": "\\League\\Fractal\\TransformerAbstract",
+        "size": 3000,
+        "relations": []
+    },
+    {
+        "name": "\\App\\Transformers\\EventStatusTransformer",
+        "size": 3000,
+        "relations": [
+            "\\League\\Fractal\\TransformerAbstract",
+            "\\App\\Entity\\EventStatus"
+        ]
+    },
+    {
+        "name": "\\App\\ArgumentResolver\\RequestQueryDTOResolver",
+        "size": 3000,
+        "relations": [
+            "\\Symfony\\Component\\HttpKernel\\Controller\\ValueResolverInterface",
+            "\\Symfony\\Component\\HttpKernel\\ControllerMetadata\\ArgumentMetadata",
+            "\\Symfony\\Component\\HttpFoundation\\Request",
+            "\\App\\DTO\\Query\\PaginationDTO"
+        ]
+    },
+    {
+        "name": "\\Symfony\\Component\\HttpKernel\\Controller\\ValueResolverInterface",
+        "size": 3000,
+        "relations": []
+    },
+    {
+        "name": "\\Symfony\\Component\\HttpKernel\\ControllerMetadata\\ArgumentMetadata",
+        "size": 3000,
+        "relations": []
+    },
+    {
+        "name": "\\App\\Exceptions\\AppException",
+        "size": 3000,
+        "relations": []
+    },
+    {
+        "name": "\\App\\Exceptions\\InvalidMailingDropWeekException",
+        "size": 3000,
+        "relations": []
+    },
+    {
+        "name": "\\App\\Exceptions\\FileCouldNotBeRetrieved",
+        "size": 3000,
+        "relations": []
+    },
+    {
+        "name": "\\App\\Exceptions\\StochasticFilePathWasInvalid",
+        "size": 3000,
+        "relations": []
+    },
+    {
+        "name": "\\App\\Exceptions\\USPS\\USPSAddressVerificationRateLimitException",
+        "size": 3000,
+        "relations": []
+    },
+    {
+        "name": "\\App\\Exceptions\\USPS\\USPSAddressVerificationValidationException",
+        "size": 3000,
+        "relations": []
+    },
+    {
+        "name": "\\App\\Exceptions\\DatabaseConsumerException",
+        "size": 3000,
+        "relations": [
+            "\\App\\Exceptions\\AppException"
+        ]
+    },
+    {
+        "name": "\\App\\Exceptions\\DomainException\\Chart\\FailedToGetTotalSalesNewVsExistingCustomerChartData",
+        "size": 3000,
+        "relations": []
+    },
+    {
+        "name": "\\App\\Exceptions\\DomainException\\Chart\\FailedToGetTotalSalesByYearAndMonthChartData",
+        "size": 3000,
+        "relations": []
+    },
+    {
+        "name": "\\App\\Exceptions\\DomainException\\CampaignIteration\\CampaignIterationCannotBeProcessedException",
+        "size": 3000,
+        "relations": []
+    },
+    {
+        "name": "\\App\\Exceptions\\DomainException\\CampaignIteration\\CampaignIterationCannotBeCreatedException",
+        "size": 3000,
+        "relations": []
+    },
+    {
+        "name": "\\App\\Exceptions\\DomainException\\DMER\\DMERFileExistsException",
+        "size": 3000,
+        "relations": []
+    },
+    {
+        "name": "\\App\\Exceptions\\DomainException\\DMER\\DMERProcessingException",
+        "size": 3000,
+        "relations": []
+    },
+    {
+        "name": "\\App\\Exceptions\\DomainException\\Batch\\BatchCannotBeArchivedException",
+        "size": 3000,
+        "relations": [
+            "\\App\\Exceptions\\AppException"
+        ]
+    },
+    {
+        "name": "\\App\\Exceptions\\DomainException\\Address\\AddressServiceException",
+        "size": 3000,
+        "relations": [
+            "\\App\\Exceptions\\AppException"
+        ]
+    },
+    {
+        "name": "\\App\\Exceptions\\DomainException\\Address\\AddressAlreadyExistsException",
+        "size": 3000,
+        "relations": []
+    },
+    {
+        "name": "\\App\\Exceptions\\DomainException\\Campaign\\CampaignEndDatePrecedesStartDateException",
+        "size": 3000,
+        "relations": []
+    },
+    {
+        "name": "\\App\\Exceptions\\DomainException\\Campaign\\CampaignWeeksLessThanMailingFrequencyWeeksException",
+        "size": 3000,
+        "relations": []
+    },
+    {
+        "name": "\\App\\Exceptions\\DomainException\\Campaign\\CampaignCreationFailedException",
+        "size": 3000,
+        "relations": []
+    },
+    {
+        "name": "\\App\\Exceptions\\DomainException\\Campaign\\CampaignAlreadyProcessingException",
+        "size": 3000,
+        "relations": []
+    },
+    {
+        "name": "\\App\\Exceptions\\DomainException\\Campaign\\CampaignAlreadyCreatedException",
+        "size": 3000,
+        "relations": []
+    },
+    {
+        "name": "\\App\\Exceptions\\DomainException\\Campaign\\CampaignAlreadyCompletedException",
+        "size": 3000,
+        "relations": []
+    },
+    {
+        "name": "\\App\\Exceptions\\DomainException\\Campaign\\CampaignStopFailedException",
+        "size": 3000,
+        "relations": []
+    },
+    {
+        "name": "\\App\\Exceptions\\DomainException\\RestrictedAddress\\RestrictedAddressAlreadyExistsException",
+        "size": 3000,
+        "relations": []
+    },
+    {
+        "name": "\\App\\Exceptions\\OneDriveException",
+        "size": 3000,
+        "relations": []
+    },
+    {
+        "name": "\\App\\Exceptions\\Smarty\\RequestAddressCandidateFailedException",
+        "size": 3000,
+        "relations": []
+    },
+    {
+        "name": "\\App\\Exceptions\\Smarty\\AddressVerificationFailedException",
+        "size": 3000,
+        "relations": []
+    },
+    {
+        "name": "\\App\\Exceptions\\Smarty\\NoAddressCandidateFoundException",
+        "size": 3000,
+        "relations": []
+    },
+    {
+        "name": "\\App\\Exceptions\\InvalidDateFormatException",
+        "size": 3000,
+        "relations": []
+    },
+    {
+        "name": "\\App\\Exceptions\\QueryManagerException",
+        "size": 3000,
+        "relations": [
+            "\\App\\Exceptions\\AppException"
+        ]
+    },
+    {
+        "name": "\\App\\Exceptions\\FileConverterException",
+        "size": 3000,
+        "relations": []
+    },
+    {
+        "name": "\\App\\Exceptions\\NotFoundException\\MailPackageNotFoundException",
+        "size": 3000,
+        "relations": []
+    },
+    {
+        "name": "\\App\\Exceptions\\NotFoundException\\CampaignIterationNotFoundException",
+        "size": 3000,
+        "relations": []
+    },
+    {
+        "name": "\\App\\Exceptions\\NotFoundException\\TradeNotFoundException",
+        "size": 3000,
+        "relations": [
+            "\\App\\Exceptions\\AppException"
+        ]
+    },
+    {
+        "name": "\\Throwable",
+        "size": 3000,
+        "relations": []
+    },
+    {
+        "name": "\\App\\Exceptions\\PostProcessingServiceException",
+        "size": 3000,
+        "relations": []
+    },
+    {
+        "name": "\\App\\Controller\\DefaultController",
+        "size": 3000,
+        "relations": [
+            "\\App\\Controller\\AbstractController",
+            "\\Symfony\\Component\\HttpFoundation\\Response"
+        ]
+    },
+    {
+        "name": "\\App\\Controller\\AbstractController",
+        "size": 3000,
+        "relations": []
+    },
+    {
+        "name": "\\App\\Controller\\AdminController",
+        "size": 3000,
+        "relations": [
+            "\\App\\Controller\\AbstractController",
+            "\\Symfony\\Component\\HttpFoundation\\Response",
+            "\\App\\Repository\\CompanyRepository",
+            "\\App\\Repository\\UserRepository"
+        ]
+    },
+    {
+        "name": "\\App\\Controller\\SecurityController",
+        "size": 3000,
+        "relations": [
+            "\\App\\Controller\\AbstractController",
+            "\\Symfony\\Component\\HttpFoundation\\Response",
+            "\\Symfony\\Component\\HttpFoundation\\Request",
+            "\\Symfony\\Bundle\\SecurityBundle\\Security"
+        ]
+    },
+    {
+        "name": "\\App\\Controller\\CompaniesController",
+        "size": 3000,
+        "relations": [
+            "\\App\\Controller\\AbstractController",
+            "\\Symfony\\Component\\HttpFoundation\\Response",
+            "\\App\\Repository\\CompanyRepository",
+            "\\App\\Repository\\UserRepository",
+            "\\App\\Repository\\Unmanaged\\GenericIngestRepository",
+            "\\Symfony\\Component\\Finder\\Exception\\AccessDeniedException"
+        ]
+    },
+    {
+        "name": "\\Symfony\\Component\\Finder\\Exception\\AccessDeniedException",
+        "size": 3000,
+        "relations": []
+    },
+    {
+        "name": "\\App\\Controller\\ExportController",
+        "size": 3000,
+        "relations": [
+            "\\App\\Controller\\AbstractController",
+            "\\Symfony\\Component\\HttpFoundation\\Response",
+            "\\Symfony\\Component\\HttpKernel\\KernelInterface",
+            "\\App\\Repository\\SavedQueryRepository",
+            "\\Symfony\\Component\\HttpKernel\\Exception\\NotFoundHttpException",
+            "\\http\\Exception\\InvalidArgumentException",
+            "\\Symfony\\Bundle\\FrameworkBundle\\Console\\Application",
+            "\\Symfony\\Component\\Console\\Input\\ArrayInput",
+            "\\Symfony\\Component\\Console\\Output\\BufferedOutput",
+            "\\Symfony\\Component\\HttpFoundation\\BinaryFileResponse"
+        ]
+    },
+    {
+        "name": "\\Symfony\\Component\\HttpKernel\\KernelInterface",
+        "size": 3000,
+        "relations": []
+    },
+    {
+        "name": "\\Symfony\\Component\\HttpKernel\\Exception\\NotFoundHttpException",
+        "size": 3000,
+        "relations": []
+    },
+    {
+        "name": "\\http\\Exception\\InvalidArgumentException",
+        "size": 3000,
+        "relations": []
+    },
+    {
+        "name": "\\Symfony\\Bundle\\FrameworkBundle\\Console\\Application",
+        "size": 3000,
+        "relations": []
+    },
+    {
+        "name": "\\Symfony\\Component\\Console\\Input\\ArrayInput",
+        "size": 3000,
+        "relations": []
+    },
+    {
+        "name": "\\Symfony\\Component\\Console\\Output\\BufferedOutput",
+        "size": 3000,
+        "relations": []
+    },
+    {
+        "name": "\\Symfony\\Component\\HttpFoundation\\BinaryFileResponse",
+        "size": 3000,
+        "relations": []
+    },
+    {
+        "name": "\\App\\Controller\\UsersController",
+        "size": 3000,
+        "relations": [
+            "\\App\\Controller\\AbstractController",
+            "\\Symfony\\Component\\HttpFoundation\\Response",
+            "\\App\\Repository\\UserRepository",
+            "\\App\\Repository\\CompanyRepository",
+            "\\Exception",
+            "\\Symfony\\Component\\Finder\\Exception\\AccessDeniedException"
+        ]
+    },
+    {
+        "name": "\\Symfony\\Bundle\\FrameworkBundle\\Controller\\AbstractController",
+        "size": 3000,
+        "relations": []
+    },
+    {
+        "name": "\\App\\Controller\\CampaignController",
+        "size": 3000,
+        "relations": [
+            "\\App\\Controller\\AbstractController",
+            "\\Symfony\\Component\\HttpFoundation\\Response",
+            "\\App\\Repository\\CampaignRepository",
+            "\\App\\Exceptions\\NotFoundException\\CampaignNotFoundException",
+            "\\Doctrine\\Common\\Collections\\Criteria",
+            "\\App\\Repository\\BatchRepository",
+            "\\App\\Repository\\ProspectRepository",
+            "\\App\\Exceptions\\NotFoundException\\BatchNotFoundException"
+        ]
+    },
+    {
+        "name": "\\Doctrine\\Common\\Collections\\Criteria",
+        "size": 3000,
+        "relations": []
+    },
+    {
+        "name": "\\App\\Repository\\ProspectRepository",
+        "size": 3000,
+        "relations": []
+    },
+    {
+        "name": "\\App\\Controller\\API\\Customers\\GetCustomersController",
+        "size": 3000,
+        "relations": [
+            "\\App\\Controller\\API\\ApiController",
+            "\\App\\Services\\CustomerQueryService",
+            "\\Symfony\\Component\\HttpFoundation\\Response",
+            "\\App\\DTO\\Request\\Customer\\CustomerQueryDTO",
+            "\\Symfony\\Component\\HttpFoundation\\Request"
+        ]
+    },
+    {
+        "name": "\\App\\Controller\\API\\ApiController",
+        "size": 3000,
+        "relations": []
+    },
+    {
+        "name": "\\App\\Services\\CustomerQueryService",
+        "size": 3000,
+        "relations": [
+            "\\App\\Repository\\CustomerRepository",
+            "\\App\\DTO\\Request\\Customer\\CustomerQueryDTO",
+            "\\App\\DTO\\Response\\CustomerListResponseDTO"
+        ]
+    },
+    {
+        "name": "\\App\\Controller\\API\\GetStochasticClientMailDataController",
+        "size": 3000,
+        "relations": [
+            "\\App\\Controller\\API\\ApiController",
+            "\\App\\Services\\GetStochasticClientMailDataService",
+            "\\Symfony\\Component\\HttpFoundation\\Response",
+            "\\App\\DTO\\Request\\StochasticClientMailDataQueryDTO"
+        ]
+    },
+    {
+        "name": "\\App\\Services\\GetStochasticClientMailDataService",
+        "size": 3000,
+        "relations": [
+            "\\App\\SQL\\GetStochasticClientMailDataSQL",
+            "\\App\\DTO\\Request\\StochasticClientMailDataQueryDTO"
+        ]
+    },
+    {
+        "name": "\\App\\Controller\\API\\HealthCheckController",
+        "size": 3000,
+        "relations": [
+            "\\App\\Controller\\API\\ApiController",
+            "\\Symfony\\Component\\HttpFoundation\\Response"
+        ]
+    },
+    {
+        "name": "\\App\\Controller\\API\\CampaignEvent\\GetCampaignEventsController",
+        "size": 3000,
+        "relations": [
+            "\\App\\Controller\\API\\ApiController",
+            "\\App\\Services\\CampaignEventService",
+            "\\App\\Resources\\CampaignEventResource",
+            "\\Symfony\\Component\\HttpFoundation\\Response"
+        ]
+    },
+    {
+        "name": "\\App\\Services\\CampaignEventService",
+        "size": 3000,
+        "relations": []
+    },
+    {
+        "name": "\\App\\Controller\\API\\CampaignIterationStatus\\GetCampaignIterationStatusController",
+        "size": 3000,
+        "relations": [
+            "\\App\\Controller\\API\\ApiController",
+            "\\App\\Repository\\CampaignIterationStatusRepository",
+            "\\App\\Resources\\CampaignIterationStatusResource",
+            "\\Symfony\\Component\\HttpFoundation\\Response",
+            "\\App\\Exceptions\\NotFoundException\\CampaignIterationNotFoundException"
+        ]
+    },
+    {
+        "name": "\\App\\Controller\\API\\CampaignIterationStatus\\GetCampaignIterationStatusesController",
+        "size": 3000,
+        "relations": [
+            "\\App\\Controller\\API\\ApiController",
+            "\\App\\Repository\\CampaignIterationStatusRepository",
+            "\\App\\Resources\\CampaignIterationStatusResource",
+            "\\Symfony\\Component\\HttpFoundation\\Response",
+            "\\App\\DTO\\Query\\PaginationDTO"
+        ]
+    },
+    {
+        "name": "\\Symfony\\Component\\HttpFoundation\\StreamedResponse",
+        "size": 3000,
+        "relations": []
+    },
+    {
+        "name": "\\Generator",
+        "size": 3000,
+        "relations": []
+    },
+    {
+        "name": "\\App\\Controller\\API\\Chart\\TotalSalesNewVsExistingCustomerChartController",
+        "size": 3000,
+        "relations": [
+            "\\App\\Controller\\API\\ApiController",
+            "\\App\\Services\\Chart\\TotalSalesNewVsExistingCustomerChartService",
+            "\\Symfony\\Component\\HttpFoundation\\Response",
+            "\\App\\DTO\\Query\\Chart\\TotalSalesNewVsExistingCustomerChartDTO",
+            "\\App\\DTO\\Query\\PaginationDTO"
+        ]
+    },
+    {
+        "name": "\\App\\Services\\Chart\\TotalSalesNewVsExistingCustomerChartService",
+        "size": 3000,
+        "relations": [
+            "\\Psr\\Log\\LoggerInterface",
+            "\\App\\Repository\\InvoiceRepository",
+            "\\App\\Repository\\CompanyRepository",
+            "\\App\\DTO\\Query\\Chart\\TotalSalesNewVsExistingCustomerChartDTO",
+            "\\App\\DTO\\Query\\PaginationDTO",
+            "\\App\\Exceptions\\DomainException\\Chart\\FailedToGetTotalSalesNewVsExistingCustomerChartData",
+            "\\Doctrine\\Common\\Collections\\ArrayCollection"
+        ]
+    },
+    {
+        "name": "\\App\\Controller\\API\\Chart\\TotalSalesAgeDistributionChartController",
+        "size": 3000,
+        "relations": [
+            "\\App\\Controller\\API\\ApiController",
+            "\\App\\Services\\Chart\\TotalSalesAgeDistributionChartService",
+            "\\Symfony\\Component\\HttpFoundation\\Response",
+            "\\App\\DTO\\Query\\Chart\\TotalSalesAgeDistributionChartDTO"
+        ]
+    },
+    {
+        "name": "\\App\\Services\\Chart\\TotalSalesAgeDistributionChartService",
+        "size": 3000,
+        "relations": [
+            "\\App\\Services\\TradeService",
+            "\\App\\Services\\InvoiceService",
+            "\\App\\Repository\\InvoiceRepository",
+            "\\App\\Repository\\CompanyRepository",
+            "\\App\\Repository\\ProspectRepository",
+            "\\App\\DTO\\Query\\Chart\\TotalSalesAgeDistributionChartDTO",
+            "\\Doctrine\\Common\\Collections\\ArrayCollection"
+        ]
+    },
+    {
+        "name": "\\App\\Controller\\API\\Chart\\TotalSalesByYearAndMonthChartController",
+        "size": 3000,
+        "relations": [
+            "\\App\\Controller\\API\\ApiController",
+            "\\App\\Services\\Chart\\TotalSalesByYearAndMonthChartService",
+            "\\Symfony\\Component\\HttpFoundation\\Response",
+            "\\App\\DTO\\Query\\Chart\\TotalSalesByYearAndMonthChartDTO"
+        ]
+    },
+    {
+        "name": "\\App\\Services\\Chart\\TotalSalesByYearAndMonthChartService",
+        "size": 3000,
+        "relations": [
+            "\\Psr\\Log\\LoggerInterface",
+            "\\App\\Repository\\InvoiceRepository",
+            "\\App\\Repository\\CompanyRepository",
+            "\\App\\DTO\\Query\\Chart\\TotalSalesByYearAndMonthChartDTO",
+            "\\App\\Exceptions\\DomainException\\Chart\\FailedToGetTotalSalesByYearAndMonthChartData",
+            "\\Doctrine\\Common\\Collections\\ArrayCollection"
+        ]
+    },
+    {
+        "name": "\\App\\Controller\\API\\CampaignStatus\\GetCampaignStatusController",
+        "size": 3000,
+        "relations": [
+            "\\App\\Controller\\API\\ApiController",
+            "\\App\\Repository\\CampaignIterationStatusRepository",
+            "\\App\\Resources\\CampaignIterationStatusResource",
+            "\\Symfony\\Component\\HttpFoundation\\Response",
+            "\\App\\Exceptions\\NotFoundException\\CampaignIterationNotFoundException"
+        ]
+    },
+    {
+        "name": "\\App\\Controller\\API\\CampaignStatus\\GetCampaignStatusesController",
+        "size": 3000,
+        "relations": [
+            "\\App\\Controller\\API\\ApiController",
+            "\\App\\Repository\\CampaignStatusRepository",
+            "\\App\\Resources\\CampaignStatusResource",
+            "\\Symfony\\Component\\HttpFoundation\\Response",
+            "\\App\\DTO\\Query\\PaginationDTO"
+        ]
+    },
+    {
+        "name": "\\App\\Controller\\API\\Action\\ProcessCompanyController",
+        "size": 3000,
+        "relations": [
+            "\\App\\Controller\\API\\ApiController",
+            "\\App\\Services\\CompanyDigestingAndProcessingService",
+            "\\Symfony\\Component\\HttpFoundation\\Response"
+        ]
+    },
+    {
+        "name": "\\App\\Controller\\API\\Batch\\ArchiveBatchController",
+        "size": 3000,
+        "relations": [
+            "\\App\\Controller\\API\\ApiController",
+            "\\App\\Repository\\BatchRepository",
+            "\\App\\Services\\BatchService",
+            "\\App\\Resources\\BatchResource",
+            "\\Symfony\\Component\\HttpFoundation\\Response"
+        ]
+    },
+    {
+        "name": "\\App\\Services\\BatchService",
+        "size": 3000,
+        "relations": [
+            "\\App\\Repository\\BatchRepository",
+            "\\App\\Repository\\BatchProspectRepository",
+            "\\App\\Repository\\BatchStatusRepository",
+            "\\App\\Entity\\Campaign",
+            "\\Doctrine\\Common\\Collections\\Collection",
+            "\\App\\Entity\\CampaignIteration",
+            "\\App\\Entity\\CampaignIterationWeek",
+            "\\App\\Exceptions\\NotFoundException\\MailPackageNotFoundException",
+            "\\App\\Entity\\Batch",
+            "\\App\\DTO\\Request\\Batch\\PatchBatchDTO",
+            "\\App\\Exceptions\\NotFoundException\\BatchStatusNotFoundException",
+            "\\App\\Entity\\BatchStatus",
+            "\\App\\ValueObjects\\BatchObject",
+            "\\App\\Exceptions\\NotFoundException\\BatchNotFoundException"
+        ]
+    },
+    {
+        "name": "\\App\\Controller\\API\\Batch\\GetBatchController",
+        "size": 3000,
+        "relations": [
+            "\\App\\Controller\\API\\ApiController",
+            "\\App\\Repository\\BatchRepository",
+            "\\App\\Resources\\BatchResource",
+            "\\Symfony\\Component\\HttpFoundation\\Response",
+            "\\App\\DTO\\Query\\PaginationDTO",
+            "\\App\\Exceptions\\NotFoundException\\BatchNotFoundException"
+        ]
+    },
+    {
+        "name": "\\App\\Controller\\API\\Batch\\PatchBatchController",
+        "size": 3000,
+        "relations": [
+            "\\App\\Controller\\API\\ApiController",
+            "\\App\\Repository\\BatchRepository",
+            "\\App\\Services\\BatchService",
+            "\\App\\Resources\\BatchResource",
+            "\\Symfony\\Component\\HttpFoundation\\Response",
+            "\\Symfony\\Component\\HttpFoundation\\Request",
+            "\\App\\DTO\\Request\\Batch\\PatchBatchDTO",
+            "\\App\\DTO\\Query\\PaginationDTO",
+            "\\App\\Exceptions\\NotFoundException\\BatchNotFoundException"
+        ]
+    },
+    {
+        "name": "\\App\\Controller\\API\\Address\\DeleteRestrictedAddressController",
+        "size": 3000,
+        "relations": [
+            "\\App\\Controller\\API\\ApiController",
+            "\\App\\Services\\AddressService",
+            "\\Symfony\\Component\\HttpFoundation\\Response",
+            "\\App\\Entity\\RestrictedAddress"
+        ]
+    },
+    {
+        "name": "\\App\\Services\\AddressService",
+        "size": 3000,
+        "relations": [
+            "\\Doctrine\\ORM\\EntityManagerInterface",
+            "\\App\\Repository\\AddressRepository",
+            "\\App\\Repository\\RestrictedAddressRepository",
+            "\\App\\Services\\AddressVerification\\AddressVerificationServiceInterface",
+            "\\App\\Entity\\AbstractAddress",
+            "\\static",
+            "\\App\\Entity\\RestrictedAddress",
+            "\\App\\Entity\\Address",
+            "\\App\\DTO\\Domain\\AddressDTO",
+            "\\App\\DTO\\Request\\Address\\AddressEditDTO",
+            "\\App\\Exceptions\\DomainException\\Address\\AddressAlreadyExistsException",
+            "\\App\\DTO\\Domain\\RestrictedAddressDTO",
+            "\\App\\DTO\\Request\\Address\\RestrictedAddressEditDTO",
+            "\\App\\Exceptions\\DomainException\\RestrictedAddress\\RestrictedAddressAlreadyExistsException"
+        ]
+    },
+    {
+        "name": "\\App\\Controller\\API\\Address\\GetAddressesController",
+        "size": 3000,
+        "relations": [
+            "\\App\\Controller\\API\\ApiController",
+            "\\App\\Repository\\AddressRepository",
+            "\\Symfony\\Component\\HttpFoundation\\Response",
+            "\\App\\DTO\\Request\\Address\\AddressQueryDTO",
+            "\\App\\DTO\\Query\\PaginationDTO"
+        ]
+    },
+    {
+        "name": "\\App\\Controller\\API\\Address\\CreateRestrictedAddressController",
+        "size": 3000,
+        "relations": [
+            "\\App\\Controller\\API\\ApiController",
+            "\\App\\Services\\AddressService",
+            "\\Symfony\\Component\\HttpFoundation\\Response",
+            "\\App\\DTO\\Request\\Address\\RestrictedAddressEditDTO",
+            "\\App\\Entity\\RestrictedAddress"
+        ]
+    },
+    {
+        "name": "\\App\\Controller\\API\\Address\\GetRestrictedAddressController",
+        "size": 3000,
+        "relations": [
+            "\\App\\Controller\\API\\ApiController",
+            "\\Symfony\\Component\\HttpFoundation\\Response",
+            "\\App\\Entity\\RestrictedAddress",
+            "\\App\\DTO\\Domain\\RestrictedAddressDTO"
+        ]
+    },
+    {
+        "name": "\\App\\Controller\\API\\Address\\GetRestrictedAddressesController",
+        "size": 3000,
+        "relations": [
+            "\\App\\Controller\\API\\ApiController",
+            "\\App\\Repository\\RestrictedAddressRepository",
+            "\\Symfony\\Component\\HttpFoundation\\Response",
+            "\\App\\DTO\\Request\\Address\\RestrictedAddressQueryDTO",
+            "\\App\\DTO\\Query\\PaginationDTO"
+        ]
+    },
+    {
+        "name": "\\App\\Controller\\API\\Address\\EditRestrictedAddressController",
+        "size": 3000,
+        "relations": [
+            "\\App\\Controller\\API\\ApiController",
+            "\\App\\Services\\AddressService",
+            "\\Symfony\\Component\\HttpFoundation\\Response",
+            "\\App\\Entity\\RestrictedAddress",
+            "\\App\\DTO\\Request\\Address\\RestrictedAddressEditDTO"
+        ]
+    },
+    {
+        "name": "\\App\\Controller\\API\\Campaign\\GetCampaignFilesController",
+        "size": 3000,
+        "relations": [
+            "\\App\\Controller\\API\\ApiController",
+            "\\App\\Services\\GetCampaignFilesService",
+            "\\Symfony\\Component\\HttpFoundation\\Response",
+            "\\App\\Entity\\Campaign",
+            "\\App\\DTO\\Query\\Campaign\\CampaignFileQueryDTO",
+            "\\Symfony\\Component\\HttpFoundation\\Request"
+        ]
+    },
+    {
+        "name": "\\App\\Services\\GetCampaignFilesService",
+        "size": 3000,
+        "relations": [
+            "\\App\\Repository\\CampaignFileRepository",
+            "\\App\\Entity\\Campaign",
+            "\\App\\DTO\\Query\\Campaign\\CampaignFileQueryDTO",
+            "\\App\\DTO\\Response\\CampaignFileListResponseDTO"
+        ]
+    },
+    {
+        "name": "\\App\\Controller\\API\\Campaign\\PauseCampaignController",
+        "size": 3000,
+        "relations": [
+            "\\App\\Controller\\API\\ApiController",
+            "\\App\\Resources\\CampaignResource",
+            "\\App\\Repository\\CampaignRepository",
+            "\\App\\Services\\Campaign\\PauseCampaignService",
+            "\\Symfony\\Component\\HttpFoundation\\Response"
+        ]
+    },
+    {
+        "name": "\\App\\Services\\Campaign\\PauseCampaignService",
+        "size": 3000,
+        "relations": [
+            "\\App\\Repository\\BatchRepository",
+            "\\App\\Repository\\CampaignRepository",
+            "\\App\\Services\\CampaignEventService",
+            "\\App\\Repository\\BatchStatusRepository",
+            "\\App\\Repository\\CampaignStatusRepository",
+            "\\App\\Repository\\CampaignIterationRepository",
+            "\\App\\Repository\\CampaignIterationStatusRepository",
+            "\\App\\Entity\\Campaign",
+            "\\DateTime"
+        ]
+    },
+    {
+        "name": "\\App\\Controller\\API\\Campaign\\CreateCampaignAsyncController",
+        "size": 3000,
+        "relations": [
+            "\\App\\Controller\\API\\ApiController",
+            "\\App\\Services\\CampaignService",
+            "\\App\\Resources\\CampaignResource",
+            "\\Symfony\\Component\\HttpFoundation\\Response",
+            "\\App\\DTO\\Request\\Campaign\\CreateCampaignDTO"
+        ]
+    },
+    {
+        "name": "\\App\\Services\\CampaignService",
+        "size": 3000,
+        "relations": [
+            "\\Psr\\Log\\LoggerInterface",
+            "\\Doctrine\\ORM\\EntityManagerInterface",
+            "\\Symfony\\Component\\Messenger\\MessageBusInterface",
+            "\\App\\Repository\\CompanyRepository",
+            "\\App\\Repository\\CampaignRepository",
+            "\\App\\Repository\\CampaignStatusRepository",
+            "\\App\\Services\\MailPackageService",
+            "\\App\\Services\\CampaignEventService",
+            "\\App\\Services\\ProspectFilterRule\\ProspectFilterRuleService",
+            "\\App\\Services\\CampaignIterationService",
+            "\\App\\Services\\BatchService",
+            "\\App\\Entity\\Campaign",
+            "\\App\\DTO\\Request\\Campaign\\CreateCampaignDTO",
+            "\\App\\Message\\CreateCampaignIterationsMessage",
+            "\\App\\Exceptions\\DomainException\\Campaign\\CampaignEndDatePrecedesStartDateException",
+            "\\App\\Exceptions\\DomainException\\Campaign\\CampaignWeeksLessThanMailingFrequencyWeeksException",
+            "\\App\\Exceptions\\InvalidMailingDropWeekException",
+            "\\App\\Exceptions\\NotFoundException\\MailPackageNotFoundException",
+            "\\App\\Exceptions\\DomainException\\Campaign\\CampaignCreationFailedException",
+            "\\App\\Entity\\Company",
+            "\\App\\Entity\\CampaignStatus",
+            "\\App\\Entity\\MailPackage",
+            "\\Carbon\\Carbon",
+            "\\Doctrine\\Common\\Collections\\ArrayCollection",
+            "\\App\\DTO\\Request\\Campaign\\PatchCampaignDTO",
+            "\\App\\Exceptions\\DomainException\\Campaign\\CampaignAlreadyCreatedException",
+            "\\App\\Exceptions\\DomainException\\Campaign\\CampaignAlreadyProcessingException",
+            "\\App\\Exceptions\\InvalidDateFormatException",
+            "\\Exception"
+        ]
+    },
+    {
+        "name": "\\App\\Controller\\API\\Campaign\\GetCampaignBatchesController",
+        "size": 3000,
+        "relations": [
+            "\\App\\Controller\\API\\ApiController",
+            "\\App\\Repository\\BatchRepository",
+            "\\App\\Resources\\BatchResource",
+            "\\Symfony\\Component\\HttpFoundation\\Response",
+            "\\App\\DTO\\Query\\Batch\\BatchesQueryDTO"
+        ]
+    },
+    {
+        "name": "\\App\\Controller\\API\\Campaign\\GetCampaignController",
+        "size": 3000,
+        "relations": [
+            "\\App\\Controller\\API\\ApiController",
+            "\\App\\Repository\\CampaignRepository",
+            "\\App\\Resources\\CampaignResource",
+            "\\Symfony\\Component\\HttpFoundation\\Response",
+            "\\App\\DTO\\Query\\PaginationDTO",
+            "\\App\\Exceptions\\NotFoundException\\CampaignNotFoundException"
+        ]
+    },
+    {
+        "name": "\\App\\Controller\\API\\Campaign\\StopCampaignController",
+        "size": 3000,
+        "relations": [
+            "\\App\\Controller\\API\\ApiController",
+            "\\App\\Services\\StopCampaignService",
+            "\\App\\Resources\\CampaignResource",
+            "\\App\\Repository\\CampaignRepository",
+            "\\Symfony\\Component\\HttpFoundation\\Response"
+        ]
+    },
+    {
+        "name": "\\App\\Services\\StopCampaignService",
+        "size": 3000,
+        "relations": [
+            "\\App\\Services\\BatchService",
+            "\\App\\Repository\\CampaignRepository",
+            "\\App\\Repository\\CampaignStatusRepository",
+            "\\App\\Repository\\CampaignIterationRepository",
+            "\\App\\Repository\\CampaignIterationStatusRepository",
+            "\\Psr\\Log\\LoggerInterface",
+            "\\Doctrine\\ORM\\EntityManagerInterface",
+            "\\App\\Entity\\Campaign",
+            "\\App\\Exceptions\\DomainException\\Campaign\\CampaignStopFailedException",
+            "\\Exception"
+        ]
+    },
+    {
+        "name": "\\App\\Controller\\API\\Campaign\\CreateCampaignController",
+        "size": 3000,
+        "relations": [
+            "\\App\\Controller\\API\\ApiController",
+            "\\App\\Services\\CampaignService",
+            "\\App\\Resources\\CampaignResource",
+            "\\Symfony\\Component\\HttpFoundation\\Response",
+            "\\App\\DTO\\Request\\Campaign\\CreateCampaignDTO",
+            "\\App\\DTO\\Query\\PaginationDTO"
+        ]
+    },
+    {
+        "name": "\\App\\Controller\\API\\Campaign\\CreateCampaignFileController",
+        "size": 3000,
+        "relations": [
+            "\\App\\Controller\\API\\ApiController",
+            "\\App\\Resources\\CampaignFileResource",
+            "\\App\\Services\\CreateCampaignFileService",
+            "\\Symfony\\Component\\HttpFoundation\\Response",
+            "\\App\\Entity\\Campaign",
+            "\\App\\DTO\\Request\\Campaign\\CreateCampaignFileDTO",
+            "\\Symfony\\Component\\HttpFoundation\\Request"
+        ]
+    },
+    {
+        "name": "\\App\\Services\\CreateCampaignFileService",
+        "size": 3000,
+        "relations": [
+            "\\Doctrine\\ORM\\EntityManagerInterface",
+            "\\App\\Entity\\CampaignFile",
+            "\\App\\Entity\\Campaign",
+            "\\App\\DTO\\Request\\Campaign\\CreateCampaignFileDTO",
+            "\\App\\Exceptions\\NotFoundException\\MailPackageNotFoundException",
+            "\\App\\Entity\\File"
+        ]
+    },
+    {
+        "name": "\\App\\Controller\\API\\Campaign\\GetCampaignDetailsMetadataController",
+        "size": 3000,
+        "relations": [
+            "\\App\\Controller\\API\\ApiController",
+            "\\App\\Services\\CampaignDetailsMetadataService",
+            "\\Symfony\\Component\\HttpFoundation\\Response",
+            "\\Symfony\\Component\\HttpFoundation\\Request"
+        ]
+    },
+    {
+        "name": "\\App\\Services\\CampaignDetailsMetadataService",
+        "size": 3000,
+        "relations": [
+            "\\App\\Repository\\ProspectFilterRuleRepository"
+        ]
+    },
+    {
+        "name": "\\App\\Controller\\API\\Campaign\\PatchCampaignController",
+        "size": 3000,
+        "relations": [
+            "\\App\\Controller\\API\\ApiController",
+            "\\App\\Repository\\CampaignRepository",
+            "\\App\\Resources\\CampaignResource",
+            "\\App\\Services\\CampaignService",
+            "\\Symfony\\Component\\HttpFoundation\\Response",
+            "\\App\\DTO\\Request\\Campaign\\PatchCampaignDTO",
+            "\\App\\DTO\\Query\\PaginationDTO"
+        ]
+    },
+    {
+        "name": "\\App\\Controller\\API\\Company\\GetCompanyTagsController",
+        "size": 3000,
+        "relations": [
+            "\\App\\Controller\\API\\ApiController",
+            "\\App\\Services\\TagQueryService",
+            "\\Symfony\\Component\\HttpFoundation\\Response",
+            "\\App\\DTO\\Query\\Tag\\TagQueryDTO"
+        ]
+    },
+    {
+        "name": "\\App\\Services\\TagQueryService",
+        "size": 3000,
+        "relations": [
+            "\\App\\Repository\\TagRepository",
+            "\\App\\DTO\\Query\\Tag\\TagQueryDTO",
+            "\\App\\DTO\\Response\\TagListResponseDTO"
+        ]
+    },
+    {
+        "name": "\\App\\Controller\\API\\Company\\GetCompanyCampaignsController",
+        "size": 3000,
+        "relations": [
+            "\\App\\Controller\\API\\ApiController",
+            "\\App\\Repository\\CampaignRepository",
+            "\\App\\Resources\\CampaignResource",
+            "\\Symfony\\Component\\HttpFoundation\\Response",
+            "\\App\\DTO\\Query\\Campaign\\CampaignQueryDTO"
+        ]
+    },
+    {
+        "name": "\\App\\Controller\\API\\Company\\GetCompanyStatusController",
+        "size": 3000,
+        "relations": [
+            "\\App\\Controller\\API\\ApiController",
+            "\\App\\Services\\CompanyStatusService",
+            "\\Symfony\\Component\\HttpFoundation\\Response"
+        ]
+    },
+    {
+        "name": "\\App\\Services\\CompanyStatusService",
+        "size": 3000,
+        "relations": [
+            "\\App\\Services\\TenantStreamAuditService",
+            "\\App\\Services\\CompanyJobService",
+            "\\App\\Repository\\CompanyRepository",
+            "\\App\\DTO\\Domain\\StatusDTO",
+            "\\App\\Entity\\Company",
+            "\\App\\Exceptions\\NotFoundException\\CompanyNotFoundException"
+        ]
+    },
+    {
+        "name": "\\App\\Controller\\API\\BatchStatus\\GetBatchStatusController",
+        "size": 3000,
+        "relations": [
+            "\\App\\Controller\\API\\ApiController",
+            "\\App\\Repository\\BatchStatusRepository",
+            "\\App\\Resources\\BatchStatusResource",
+            "\\Symfony\\Component\\HttpFoundation\\Response",
+            "\\App\\Exceptions\\NotFoundException\\BatchStatusNotFoundException"
+        ]
+    },
+    {
+        "name": "\\App\\Controller\\API\\BatchStatus\\GetBatchStatusesController",
+        "size": 3000,
+        "relations": [
+            "\\App\\Controller\\API\\ApiController",
+            "\\App\\Repository\\BatchStatusRepository",
+            "\\App\\Resources\\BatchStatusResource",
+            "\\Symfony\\Component\\HttpFoundation\\Response",
+            "\\App\\DTO\\Query\\PaginationDTO"
+        ]
+    },
+    {
+        "name": "\\App\\Transformers\\CampaignIterationTransformer",
+        "size": 3000,
+        "relations": []
+    },
+    {
+        "name": "\\App\\Transformers\\MailPackageTransformer",
+        "size": 3000,
+        "relations": [
+            "\\League\\Fractal\\TransformerAbstract",
+            "\\App\\Entity\\MailPackage"
+        ]
+    },
+    {
+        "name": "\\App\\Transformers\\CampaignIterationWeekTransformer",
+        "size": 3000,
+        "relations": [
+            "\\League\\Fractal\\TransformerAbstract",
+            "\\App\\Entity\\CampaignIterationWeek"
+        ]
+    },
+    {
+        "name": "\\App\\Actions\\AbstractAction",
+        "size": 3000,
+        "relations": [
+            "\\App\\AbstractMigrator",
+            "\\class"
+        ]
+    },
+    {
+        "name": "\\class",
+        "size": 3000,
+        "relations": []
+    },
+    {
+        "name": "\\App\\Commands\\PostProcessCommand",
+        "size": 3000,
+        "relations": [
+            "\\Symfony\\Component\\Console\\Command\\Command",
+            "\\App\\Services\\PostProcessingService",
+            "\\ReflectionClass",
+            "\\Symfony\\Component\\Console\\Input\\InputInterface",
+            "\\Symfony\\Component\\Console\\Output\\OutputInterface",
+            "\\Symfony\\Component\\Console\\Style\\SymfonyStyle",
+            "\\InvalidArgumentException"
+        ]
+    },
+    {
+        "name": "\\Symfony\\Component\\Console\\Command\\Command",
+        "size": 3000,
+        "relations": []
+    },
+    {
+        "name": "\\App\\Services\\PostProcessingService",
+        "size": 3000,
+        "relations": []
+    },
+    {
+        "name": "\\Symfony\\Component\\Console\\Input\\InputInterface",
+        "size": 3000,
+        "relations": []
+    },
+    {
+        "name": "\\Symfony\\Component\\Console\\Output\\OutputInterface",
+        "size": 3000,
+        "relations": []
+    },
+    {
+        "name": "\\Symfony\\Component\\Console\\Style\\SymfonyStyle",
+        "size": 3000,
+        "relations": []
+    },
+    {
+        "name": "\\App\\Commands\\DMERQueueReportsCommand",
+        "size": 3000,
+        "relations": [
+            "\\Symfony\\Component\\Console\\Command\\Command",
+            "\\App\\Repository\\CompanyRepository",
+            "\\App\\Services\\DMER\\DMERDataService",
+            "\\Symfony\\Component\\Console\\Input\\InputInterface",
+            "\\Symfony\\Component\\Console\\Output\\OutputInterface",
+            "\\Symfony\\Component\\Console\\Style\\SymfonyStyle"
+        ]
+    },
+    {
+        "name": "\\App\\Commands\\PopulateDataCommand",
+        "size": 3000,
+        "relations": [
+            "\\Symfony\\Component\\Console\\Command\\Command",
+            "\\App\\Services\\DataProvisioner",
+            "\\Symfony\\Component\\Console\\Input\\InputInterface",
+            "\\Symfony\\Component\\Console\\Output\\OutputInterface",
+            "\\Symfony\\Component\\Console\\Style\\SymfonyStyle"
+        ]
+    },
+    {
+        "name": "\\App\\Services\\DataProvisioner",
+        "size": 3000,
+        "relations": [
+            "\\App\\Repository\\UserRepository",
+            "\\App\\Repository\\CompanyRepository",
+            "\\App\\Entity\\User",
+            "\\App\\Entity\\Company"
+        ]
+    },
+    {
+        "name": "\\App\\Commands\\CompanyProcessingCommand",
+        "size": 3000,
+        "relations": [
+            "\\Symfony\\Component\\Console\\Command\\Command",
+            "\\App\\Services\\CompanyDigestingAndProcessingService",
+            "\\Symfony\\Component\\Console\\Input\\InputInterface",
+            "\\Symfony\\Component\\Console\\Output\\OutputInterface"
+        ]
+    },
+    {
+        "name": "\\App\\Commands\\InitCampaignCommand",
+        "size": 3000,
+        "relations": [
+            "\\Symfony\\Component\\Console\\Command\\Command",
+            "\\App\\Services\\CampaignService",
+            "\\Symfony\\Component\\Console\\Input\\InputInterface",
+            "\\Symfony\\Component\\Console\\Output\\OutputInterface",
+            "\\App\\DTO\\Request\\Campaign\\CreateCampaignDTO",
+            "\\App\\DTO\\Domain\\ProspectFilterRulesDTO"
+        ]
+    },
+    {
+        "name": "\\App\\Commands\\ExportCommand",
+        "size": 3000,
+        "relations": [
+            "\\Symfony\\Component\\Console\\Command\\Command",
+            "\\App\\Services\\ExportService",
+            "\\Symfony\\Component\\Console\\Input\\InputInterface",
+            "\\Symfony\\Component\\Console\\Output\\OutputInterface",
+            "\\Symfony\\Component\\Console\\Helper\\Table"
+        ]
+    },
+    {
+        "name": "\\App\\Services\\ExportService",
+        "size": 3000,
+        "relations": [
+            "\\App\\Repository\\CompanyRepository",
+            "\\App\\Services\\FileConverter",
+            "\\App\\Services\\FileWriter",
+            "\\App\\Services\\QueryManager",
+            "\\App\\Repository\\SavedQueryRepository",
+            "\\Doctrine\\ORM\\EntityManagerInterface",
+            "\\App\\Client\\FileClient",
+            "\\App\\Exporters\\AbstractExporter",
+            "\\InvalidArgumentException",
+            "\\App\\ValueObjects\\CompanyObject",
+            "\\App\\Exporters\\ExportFactory",
+            "\\App\\ValueObjects\\TempFile",
+            "\\RuntimeException"
+        ]
+    },
+    {
+        "name": "\\Symfony\\Component\\Console\\Helper\\Table",
+        "size": 3000,
+        "relations": []
+    },
+    {
+        "name": "\\App\\Commands\\AssignTradeToCompanyCommand",
+        "size": 3000,
+        "relations": [
+            "\\Symfony\\Component\\Console\\Command\\Command",
+            "\\App\\Repository\\CompanyRepository",
+            "\\App\\Repository\\TradeRepository",
+            "\\Symfony\\Component\\Console\\Input\\InputInterface",
+            "\\Symfony\\Component\\Console\\Output\\OutputInterface"
+        ]
+    },
+    {
+        "name": "\\App\\Commands\\DigestRemoteSourcesCommand",
+        "size": 3000,
+        "relations": [
+            "\\Symfony\\Component\\Console\\Command\\Command",
+            "\\App\\Services\\DataStreamDigestingService",
+            "\\ReflectionClass",
+            "\\Symfony\\Component\\Console\\Input\\InputInterface",
+            "\\Symfony\\Component\\Console\\Output\\OutputInterface",
+            "\\Symfony\\Component\\Console\\Style\\SymfonyStyle"
+        ]
+    },
+    {
+        "name": "\\App\\Services\\DataStreamDigestingService",
+        "size": 3000,
+        "relations": [
+            "\\Doctrine\\ORM\\EntityManagerInterface",
+            "\\App\\Repository\\CompanyRepository",
+            "\\App\\Repository\\CustomerRepository",
+            "\\App\\Repository\\ProspectRepository",
+            "\\App\\Repository\\InvoiceRepository",
+            "\\App\\Repository\\Unmanaged\\FieldEdgeRepository",
+            "\\App\\Repository\\Unmanaged\\GenericIngestRepository",
+            "\\App\\Repository\\Unmanaged\\ServiceTitanRepository",
+            "\\App\\Repository\\Unmanaged\\SuccesswareRepository",
+            "\\App\\Repository\\Unmanaged\\HubPlusRepository",
+            "\\App\\Repository\\TradeRepository",
+            "\\App\\Repository\\TagRepository",
+            "\\App\\Repository\\SubscriptionRepository",
+            "\\App\\Repository\\ProspectDetailsRepository",
+            "\\Psr\\Log\\LoggerInterface",
+            "\\App\\Repository\\Unmanaged\\AbstractUnmanagedRepository",
+            "\\App\\Entity\\Company",
+            "\\App\\ValueObjects\\CompanyObject",
+            "\\parserClass",
+            "\\App\\ValueObjects\\ProspectObject",
+            "\\App\\Entity\\Prospect",
+            "\\App\\Entity\\Customer",
+            "\\App\\Entity\\ProspectDetails",
+            "\\App\\Entity\\Tag",
+            "\\App\\ValueObjects\\InvoiceObject",
+            "\\App\\Entity\\Trade",
+            "\\App\\Entity\\Subscription"
+        ]
+    },
+    {
+        "name": "\\App\\Commands\\ProcessCampaignIterationCommand",
+        "size": 3000,
+        "relations": [
+            "\\Symfony\\Component\\Console\\Command\\Command",
+            "\\Psr\\Log\\LoggerInterface",
+            "\\Doctrine\\ORM\\EntityManagerInterface",
+            "\\App\\Repository\\CampaignRepository",
+            "\\App\\Repository\\CampaignIterationRepository",
+            "\\App\\Services\\CampaignIterationService",
+            "\\App\\Repository\\CampaignIterationStatusRepository",
+            "\\Symfony\\Component\\Console\\Input\\InputInterface",
+            "\\Symfony\\Component\\Console\\Output\\OutputInterface",
+            "\\App\\Entity\\Campaign",
+            "\\DateTime",
+            "\\Carbon\\Carbon",
+            "\\App\\Exceptions\\InvalidDateFormatException"
+        ]
+    },
+    {
+        "name": "\\App\\Commands\\BulkMigrationCommand",
+        "size": 3000,
+        "relations": [
+            "\\Symfony\\Component\\Console\\Command\\Command",
+            "\\App\\Services\\BulkMigrationService",
+            "\\Symfony\\Component\\Console\\Input\\InputInterface",
+            "\\Symfony\\Component\\Console\\Output\\OutputInterface",
+            "\\Symfony\\Component\\Console\\Helper\\Table"
+        ]
+    },
+    {
+        "name": "\\App\\Services\\BulkMigrationService",
+        "size": 3000,
+        "relations": [
+            "\\App\\Services\\StochasticRosterLoaderService",
+            "\\App\\Client\\FileClient",
+            "\\Symfony\\Component\\Messenger\\MessageBusInterface",
+            "\\App\\Services\\MigrationService",
+            "\\App\\Services\\LifeFileService",
+            "\\App\\ValueObjects\\StochasticFile",
+            "\\App\\Parsers\\MailManager\\MailManagerParser",
+            "\\App\\Parsers\\MailManagerLife\\MailManagerLifeParser",
+            "\\App\\DTO\\Domain\\StochasticRosterDTO",
+            "\\App\\Entity\\Trade",
+            "\\App\\Message\\MigrationMessage",
+            "\\App\\ValueObjects\\TempFile"
+        ]
+    },
+    {
+        "name": "\\App\\Commands\\DMERWriteReportCommand",
+        "size": 3000,
+        "relations": [
+            "\\Symfony\\Component\\Console\\Command\\Command",
+            "\\App\\Repository\\CompanyRepository",
+            "\\App\\Services\\DMER\\DMERDataService",
+            "\\Symfony\\Component\\Console\\Input\\InputInterface",
+            "\\Symfony\\Component\\Console\\Output\\OutputInterface"
+        ]
+    },
+    {
+        "name": "\\App\\Commands\\CustomerMetricsCommand",
+        "size": 3000,
+        "relations": [
+            "\\Symfony\\Component\\Console\\Command\\Command",
+            "\\App\\Repository\\CompanyRepository",
+            "\\App\\Services\\CustomerMetricsService",
+            "\\Symfony\\Component\\Console\\Input\\InputInterface",
+            "\\Symfony\\Component\\Console\\Output\\OutputInterface"
+        ]
+    },
+    {
+        "name": "\\App\\Commands\\DMERPopulateBaseDirectoriesCommand",
+        "size": 3000,
+        "relations": [
+            "\\Symfony\\Component\\Console\\Command\\Command",
+            "\\App\\Services\\OneDriveService",
+            "\\Symfony\\Component\\Console\\Input\\InputInterface",
+            "\\Symfony\\Component\\Console\\Output\\OutputInterface"
+        ]
+    },
+    {
+        "name": "\\App\\Services\\OneDriveService",
+        "size": 3000,
+        "relations": [
+            "\\Microsoft\\Graph\\Graph",
+            "\\App\\Exceptions\\OneDriveException",
+            "\\stdClass",
+            "\\App\\Entity\\Company",
+            "\\Microsoft\\Graph\\Model\\SharingLink",
+            "\\GuzzleHttp\\Promise\\Promise",
+            "\\Microsoft\\Graph\\Model\\DriveItem"
+        ]
+    },
+    {
+        "name": "\\App\\Commands\\AddRestrictedAddressesCommand",
+        "size": 3000,
+        "relations": [
+            "\\Symfony\\Component\\Console\\Command\\Command",
+            "\\App\\Repository\\CompanyRepository",
+            "\\App\\Repository\\RestrictedAddressRepository",
+            "\\Symfony\\Component\\Console\\Input\\InputInterface",
+            "\\Symfony\\Component\\Console\\Output\\OutputInterface",
+            "\\InvalidArgumentException",
+            "\\App\\ValueObjects\\AddressObject",
+            "\\App\\Entity\\RestrictedAddress"
+        ]
+    },
+    {
+        "name": "\\App\\Commands\\SingleMigrationCommand",
+        "size": 3000,
+        "relations": [
+            "\\Symfony\\Component\\Console\\Command\\Command",
+            "\\App\\MessageHandler\\MigrationHandler",
+            "\\App\\Services\\MigrationService",
+            "\\Symfony\\Component\\Console\\Input\\InputInterface",
+            "\\Symfony\\Component\\Console\\Output\\OutputInterface",
+            "\\App\\Parsers\\MailManagerLife\\MailManagerLifeParser",
+            "\\App\\Message\\MigrationMessage"
+        ]
+    },
+    {
+        "name": "\\App\\Commands\\DMERCreateReportCommand",
+        "size": 3000,
+        "relations": [
+            "\\Symfony\\Component\\Console\\Command\\Command",
+            "\\App\\Repository\\CompanyRepository",
+            "\\App\\Services\\DMER\\DMERFileService",
+            "\\Symfony\\Component\\Console\\Input\\InputInterface",
+            "\\Symfony\\Component\\Console\\Output\\OutputInterface"
+        ]
+    },
+    {
+        "name": "\\App\\Services\\DMER\\DMERFileService",
+        "size": 3000,
+        "relations": [
+            "\\App\\Services\\OneDriveService",
+            "\\App\\Services\\DMER\\DMERTemplateFactory",
+            "\\App\\Services\\ExcelService",
+            "\\Microsoft\\Graph\\Model\\SharingLink",
+            "\\App\\Entity\\Company",
+            "\\App\\Exceptions\\DomainException\\DMER\\DMERFileExistsException",
+            "\\GuzzleHttp\\Promise\\Utils",
+            "\\Illuminate\\Support\\Collection"
+        ]
+    },
+    {
+        "name": "\\App\\Commands\\VerifyAddressCommand",
+        "size": 3000,
+        "relations": [
+            "\\Symfony\\Component\\Console\\Command\\Command",
+            "\\App\\Repository\\RestrictedAddressRepository",
+            "\\App\\Services\\AddressService",
+            "\\App\\Repository\\AddressRepository",
+            "\\Symfony\\Component\\Validator\\Validator\\ValidatorInterface",
+            "\\Symfony\\Component\\Console\\Input\\InputInterface",
+            "\\Symfony\\Component\\Console\\Output\\OutputInterface"
+        ]
+    },
+    {
+        "name": "\\App\\StatementBuilder\\AbstractStatementBuilder",
+        "size": 3000,
+        "relations": []
+    },
+    {
+        "name": "\\Doctrine\\DBAL\\Statement",
+        "size": 3000,
+        "relations": []
+    },
+    {
+        "name": "\\App\\StatementBuilder\\Trait\\InvoicedAtYearsStatementTrait",
+        "size": 3000,
+        "relations": [
+            "\\Doctrine\\DBAL\\Statement"
+        ]
+    },
+    {
+        "name": "\\App\\StatementBuilder\\Trait\\TotalSalesByYearAndMonthStatementTrait",
+        "size": 3000,
+        "relations": [
+            "\\Doctrine\\DBAL\\Statement"
+        ]
+    },
+    {
+        "name": "\\App\\StatementBuilder\\Trait\\TotalSalesAgeDistributionStatementTrait",
+        "size": 3000,
+        "relations": [
+            "\\Doctrine\\DBAL\\Statement",
+            "\\App\\DTO\\Query\\Chart\\TotalSalesAgeDistributionChartDTO",
+            "\\Carbon\\Carbon"
+        ]
+    },
+    {
+        "name": "\\App\\StatementBuilder\\Trait\\TotalSalesNewVsExistingCustomerStatementTrait",
+        "size": 3000,
+        "relations": [
+            "\\Doctrine\\DBAL\\Statement"
+        ]
+    },
+    {
+        "name": "\\Illuminate\\Support\\Collection",
+        "size": 3000,
+        "relations": []
+    },
+    {
+        "name": "\\Carbon\\CarbonPeriod",
+        "size": 3000,
+        "relations": []
+    },
+    {
+        "name": "\\Aws\\S3\\S3Client",
+        "size": 3000,
+        "relations": []
+    },
+    {
+        "name": "\\App\\ValueObjects\\TempFile",
+        "size": 3000,
+        "relations": []
+    },
+    {
+        "name": "\\App\\Factory\\MSGraphProviderFactory",
+        "size": 3000,
+        "relations": [
+            "\\Microsoft\\Graph\\Graph",
+            "\\GuzzleHttp\\Client"
+        ]
+    },
+    {
+        "name": "\\Microsoft\\Graph\\Graph",
+        "size": 3000,
+        "relations": []
+    },
+    {
+        "name": "\\App\\Factory\\SmartyStreetsClientFactory",
+        "size": 3000,
+        "relations": [
+            "\\SmartyStreets\\PhpSdk\\US_Street\\Client",
+            "\\SmartyStreets\\PhpSdk\\StaticCredentials",
+            "\\SmartyStreets\\PhpSdk\\ClientBuilder"
+        ]
+    },
+    {
+        "name": "\\SmartyStreets\\PhpSdk\\US_Street\\Client",
+        "size": 3000,
+        "relations": []
+    },
+    {
+        "name": "\\SmartyStreets\\PhpSdk\\StaticCredentials",
+        "size": 3000,
+        "relations": []
+    },
+    {
+        "name": "\\SmartyStreets\\PhpSdk\\ClientBuilder",
+        "size": 3000,
+        "relations": []
+    },
+    {
+        "name": "\\App\\Services\\ExcelService",
+        "size": 3000,
+        "relations": []
+    },
+    {
+        "name": "\\Microsoft\\Graph\\Model\\WorkbookSessionInfo",
+        "size": 3000,
+        "relations": []
+    },
+    {
+        "name": "\\App\\Services\\ConfigurationAccessor",
+        "size": 3000,
+        "relations": []
+    },
+    {
+        "name": "\\App\\Services\\LifeFileService",
+        "size": 3000,
+        "relations": []
+    },
+    {
+        "name": "\\App\\ValueObjects\\LifeFileCollection",
+        "size": 3000,
+        "relations": [
+            "\\App\\Entity\\Trade",
+            "\\App\\ValueObjects\\LifeFile"
+        ]
+    },
+    {
+        "name": "\\App\\Services\\QueryManager",
+        "size": 3000,
+        "relations": []
+    },
+    {
+        "name": "\\Symfony\\Component\\Filesystem\\Filesystem",
+        "size": 3000,
+        "relations": []
+    },
+    {
+        "name": "\\App\\Services\\TenantStreamAuditService",
+        "size": 3000,
+        "relations": [
+            "\\App\\Repository\\Unmanaged\\GenericIngestRepository"
+        ]
+    },
+    {
+        "name": "\\App\\Services\\CompanyJobService",
+        "size": 3000,
+        "relations": [
+            "\\App\\Repository\\CompanyJobEventRepository",
+            "\\App\\Repository\\EventStatusRepository",
+            "\\App\\Repository\\CompanyRepository",
+            "\\Doctrine\\Persistence\\ManagerRegistry",
+            "\\Doctrine\\ORM\\EntityManagerInterface",
+            "\\Psr\\Log\\LoggerInterface",
+            "\\App\\Entity\\Company",
+            "\\App\\Entity\\CompanyJobEvent",
+            "\\App\\Entity\\EventStatus"
+        ]
+    },
+    {
+        "name": "\\Symfony\\Component\\Messenger\\MessageBusInterface",
+        "size": 3000,
+        "relations": []
+    },
+    {
+        "name": "\\App\\Services\\MailPackageService",
+        "size": 3000,
+        "relations": [
+            "\\App\\Repository\\MailPackageRepository",
+            "\\App\\Entity\\MailPackage"
+        ]
+    },
+    {
+        "name": "\\App\\Services\\ProspectFilterRule\\ProspectFilterRuleService",
+        "size": 3000,
+        "relations": []
+    },
+    {
+        "name": "\\App\\Services\\TradeService",
+        "size": 3000,
+        "relations": []
+    },
+    {
+        "name": "\\App\\Services\\StochasticRosterLoaderService",
+        "size": 3000,
+        "relations": []
+    },
+    {
+        "name": "\\App\\ValueObjects\\StochasticRoster",
+        "size": 3000,
+        "relations": [
+            "\\OpenSpout\\Reader\\XLSX\\Reader",
+            "\\App\\DTO\\Domain\\StochasticRosterDTO"
+        ]
+    },
+    {
+        "name": "\\App\\Services\\InvoiceService",
+        "size": 3000,
+        "relations": [
+            "\\App\\Repository\\InvoiceRepository",
+            "\\Doctrine\\Common\\Collections\\ArrayCollection"
+        ]
+    },
+    {
+        "name": "\\Symfony\\Component\\Messenger\\Stamp\\DelayStamp",
+        "size": 3000,
+        "relations": []
+    },
+    {
+        "name": "\\App\\SQL\\GetStochasticClientMailDataSQL",
+        "size": 3000,
+        "relations": [
+            "\\Doctrine\\DBAL\\Connection"
+        ]
+    },
+    {
+        "name": "\\App\\Repository\\ProspectDetailsRepository",
+        "size": 3000,
+        "relations": []
+    },
+    {
+        "name": "\\parserClass",
+        "size": 3000,
+        "relations": []
+    },
+    {
+        "name": "\\App\\Entity\\ProspectDetails",
+        "size": 3000,
+        "relations": []
+    },
+    {
+        "name": "\\App\\Services\\DMER\\DMERTemplateFactory",
+        "size": 3000,
+        "relations": []
+    },
+    {
+        "name": "\\Microsoft\\Graph\\Model\\WorkbookWorksheet",
+        "size": 3000,
+        "relations": []
+    },
+    {
+        "name": "\\Microsoft\\Graph\\Model\\SharingLink",
+        "size": 3000,
+        "relations": []
+    },
+    {
+        "name": "\\GuzzleHttp\\Promise\\Utils",
+        "size": 3000,
+        "relations": []
+    },
+    {
+        "name": "\\App\\Services\\AddressVerification\\AddressVerificationServiceInterface",
+        "size": 3000,
+        "relations": []
+    },
+    {
+        "name": "\\App\\ValueObjects\\StochasticFile",
+        "size": 3000,
+        "relations": [
+            "\\App\\Exceptions\\StochasticFilePathWasInvalid"
+        ]
+    },
+    {
+        "name": "\\stdClass",
+        "size": 3000,
+        "relations": []
+    },
+    {
+        "name": "\\GuzzleHttp\\Promise\\Promise",
+        "size": 3000,
+        "relations": []
+    },
+    {
+        "name": "\\Microsoft\\Graph\\Model\\DriveItem",
+        "size": 3000,
+        "relations": []
+    },
+    {
+        "name": "\\Knp\\Component\\Pager\\PaginatorInterface",
+        "size": 3000,
+        "relations": []
+    },
+    {
+        "name": "\\App\\Services\\CampaignIterationWeekService",
+        "size": 3000,
+        "relations": []
+    },
+    {
+        "name": "\\App\\Services\\AddressVerification\\MockAddressVerificationService",
+        "size": 3000,
+        "relations": []
+    },
+    {
+        "name": "\\Symfony\\Component\\Serializer\\SerializerInterface",
+        "size": 3000,
+        "relations": []
+    },
+    {
+        "name": "\\App\\Services\\AddressVerification\\SmartyAddressVerificationService",
+        "size": 3000,
+        "relations": [
+            "\\App\\Services\\AddressVerification\\AddressVerificationServiceInterface",
+            "\\SmartyStreets\\PhpSdk\\US_Street\\Client",
+            "\\Psr\\Log\\LoggerInterface",
+            "\\Doctrine\\ORM\\EntityManagerInterface",
+            "\\Symfony\\Component\\Serializer\\SerializerInterface",
+            "\\App\\Entity\\AbstractAddress",
+            "\\App\\Exceptions\\Smarty\\NoAddressCandidateFoundException",
+            "\\App\\Exceptions\\Smarty\\AddressVerificationFailedException",
+            "\\SmartyStreets\\PhpSdk\\US_Street\\Candidate",
+            "\\SmartyStreets\\PhpSdk\\US_Street\\Lookup",
+            "\\App\\Exceptions\\Smarty\\RequestAddressCandidateFailedException"
+        ]
+    },
+    {
+        "name": "\\SmartyStreets\\PhpSdk\\US_Street\\Candidate",
+        "size": 3000,
+        "relations": []
+    },
+    {
+        "name": "\\SmartyStreets\\PhpSdk\\US_Street\\Lookup",
+        "size": 3000,
+        "relations": []
+    },
+    {
+        "name": "\\App\\Services\\AddressVerification\\USPSAddressVerificationService",
+        "size": 3000,
+        "relations": [
+            "\\App\\Services\\AddressVerification\\AddressVerificationServiceInterface",
+            "\\App\\Repository\\SettingRepository",
+            "\\Psr\\Log\\LoggerInterface",
+            "\\Symfony\\Component\\HttpClient\\HttpClient",
+            "\\App\\Entity\\Setting",
+            "\\App\\Entity\\AbstractAddress",
+            "\\App\\ValueObjects\\AddressObject",
+            "\\App\\Exceptions\\Smarty\\AddressVerificationFailedException",
+            "\\App\\Exceptions\\USPS\\USPSAddressVerificationRateLimitException",
+            "\\App\\Exceptions\\USPS\\USPSAddressVerificationValidationException"
+        ]
+    },
+    {
+        "name": "\\Symfony\\Component\\HttpClient\\HttpClient",
+        "size": 3000,
+        "relations": []
+    },
+    {
+        "name": "\\App\\Services\\AddressVerification\\BypassingAddressVerificationService",
+        "size": 3000,
+        "relations": [
+            "\\App\\Services\\AddressVerification\\MockAddressVerificationService"
+        ]
+    },
+    {
+        "name": "\\App\\Repository\\BatchProspectRepository",
+        "size": 3000,
+        "relations": []
+    },
+    {
+        "name": "\\App\\Repository\\ProspectFilterRuleRepository",
+        "size": 3000,
+        "relations": []
+    },
+    {
+        "name": "\\App\\Kernel",
+        "size": 3000,
+        "relations": [
+            "\\Symfony\\Component\\HttpKernel\\Kernel"
+        ]
+    },
+    {
+        "name": "\\Symfony\\Component\\HttpKernel\\Kernel",
+        "size": 3000,
+        "relations": []
+    },
+    {
+        "name": "\\App\\ValueObjects\\SubscriptionObject",
+        "size": 3000,
+        "relations": [
+            "\\App\\ValueObjects\\AbstractObject"
+        ]
+    },
+    {
+        "name": "\\App\\ValueObjects\\SequencedObject",
+        "size": 3000,
+        "relations": [
+            "\\App\\ValueObjects\\AbstractObject"
+        ]
+    },
+    {
+        "name": "\\OpenSpout\\Reader\\XLSX\\Reader",
+        "size": 3000,
+        "relations": []
+    },
+    {
+        "name": "\\App\\ValueObjects\\LifeFile",
+        "size": 3000,
+        "relations": [
+            "\\App\\Entity\\Trade"
+        ]
+    },
+    {
+        "name": "\\App\\EventListener\\ExceptionListener",
+        "size": 3000,
+        "relations": [
+            "\\Symfony\\Component\\EventDispatcher\\EventSubscriberInterface",
+            "\\Symfony\\Component\\HttpKernel\\Event\\ExceptionEvent",
+            "\\Symfony\\Component\\HttpFoundation\\JsonResponse",
+            "\\Throwable",
+            "\\ReflectionClass",
+            "\\Symfony\\Component\\Validator\\ConstraintViolationListInterface"
+        ]
+    },
+    {
+        "name": "\\Symfony\\Component\\EventDispatcher\\EventSubscriberInterface",
+        "size": 3000,
+        "relations": []
+    },
+    {
+        "name": "\\Symfony\\Component\\HttpKernel\\Event\\ExceptionEvent",
+        "size": 3000,
+        "relations": []
+    },
+    {
+        "name": "\\Symfony\\Component\\Validator\\ConstraintViolationListInterface",
+        "size": 3000,
+        "relations": []
+    }
+];
+
+    /**
+     * Thanks to http://bl.ocks.org/mbostock/raw/7607999/
+     */
+    function updateRelationsChart() {
+
+
+        var diameter = document.getElementById('chart-relations').offsetWidth,
+            radius = diameter / 2,
+            innerRadius = radius - 120;
+
+        var cluster = d3.layout.cluster()
+            .size([360, innerRadius])
+            .sort(null)
+            .value(function (d) {
+                return d.size;
+            });
+
+        var bundle = d3.layout.bundle();
+
+        var line = d3.svg.line.radial()
+            .interpolate("bundle")
+            .tension(.85)
+            .radius(function (d) {
+                return d.y;
+            })
+            .angle(function (d) {
+                return d.x / 180 * Math.PI;
+            });
+
+        var svg = d3.select("#chart-relations").append("svg")
+            .attr("width", diameter)
+            .attr("height", diameter)
+            .append("g")
+            .attr("transform", "translate(" + radius + "," + radius + ")");
+
+        var link = svg.append("g").selectAll(".link"),
+            node = svg.append("g").selectAll(".node");
+
+
+        var nodes = cluster.nodes(packageHierarchy(relations)),
+            links = packageImports(nodes);
+        link = link
+            .data(bundle(links))
+            .enter().append("path")
+            .each(function (d) {
+                d.source = d[0], d.target = d[d.length - 1];
+            })
+            .attr("class", "link")
+            .attr("d", line);
+
+        node = node
+            .data(nodes.filter(function (n) {
+                return !n.children;
+            }))
+            .enter().append("text")
+            .attr("class", "node")
+            .attr("dy", ".31em")
+            .attr("transform", function (d) {
+                return "rotate(" + (d.x - 90) + ")translate(" + (d.y + 8) + ",0)" + (d.x < 180 ? "" : "rotate(180)");
+            })
+            .style("text-anchor", function (d) {
+                return d.x < 180 ? "start" : "end";
+            })
+            .text(function (d) {
+                return d.key;
+            })
+            .on("mouseover", mouseovered)
+            .on("mouseout", mouseouted);
+
+
+//        d3.data(relations);
+
+        function mouseovered(d) {
+            node
+                .each(function (n) {
+                    n.target = n.source = false;
+                });
+
+            link
+                .classed("link--target", function (l) {
+                    if (l.target === d) return l.source.source = true;
+                })
+                .classed("link--source", function (l) {
+                    if (l.source === d) return l.target.target = true;
+                })
+                .filter(function (l) {
+                    return l.target === d || l.source === d;
+                })
+                .each(function () {
+                    this.parentNode.appendChild(this);
+                });
+
+            node
+                .classed("node--target", function (n) {
+                    return n.target;
+                })
+                .classed("node--source", function (n) {
+                    return n.source;
+                });
+        }
+
+        function mouseouted(d) {
+            link
+                .classed("link--target", false)
+                .classed("link--source", false);
+
+            node
+                .classed("node--target", false)
+                .classed("node--source", false);
+        }
+
+        d3.select(self.frameElement).style("height", diameter + "px");
+
+        // Lazily construct the package hierarchy from class names.
+        function packageHierarchy(classes) {
+            var map = {};
+
+            function find(name, data) {
+                name = (data ? name + ' ' : name);
+                var node = map[name], i;
+                if (!node) {
+                    node = map[name] = data || {name: name, children: []};
+                    if (name.length) {
+                        node.parent = find(name.substring(0, i = name.lastIndexOf("\\")));
+                        if (!node.parent.children) {
+                            node.parent.children = []; // fix anomalies
+                        }
+                        node.parent.children.push(node);
+                        node.key = name;//name.substring(i + 1);
+                    }
+                }
+                return node;
+            }
+
+            classes.forEach(function (d) {
+                find(d.name, d);
+            });
+
+            return map[""];
+        }
+
+        // Return a list of imports for the given array of nodes.
+        function packageImports(nodes) {
+            var map = {},
+                imports = [];
+
+            // Compute a map from name to node.
+            nodes.forEach(function (d) {
+                map[d.name] = d;
+            });
+
+            // For each import, construct a link from the source to target node.
+            nodes.forEach(function (d) {
+                if (d.relations) d.relations.forEach(function (i) {
+                    imports.push({source: map[d.name], target: map[i]});
+                });
+            });
+
+            return imports;
+        }
+
+
+    }
+
+    document.onreadystatechange = function () {
+        if (document.readyState === 'complete') {
+            updateRelationsChart();
+        }
+    };
+
+</script>

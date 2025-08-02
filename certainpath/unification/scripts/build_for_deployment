@@ -1,0 +1,11 @@
+#!/bin/bash
+
+SCRIPT_DIR=$(dirname "$(readlink -f "$0")")
+
+COMMAND="php $SCRIPT_DIR/../bin/console tailwind:build --minify"
+echo "Running: $COMMAND"
+eval $COMMAND
+
+COMMAND="php $SCRIPT_DIR/../bin/console asset-map:compile"
+echo "Running: $COMMAND"
+eval $COMMAND
