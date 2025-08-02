@@ -1,0 +1,538 @@
+/* Common styles for both views */
+.contextMenu {
+    background-color: white;
+    border: 1px solid #e2e8f0;
+    border-radius: 8px;
+    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+    padding: 6px;
+    min-width: 180px;
+    z-index: 50;
+}
+
+.contextMenuItem {
+    display: flex;
+    align-items: center;
+    padding: 8px 10px;
+    font-size: 0.9rem;
+    border-radius: 4px;
+    transition: all 0.15s ease;
+    color: #334155;
+    cursor: pointer;
+}
+
+.contextMenuItem:hover {
+    background-color: #f1f5f9;
+}
+
+.contextMenuIcon {
+    margin-right: 8px;
+    color: #64748b;
+}
+
+.contextMenuSeparator {
+    height: 1px;
+    background-color: #e2e8f0;
+    margin: 4px 0;
+}
+
+.destructiveMenuItem {
+    color: #ef4444;
+}
+
+.destructiveMenuItem:hover {
+    background-color: #fee2e2;
+}
+
+.destructiveMenuItem .contextMenuIcon {
+    color: #ef4444;
+}
+
+.spinningIcon {
+    animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+    from {
+        transform: rotate(0deg);
+    }
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+.checkboxWrapper {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.checkbox {
+    height: 18px;
+    width: 18px;
+    border-radius: 4px;
+    border: 2px solid #cbd5e1;
+    cursor: pointer;
+}
+
+.checkbox[data-state="checked"] {
+    background-color: #3b82f6;
+    border-color: #3b82f6;
+    color: white;
+}
+
+.selectedItem {
+    background-color: rgba(59, 130, 246, 0.08) !important;
+    border-color: rgba(59, 130, 246, 0.2) !important;
+    position: relative;
+}
+
+.renamingItem {
+    cursor: default !important;
+}
+
+.renameInput {
+    width: 100%;
+    background-color: white;
+    border: 1px solid #3b82f6;
+    border-radius: 4px;
+    font-size: 0.95rem;
+    padding: 6px 8px;
+    box-shadow: 0 0 0 2px rgba(59, 130, 246, 0.1);
+}
+
+.renameLoader {
+    position: absolute;
+    right: 8px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: #64748b;
+}
+
+/* Tag styling */
+.tagContainer {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 4px;
+    margin-top: 4px;
+}
+
+.tag {
+    font-size: 0.7rem;
+    padding: 2px 6px;
+    border-radius: 4px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-width: 100px;
+    font-weight: 500;
+}
+
+.moreTag {
+    font-size: 0.7rem;
+    padding: 2px 6px;
+    border-radius: 4px;
+    background-color: #f1f5f9;
+    color: #64748b;
+    font-weight: 500;
+}
+
+/* File type icon colors */
+.folderIcon {
+    color: #f59e0b;
+}
+
+.imageIcon {
+    color: #3b82f6;
+}
+
+.pdfIcon {
+    color: #ef4444;
+}
+
+.documentIcon {
+    color: #2563eb;
+}
+
+.spreadsheetIcon {
+    color: #16a34a;
+}
+
+.presentationIcon {
+    color: #ea580c;
+}
+
+.videoIcon {
+    color: #8b5cf6;
+}
+
+.audioIcon {
+    color: #10b981;
+}
+
+.archiveIcon {
+    color: #6b7280;
+}
+
+.genericFileIcon {
+    color: #94a3b8;
+}
+
+/* Grid view specific styles */
+.fileItemGrid {
+    padding: 16px;
+    border: 1px solid #e2e8f0;
+    border-radius: 10px;
+    background-color: white;
+    transition: all 0.2s ease;
+    cursor: pointer;
+    position: relative;
+    overflow: hidden;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+.fileItemGrid:hover {
+    border-color: #cbd5e1;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+}
+
+.fileContentGrid {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    height: 100%;
+}
+
+.fileIconContainerGrid {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 56px;
+    height: 56px;
+    border-radius: 8px;
+    background-color: #f8fafc;
+    margin-bottom: 12px;
+    position: relative;
+}
+
+.fileNameGrid {
+    font-weight: 500;
+    font-size: 0.95rem;
+    color: #1e293b;
+    margin-bottom: 4px;
+    word-break: break-word;
+    overflow: hidden;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+}
+
+.fileMetaGrid {
+    font-size: 0.75rem;
+    color: #64748b;
+    margin-bottom: 8px;
+}
+
+.checkboxPositioner {
+    position: absolute;
+    top: 8px;
+    left: 8px;
+    z-index: 5;
+}
+
+.renamingContainerGrid {
+    width: 100%;
+    position: relative;
+    margin-bottom: 8px;
+}
+
+/* List view specific styles */
+.fileItemList {
+    padding: 10px 16px;
+    border-bottom: 1px solid #e2e8f0;
+    background-color: white;
+    transition: background-color 0.15s ease;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+}
+
+.fileItemList:hover {
+    background-color: #f8fafc;
+}
+
+.fileContentList {
+    display: flex;
+    align-items: center;
+    flex: 1;
+    min-width: 0;
+}
+
+.fileIconContainerList {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 40px;
+    height: 40px;
+    border-radius: 6px;
+    background-color: #f8fafc;
+    margin-right: 12px;
+    flex-shrink: 0;
+    position: relative;
+}
+
+.fileDetailsContainer {
+    flex: 1;
+    min-width: 0;
+}
+
+.fileNameList {
+    font-weight: 500;
+    font-size: 0.95rem;
+    color: #1e293b;
+    margin-bottom: 4px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.fileMetaList {
+    display: flex;
+    align-items: center;
+    font-size: 0.75rem;
+    color: #64748b;
+    margin-bottom: 4px;
+}
+
+.metaSeparator {
+    margin: 0 6px;
+    font-size: 0.6rem;
+}
+
+.dateInfo {
+    display: flex;
+    align-items: center;
+}
+
+.dateIcon {
+    margin-right: 4px;
+}
+
+.checkboxPositionerList {
+    margin-right: 12px;
+}
+
+.renamingContainerList {
+    width: 100%;
+    position: relative;
+    margin-bottom: 4px;
+}
+
+/* List view columns */
+.fileTypeColumn, .dateColumn, .sizeColumn {
+    display: none;
+}
+
+@media (min-width: 768px) {
+    .fileTypeColumn {
+        display: flex;
+        align-items: center;
+        width: 100px;
+        font-size: 0.85rem;
+        color: #64748b;
+        flex-shrink: 0;
+        margin-left: 16px;
+    }
+
+    .dateColumn {
+        display: flex;
+        align-items: center;
+        width: 140px;
+        font-size: 0.85rem;
+        color: #64748b;
+        flex-shrink: 0;
+    }
+
+    .sizeColumn {
+        display: flex;
+        width: 80px;
+        font-size: 0.85rem;
+        color: #64748b;
+        flex-shrink: 0;
+        justify-content: flex-end;
+    }
+
+    .columnIcon {
+        margin-right: 6px;
+        opacity: 0.7;
+    }
+}
+
+/* Mac-style disabled item styling */
+.disabledItem {
+    opacity: 0.8;
+    cursor: not-allowed !important;
+}
+
+.disabledItem:hover {
+    transform: none !important;
+    box-shadow: none !important;
+    border-color: #e2e8f0 !important;
+    background-color: white !important;
+}
+
+.disabledItem .fileNameGrid,
+.disabledItem .fileNameList {
+    color: #94a3b8;
+}
+
+.disabledItem .fileIconContainerGrid,
+.disabledItem .fileIconContainerList {
+    background-color: #f1f5f9;
+}
+
+.nonSelectableOverlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: rgba(255, 255, 255, 0.7);
+    border-radius: 6px;
+    backdrop-filter: blur(1px);
+    transition: all 0.2s ease;
+}
+
+.nonSelectableIcon {
+    color: #94a3b8;
+    opacity: 0.7;
+}
+
+/* Dark mode support */
+@media (prefers-color-scheme: dark) {
+    .contextMenu {
+        background-color: #1e293b;
+        border-color: #334155;
+    }
+
+    .contextMenuItem {
+        color: #e2e8f0;
+    }
+
+    .contextMenuItem:hover {
+        background-color: #334155;
+    }
+
+    .contextMenuIcon {
+        color: #94a3b8;
+    }
+
+    .contextMenuSeparator {
+        background-color: #334155;
+    }
+
+    .destructiveMenuItem:hover {
+        background-color: rgba(239, 68, 68, 0.2);
+    }
+
+    .checkbox {
+        border-color: #475569;
+    }
+
+    .selectedItem {
+        background-color: rgba(59, 130, 246, 0.15) !important;
+        border-color: rgba(59, 130, 246, 0.3) !important;
+    }
+
+    .renameInput {
+        background-color: #1e293b;
+        border-color: #3b82f6;
+        color: #e2e8f0;
+    }
+
+    .moreTag {
+        background-color: #334155;
+        color: #cbd5e1;
+    }
+
+    .fileItemGrid {
+        background-color: #1e293b;
+        border-color: #334155;
+    }
+
+    .fileItemGrid:hover {
+        border-color: #475569;
+        box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.2), 0 2px 4px -1px rgba(0, 0, 0, 0.1);
+    }
+
+    .fileIconContainerGrid {
+        background-color: #0f172a;
+    }
+
+    .fileNameGrid {
+        color: #e2e8f0;
+    }
+
+    .fileMetaGrid {
+        color: #94a3b8;
+    }
+
+    .fileItemList {
+        background-color: #1e293b;
+        border-color: #334155;
+    }
+
+    .fileItemList:hover {
+        background-color: #0f172a;
+    }
+
+    .fileIconContainerList {
+        background-color: #0f172a;
+    }
+
+    .fileNameList {
+        color: #e2e8f0;
+    }
+
+    .fileMetaList {
+        color: #94a3b8;
+    }
+
+    .fileTypeColumn, .dateColumn, .sizeColumn {
+        color: #94a3b8;
+    }
+
+    /* Dark mode disabled state */
+    .disabledItem {
+        opacity: 0.7;
+    }
+
+    .disabledItem:hover {
+        border-color: #334155 !important;
+        background-color: #1e293b !important;
+    }
+
+    .disabledItem .fileNameGrid,
+    .disabledItem .fileNameList {
+        color: #64748b;
+    }
+
+    .disabledItem .fileIconContainerGrid,
+    .disabledItem .fileIconContainerList {
+        background-color: #0f172a;
+    }
+
+    .nonSelectableOverlay {
+        background-color: rgba(15, 23, 42, 0.7);
+    }
+
+    .nonSelectableIcon {
+        color: #64748b;
+    }
+}

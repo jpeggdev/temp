@@ -1,0 +1,20 @@
+/* src/modules/hub/features/FileManagement/components/FilePickerLoadingSkeleton/FilePickerLoadingSkeleton.css */
+.loading-skeleton-item {
+    transition: all 0.2s ease;
+}
+
+@keyframes pulse {
+    0% {
+        opacity: 0.6;
+    }
+    50% {
+        opacity: 1;
+    }
+    100% {
+        opacity: 0.6;
+    }
+}
+
+.animate-pulse {
+    animation: pulse 1.5s infinite ease-in-out;
+}

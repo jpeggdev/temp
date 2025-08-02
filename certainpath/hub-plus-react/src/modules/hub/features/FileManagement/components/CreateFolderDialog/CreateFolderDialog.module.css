@@ -1,0 +1,240 @@
+/* CreateFolderDialog.module.css */
+.dialogWrapper {
+    position: relative;
+    z-index: 50;
+}
+
+.backdrop {
+    position: fixed;
+    inset: 0;
+    background-color: rgba(0, 0, 0, 0.5);
+    backdrop-filter: blur(4px);
+    transition: opacity 0.3s ease;
+}
+
+.fixedWrapper {
+    position: fixed;
+    inset: 0;
+    z-index: 10;
+    overflow-y: auto;
+}
+
+.dialogContainer {
+    display: flex;
+    min-height: 100%;
+    align-items: center;
+    justify-content: center;
+    padding: 1rem;
+    text-align: center;
+}
+
+.dialogPanel {
+    position: relative;
+    background-color: white;
+    border-radius: 12px;
+    box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+    overflow: hidden;
+    width: 100%;
+    max-width: 500px;
+    margin: 2rem auto;
+    transition: transform 0.3s ease, opacity 0.3s ease;
+}
+
+.dialogHeader {
+    padding: 1.25rem;
+    background: linear-gradient(135deg, #3b82f6 0%, #2563eb 100%);
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.dialogTitle {
+    font-size: 1.25rem;
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.titleIcon {
+    font-size: 1.1rem;
+}
+
+.closeButton {
+    background: rgba(255, 255, 255, 0.2);
+    border: none;
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+}
+
+.closeButton:hover {
+    background: rgba(255, 255, 255, 0.3);
+}
+
+.dialogContent {
+    padding: 1.5rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+}
+
+.iconContainer {
+    margin-bottom: 1.5rem;
+    background-color: rgba(59, 130, 246, 0.1);
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.folderIcon {
+    color: #3b82f6;
+}
+
+.formWrapper {
+    width: 100%;
+    max-width: 400px;
+}
+
+.folderLocation {
+    color: #4b5563;
+    margin-bottom: 1.5rem;
+    text-align: left;
+    font-size: 0.95rem;
+}
+
+.folderPath {
+    color: #3b82f6;
+    font-weight: 600;
+    font-family: monospace;
+    padding: 0.15rem 0.3rem;
+    background-color: rgba(59, 130, 246, 0.1);
+    border-radius: 4px;
+    font-size: 0.9rem;
+}
+
+.inputLabel {
+    display: block;
+    text-align: left;
+    margin-bottom: 0.5rem;
+    font-weight: 500;
+    color: #4b5563;
+    font-size: 0.95rem;
+}
+
+.folderInput {
+    width: 100%;
+    padding: 0.75rem 1rem;
+    border: 1px solid #e2e8f0;
+    border-radius: 8px;
+    font-size: 1rem;
+    transition: all 0.2s ease;
+    background-color: white;
+}
+
+.folderInput:focus {
+    outline: none;
+    border-color: #3b82f6;
+    box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.2);
+}
+
+.buttonGroup {
+    display: flex;
+    justify-content: flex-end;
+    padding: 1rem 1.5rem;
+    background-color: #f7fafc;
+    border-top: 1px solid #edf2f7;
+    gap: 0.75rem;
+}
+
+.cancelButton {
+    padding: 0.75rem 1.25rem;
+    background-color: white;
+    color: #4b5563;
+    border: 1px solid #e2e8f0;
+    border-radius: 8px;
+    font-size: 0.95rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.cancelButton:hover {
+    background-color: #f7fafc;
+}
+
+.cancelButton:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+
+.createButton {
+    padding: 0.75rem 1.25rem;
+    background: linear-gradient(135deg, #3b82f6 0%, #2563eb 100%);
+    color: white;
+    border: none;
+    border-radius: 8px;
+    font-size: 0.95rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    box-shadow: 0 4px 6px rgba(59, 130, 246, 0.1);
+}
+
+.createButton:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 12px rgba(59, 130, 246, 0.2);
+}
+
+.createButtonDisabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+    transform: none !important;
+    box-shadow: none !important;
+}
+
+.buttonIcon {
+    font-size: 1rem;
+}
+
+.spinningIcon {
+    animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+    from {
+        transform: rotate(0deg);
+    }
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+/* Mobile responsiveness */
+@media (max-width: 480px) {
+    .dialogPanel {
+        margin: 1rem;
+    }
+
+    .buttonGroup {
+        flex-direction: column-reverse;
+    }
+
+    .createButton, .cancelButton {
+        width: 100%;
+    }
+}

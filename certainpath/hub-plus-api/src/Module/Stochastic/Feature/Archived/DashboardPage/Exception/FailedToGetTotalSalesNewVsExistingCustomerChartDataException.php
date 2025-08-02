@@ -1,0 +1,14 @@
+<?php
+
+namespace App\Module\Stochastic\Feature\Archived\DashboardPage\Exception;
+
+use App\Exception\UnificationAPIException;
+
+class FailedToGetTotalSalesNewVsExistingCustomerChartDataException extends UnificationAPIException
+{
+    public function __construct()
+    {
+        $message = 'Failed to get the total sales new vs. existing customer chart data';
+        parent::__construct($message);
+    }
+}

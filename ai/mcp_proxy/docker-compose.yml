@@ -1,0 +1,55 @@
+version: '3.8'
+
+services:
+  mcp-proxy:
+    build: .
+    ports:
+      - "${MCP_PROXY_PORT:-3000}:3000"
+    environment:
+      - NODE_ENV=${NODE_ENV:-production}
+      - MCP_PROXY_CONFIG=/app/config/mcp_servers.json
+      - MCP_PROXY_HOST=0.0.0.0
+      - MCP_PROXY_PORT=3000
+    volumes:
+      # Mount configuration file
+      - ./mcp_servers.json:/app/config/mcp_servers.json:ro
+      # Mount data directory if needed
+      - ./data:/app/data
+      # Mount logs directory
+      - ./logs:/app/logs
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "wget", "--no-verbose", "--tries=1", "--spider", "http://localhost:3000/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 40s
+    networks:
+      - mcp-network
+
+  # Example: Add a reverse proxy if needed
+  nginx:
+    image: nginx:alpine
+    ports:
+      - "80:80"
+      - "443:443"
+    volumes:
+      - ./nginx.conf:/etc/nginx/nginx.conf:ro
+      - ./ssl:/etc/nginx/ssl:ro
+    depends_on:
+      - mcp-proxy
+    restart: unless-stopped
+    networks:
+      - mcp-network
+    profiles:
+      - with-proxy
+
+networks:
+  mcp-network:
+    driver: bridge
+
+volumes:
+  mcp-data:
+    driver: local
+  mcp-logs:
+    driver: local

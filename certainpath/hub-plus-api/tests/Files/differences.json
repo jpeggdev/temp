@@ -1,0 +1,14 @@
+[
+    "File \/[Content_Types].xml differs between \/broken-customer-list-throws-sheet-related-error and \/copy-of-broken-customer-list-throws-sheet-related-error",
+    "File \/_rels\/.rels differs between \/broken-customer-list-throws-sheet-related-error and \/copy-of-broken-customer-list-throws-sheet-related-error",
+    "File \/xl\/workbook.xml differs between \/broken-customer-list-throws-sheet-related-error and \/copy-of-broken-customer-list-throws-sheet-related-error",
+    "File \/xl\/worksheets\/sheet2.xml differs between \/broken-customer-list-throws-sheet-related-error and \/copy-of-broken-customer-list-throws-sheet-related-error",
+    "File \/xl\/worksheets\/sheet1.xml differs between \/broken-customer-list-throws-sheet-related-error and \/copy-of-broken-customer-list-throws-sheet-related-error",
+    "File \/xl\/worksheets\/_rels\/sheet2.xml.rels differs between \/broken-customer-list-throws-sheet-related-error and \/copy-of-broken-customer-list-throws-sheet-related-error",
+    "File \/xl\/styles.xml differs between \/broken-customer-list-throws-sheet-related-error and \/copy-of-broken-customer-list-throws-sheet-related-error",
+    "File \/xl\/_rels\/workbook.xml.rels differs between \/broken-customer-list-throws-sheet-related-error and \/copy-of-broken-customer-list-throws-sheet-related-error",
+    "File \/docProps\/app.xml exists in \/copy-of-broken-customer-list-throws-sheet-related-error but not in \/broken-customer-list-throws-sheet-related-error",
+    "File \/docProps\/core.xml exists in \/copy-of-broken-customer-list-throws-sheet-related-error but not in \/broken-customer-list-throws-sheet-related-error",
+    "File \/xl\/theme\/theme1.xml exists in \/copy-of-broken-customer-list-throws-sheet-related-error but not in \/broken-customer-list-throws-sheet-related-error",
+    "File \/xl\/sharedStrings.xml exists in \/copy-of-broken-customer-list-throws-sheet-related-error but not in \/broken-customer-list-throws-sheet-related-error"
+]

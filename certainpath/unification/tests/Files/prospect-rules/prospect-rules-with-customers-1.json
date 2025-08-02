@@ -1,0 +1,27 @@
+{
+  "customer_inclusion": {
+    "options": [
+      "prospects_only",
+      "customers_only",
+      "prospects_and_customers"
+    ],
+    "selected": "prospects_and_customers"
+  },
+  "customer_criteria": {
+    "conditions": {
+        "single_invoice": {
+            "operator": "greater_than",
+            "value": 1000,
+            "include": true
+        },
+        "lifetime_value": {
+            "operator": "greater_than",
+            "value": 2500,
+            "include": true
+        },
+        "club_members": {
+            "include": true
+        }
+    }
+  }
+}

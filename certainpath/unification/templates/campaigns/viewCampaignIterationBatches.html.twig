@@ -1,0 +1,45 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{{ batches.first.campaign.name }}: Batches {% endblock %}
+{% block page_heading %} {{ batches.first.campaign.name }}: Batches {% endblock %}
+
+{% block body %}
+    {% if batches|length > 0 %}
+        <div class="mt-8 flow-root">
+            <div class="-mx-4 -my-2 overflow-x-auto sm:-mx-6 lg:-mx-8">
+                <div class="inline-block min-w-full py-2 align-middle sm:px-6 lg:px-8">
+                    <table class="min-w-full divide-y divide-gray-300">
+                        <thead>
+                        <tr>
+                            <th scope="col" class="py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 sm:pl-0">Week number</th>
+                            <th scope="col" class="py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 sm:pl-0">Start Date</th>
+                            <th scope="col" class="py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 sm:pl-0">End Date</th>
+                        </tr>
+                        </thead>
+                        <tbody class="divide-y divide-gray-200">
+                        {% for batch in batches %}
+                            <tr>
+                                <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">{{ batch.campaignIterationWeek.weekNumber }}</td>
+                                <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">{{ batch.campaignIterationWeek.startDate|date('m-d-Y') }}</td>
+                                <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">{{ batch.campaignIterationWeek.endDate|date('m-d-Y') }}</td>
+                                <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500 text-right">
+                                    <a href="{{ path('app_list_batch_prospects', {
+                                        batchId: batch.id
+                                    }) }}" class="rounded-md bg-indigo-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-rose-600">View Prospects
+                                    </a>
+                                    <a href="{{ path('app_export_saved_query', {
+                                        savedQueryId: batch.id,
+                                        dataType: 'prospects',
+                                        dataTarget: 'mailmanager'
+                                    }) }}" class="rounded-md bg-rose-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-rose-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-rose-600">Export as .DBF
+                                    </a>
+                                </td>
+                            </tr>
+                        {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    {% endif %}
+{% endblock %}

@@ -1,0 +1,10 @@
+{
+  "customer_inclusion": {
+    "options": [
+      "prospects_only",
+      "customers_only",
+      "prospects_and_customers"
+    ],
+    "selected": "customers_only"
+  }
+}

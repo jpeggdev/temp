@@ -1,0 +1,51 @@
+/* src/modules/hub/features/FileManagement/components/FileManagement/FileManagement.module.css */
+.headerContainer {
+    background: linear-gradient(135deg, #3b82f6 0%, #2563eb 100%);
+    border-radius: 1rem;
+    padding: 2rem;
+    margin: 1rem 0 2rem;
+    position: relative;
+    overflow: hidden;
+    box-shadow: 0 10px 30px -5px rgba(37, 99, 235, 0.2);
+}
+
+.pageHeaderContent {
+    position: relative;
+    z-index: 1;
+}
+
+.pageTitle {
+    font-size: 2.5rem;
+    font-weight: 700;
+    color: white;
+    margin: 0;
+    line-height: 1.2;
+}
+
+.pageSubtitle {
+    font-size: 1.1rem;
+    color: rgba(255, 255, 255, 0.8);
+    margin: 0.5rem 0 0 0;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .pageTitle {
+        font-size: 2rem;
+    }
+
+    .headerContainer {
+        padding: 1.5rem;
+        margin: 1rem 0;
+    }
+}
+
+@media (max-width: 480px) {
+    .pageTitle {
+        font-size: 1.75rem;
+    }
+
+    .pageSubtitle {
+        font-size: 1rem;
+    }
+}

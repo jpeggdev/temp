@@ -1,0 +1,53 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}My Companies{% endblock %}
+{% block page_heading %}My Companies{% endblock %}
+
+
+{% block body %}
+    <div class="px-4 sm:px-6 lg:px-8">
+        <div class="sm:flex sm:items-center">
+            <div class="sm:flex-auto">
+                <h1 class="text-base font-semibold leading-6 text-gray-900">My Companies</h1>
+                <p class="mt-2 text-sm text-gray-700">A list of companies you can manage.</p>
+            </div>
+            {#<div class="mt-4 sm:ml-16 sm:mt-0 sm:flex-none">
+                <button type="button" class="block rounded-md bg-indigo-600 px-3 py-2 text-center text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">Add user</button>
+            </div>#}
+        </div>
+        <div class="mt-8 flow-root">
+            <div class="-mx-4 -my-2 overflow-x-auto sm:-mx-6 lg:-mx-8">
+                <div class="inline-block min-w-full py-2 align-middle sm:px-6 lg:px-8">
+                    <table class="min-w-full divide-y divide-gray-300">
+                        <thead>
+                        <tr>
+                            <th scope="col" class="py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 sm:pl-0">Company</th>
+                            <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">Company Name</th>
+                            <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">Created</th>
+                            <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">Manage</th>
+                        </tr>
+                        </thead>
+                        <tbody class="divide-y divide-gray-200">
+                        {% for company in app.user.companies %}
+                            <tr>
+                                <td class="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium text-gray-900 sm:pl-0">{{ company.identifier }}</td>
+                                <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">{{ company.name }}</td>
+                                <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">{{ company.createdAt|date('Y-m-d') }}</td>
+                                <td>
+                                    <a
+                                        type="button"
+                                        href="{{ path('app_manage_company', {'identifier': company.identifier}) }}"
+                                        class="block rounded-md bg-indigo-500 px-3 py-2 text-center text-sm font-semibold text-white shadow-sm hover:bg-indigo-400 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-500"
+                                    >
+                                        Manage
+                                    </a>
+                                </td>
+                            </tr>
+                        {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

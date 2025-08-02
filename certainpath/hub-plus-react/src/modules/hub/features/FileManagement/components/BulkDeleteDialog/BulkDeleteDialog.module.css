@@ -1,0 +1,347 @@
+.dialogWrapper {
+    position: relative;
+    z-index: 50;
+}
+
+.backdrop {
+    position: fixed;
+    inset: 0;
+    background-color: rgba(0, 0, 0, 0.5);
+    backdrop-filter: blur(4px);
+    transition: opacity 0.3s ease;
+}
+
+.fixedWrapper {
+    position: fixed;
+    inset: 0;
+    z-index: 10;
+    overflow-y: auto;
+}
+
+.dialogContainer {
+    display: flex;
+    min-height: 100%;
+    align-items: center;
+    justify-content: center;
+    padding: 1rem;
+    text-align: center;
+}
+
+.dialogPanel {
+    position: relative;
+    background-color: white;
+    border-radius: 12px;
+    box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+    overflow: hidden;
+    width: 100%;
+    max-width: 500px;
+    margin: 2rem auto;
+    transition: transform 0.3s ease, opacity 0.3s ease;
+}
+
+.dialogHeader {
+    padding: 1.25rem;
+    background: linear-gradient(135deg, #ef4444 0%, #b91c1c 100%);
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.dialogTitle {
+    font-size: 1.25rem;
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.titleIcon {
+    font-size: 1.1rem;
+}
+
+.closeButton {
+    background: rgba(255, 255, 255, 0.2);
+    border: none;
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+}
+
+.closeButton:hover {
+    background: rgba(255, 255, 255, 0.3);
+}
+
+.dialogContent {
+    padding: 1.5rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+}
+
+.warningIcon {
+    color: #ef4444;
+    margin-bottom: 1.5rem;
+}
+
+.statusIcon {
+    margin-bottom: 1.5rem;
+}
+
+.spinningIcon {
+    animation: spin 1s linear infinite;
+    color: #3b82f6;
+}
+
+.successIcon {
+    color: #10b981;
+}
+
+.errorIcon {
+    color: #ef4444;
+}
+
+.statusTextWrapper {
+    max-width: 400px;
+}
+
+.statusTitle {
+    font-weight: 600;
+    font-size: 1.1rem;
+    color: #1f2937;
+    margin: 0 0 1rem 0;
+}
+
+.warningText {
+    color: #4a5568;
+    margin-bottom: 1.5rem;
+    font-size: 0.95rem;
+    line-height: 1.5;
+    text-align: center;
+}
+
+.progressStats {
+    display: flex;
+    justify-content: space-around;
+    margin-bottom: 1rem;
+    width: 100%;
+}
+
+.statItem {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.statLabel {
+    font-size: 0.8rem;
+    color: #6b7280;
+    margin-bottom: 0.25rem;
+}
+
+.statValue {
+    font-weight: 600;
+    font-size: 1.1rem;
+    color: #1f2937;
+}
+
+.progressBarContainer {
+    width: 100%;
+    height: 8px;
+    background-color: #e5e7eb;
+    border-radius: 4px;
+    overflow: hidden;
+    margin: 1rem 0;
+}
+
+.progressBar {
+    height: 100%;
+    background: linear-gradient(90deg, #3b82f6 0%, #2563eb 100%);
+    transition: width 0.3s ease;
+}
+
+.failedItemsContainer {
+    width: 100%;
+    margin-top: 1rem;
+    text-align: left;
+}
+
+.toggleFailedItemsButton {
+    background: none;
+    border: none;
+    color: #ef4444;
+    font-size: 0.9rem;
+    font-weight: 500;
+    cursor: pointer;
+    padding: 0.5rem 0;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.toggleFailedItemsButton:hover {
+    text-decoration: underline;
+}
+
+.failedItemsList {
+    margin-top: 0.5rem;
+    max-height: 200px;
+    overflow-y: auto;
+    background-color: #fee2e2;
+    border-radius: 8px;
+    padding: 0.75rem;
+    border: 1px solid #fecaca;
+}
+
+.failedItem {
+    display: flex;
+    gap: 0.5rem;
+    margin-bottom: 0.75rem;
+    padding-bottom: 0.75rem;
+    border-bottom: 1px solid #fecaca;
+}
+
+.failedItem:last-child {
+    margin-bottom: 0;
+    padding-bottom: 0;
+    border-bottom: none;
+}
+
+.failedItemIcon {
+    color: #ef4444;
+    flex-shrink: 0;
+    margin-top: 0.1rem;
+}
+
+.failedItemDetails {
+    flex: 1;
+}
+
+.failedItemUuid {
+    font-size: 0.8rem;
+    color: #9b1c1c;
+    margin-bottom: 0.25rem;
+    font-family: monospace;
+}
+
+.failedItemReason {
+    font-size: 0.9rem;
+    color: #b91c1c;
+}
+
+.buttonGroup {
+    display: flex;
+    justify-content: flex-end;
+    padding: 1rem 1.5rem;
+    background-color: #f7fafc;
+    border-top: 1px solid #edf2f7;
+    gap: 0.75rem;
+}
+
+.cancelButton {
+    padding: 0.75rem 1.25rem;
+    background-color: white;
+    color: #4a5568;
+    border: 1px solid #e2e8f0;
+    border-radius: 8px;
+    font-size: 0.95rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.cancelButton:hover {
+    background-color: #f7fafc;
+}
+
+.doneButton {
+    padding: 0.75rem 1.25rem;
+    background-color: #3b82f6;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    font-size: 0.95rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    box-shadow: 0 4px 6px rgba(59, 130, 246, 0.1);
+}
+
+.doneButton:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 12px rgba(59, 130, 246, 0.2);
+}
+
+.deleteButton {
+    padding: 0.75rem 1.25rem;
+    background: linear-gradient(135deg, #ef4444 0%, #b91c1c 100%);
+    color: white;
+    border: none;
+    border-radius: 8px;
+    font-size: 0.95rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    box-shadow: 0 4px 6px rgba(185, 28, 28, 0.1);
+}
+
+.deleteButton:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 12px rgba(185, 28, 28, 0.2);
+}
+
+.deleteButtonDisabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+    transform: none !important;
+    box-shadow: none !important;
+}
+
+.buttonIcon {
+    font-size: 1rem;
+}
+
+@keyframes spin {
+    from {
+        transform: rotate(0deg);
+    }
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+/* Mobile responsiveness */
+@media (max-width: 480px) {
+    .dialogPanel {
+        margin: 1rem;
+    }
+
+    .buttonGroup {
+        flex-direction: column-reverse;
+    }
+
+    .deleteButton, .cancelButton, .doneButton {
+        width: 100%;
+    }
+
+    .progressStats {
+        flex-direction: column;
+        gap: 0.5rem;
+    }
+
+    .statItem {
+        flex-direction: row;
+        justify-content: space-between;
+        width: 100%;
+    }
+}

@@ -1,0 +1,23 @@
+{
+  "servers": {
+    "filesystem": {
+      "command": "npx",
+      "args": ["-y", "@modelcontextprotocol/server-filesystem", "/tmp"],
+      "description": "File system server for /tmp directory",
+      "env": {}
+    }
+  },
+  "proxy": {
+    "host": "localhost",
+    "port": 3000,
+    "cors": {
+      "enabled": true,
+      "origins": ["http://localhost:3001", "http://127.0.0.1:3001"]
+    },
+    "logging": {
+      "level": "info",
+      "requests": true,
+      "responses": false
+    }
+  }
+}

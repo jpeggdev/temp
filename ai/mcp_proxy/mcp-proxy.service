@@ -1,0 +1,29 @@
+[Unit]
+Description=MCP Proxy Server
+Documentation=https://github.com/yourusername/mcp-proxy
+After=network.target
+
+[Service]
+Type=simple
+User=%i
+WorkingDirectory=/home/%i/code/ai/mcp_proxy
+ExecStart=/usr/bin/node /home/%i/code/ai/mcp_proxy/dist/index.js
+Restart=on-failure
+RestartSec=10
+
+# Environment variables
+Environment="NODE_ENV=production"
+Environment="MCP_PROXY_WEB_PASSWORD=changeme"
+Environment="MCP_PROXY_SESSION_SECRET=change-this-secret-key"
+
+# Security settings
+NoNewPrivileges=true
+PrivateTmp=true
+
+# Logging
+StandardOutput=journal
+StandardError=journal
+SyslogIdentifier=mcp-proxy
+
+[Install]
+WantedBy=multi-user.target

@@ -1,0 +1,433 @@
+/* ReplaceFileDialog.module.css */
+.dialogWrapper {
+    position: relative;
+    z-index: 50;
+}
+
+.backdrop {
+    position: fixed;
+    inset: 0;
+    background-color: rgba(0, 0, 0, 0.5);
+    backdrop-filter: blur(4px);
+    transition: opacity 0.3s ease;
+}
+
+.fixedWrapper {
+    position: fixed;
+    inset: 0;
+    z-index: 10;
+    overflow-y: auto;
+}
+
+.dialogContainer {
+    display: flex;
+    min-height: 100%;
+    align-items: center;
+    justify-content: center;
+    padding: 1rem;
+    text-align: center;
+}
+
+.dialogPanel {
+    position: relative;
+    background-color: white;
+    border-radius: 12px;
+    box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+    overflow: hidden;
+    width: 100%;
+    max-width: 500px;
+    margin: 2rem auto;
+    transition: transform 0.3s ease, opacity 0.3s ease;
+}
+
+.dialogHeader {
+    padding: 1.25rem;
+    background: linear-gradient(135deg, #0ea5e9 0%, #0284c7 100%);
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.dialogTitle {
+    font-size: 1.25rem;
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.titleIcon {
+    font-size: 1.1rem;
+}
+
+.closeButton {
+    background: rgba(255, 255, 255, 0.2);
+    border: none;
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+}
+
+.closeButton:hover {
+    background: rgba(255, 255, 255, 0.3);
+}
+
+.dialogContent {
+    padding: 1.5rem;
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+}
+
+/* Original file info */
+.originalFileInfo {
+    display: flex;
+    align-items: center;
+    padding: 1rem;
+    background-color: #f8fafc;
+    border-radius: 8px;
+    border: 1px solid #e2e8f0;
+}
+
+.fileIconContainer {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 40px;
+    height: 40px;
+    border-radius: 8px;
+    background-color: rgba(14, 165, 233, 0.1);
+    margin-right: 1rem;
+}
+
+.fileIcon {
+    color: #0ea5e9;
+}
+
+.fileDetails {
+    flex: 1;
+    text-align: left;
+    overflow: hidden;
+}
+
+.originalFileLabel {
+    font-size: 0.75rem;
+    color: #64748b;
+    margin: 0 0 0.25rem 0;
+}
+
+.originalFileName {
+    font-size: 0.95rem;
+    font-weight: 500;
+    color: #334155;
+    margin: 0;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+/* Dropzone styling */
+.dropzone {
+    border: 2px dashed #cbd5e1;
+    border-radius: 12px;
+    padding: 2rem 1.5rem;
+    text-align: center;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    background-color: #f8fafc;
+}
+
+.dropzone:hover {
+    border-color: #93c5fd;
+    background-color: #f0f9ff;
+}
+
+.dropzoneActive {
+    border-color: #0ea5e9;
+    background-color: #e0f2fe;
+}
+
+.uploadIcon {
+    color: #94a3b8;
+    margin: 0 auto 1rem;
+}
+
+.dropzoneText {
+    color: #64748b;
+    margin-bottom: 0.5rem;
+    font-size: 1rem;
+}
+
+.dropzoneTextActive {
+    color: #0ea5e9;
+    font-weight: 500;
+    margin-bottom: 0.5rem;
+    font-size: 1rem;
+}
+
+.dropzoneSubtext {
+    color: #94a3b8;
+    font-size: 0.875rem;
+}
+
+/* Replace preview styling */
+.replacePreview {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem;
+}
+
+.replaceArrow {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background-color: #f1f5f9;
+}
+
+.arrowIcon {
+    color: #64748b;
+}
+
+.selectedFileContainer {
+    width: 100%;
+    border: 1px solid #e2e8f0;
+    border-radius: 8px;
+    overflow: hidden;
+    background-color: white;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+}
+
+.selectedFileHeader {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0.75rem 1rem;
+    background-color: #f8fafc;
+    border-bottom: 1px solid #e2e8f0;
+}
+
+.selectedFileTitle {
+    font-size: 0.875rem;
+    font-weight: 600;
+    color: #475569;
+    margin: 0;
+}
+
+.clearButton {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 24px;
+    height: 24px;
+    border-radius: 50%;
+    border: none;
+    background: none;
+    color: #94a3b8;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.clearButton:hover {
+    background-color: #f1f5f9;
+    color: #ef4444;
+}
+
+.selectedFileContent {
+    padding: 1rem;
+    display: flex;
+    align-items: center;
+}
+
+.newFileIcon {
+    color: #22c55e;
+}
+
+.selectedFileName {
+    font-size: 0.95rem;
+    font-weight: 500;
+    color: #334155;
+    margin: 0 0 0.25rem 0;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.selectedFileSize {
+    font-size: 0.8rem;
+    color: #64748b;
+    margin: 0;
+}
+
+/* Error message styling */
+.errorContainer {
+    border: 1px solid #fca5a5;
+    border-radius: 8px;
+    background-color: #fee2e2;
+    overflow: hidden;
+}
+
+.errorHeader {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0.75rem 1rem;
+    background-color: #fecaca;
+    border-bottom: 1px solid #fca5a5;
+}
+
+.errorTitle {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-weight: 600;
+    font-size: 0.875rem;
+    color: #b91c1c;
+}
+
+.errorIcon {
+    color: #b91c1c;
+}
+
+.clearErrorButton {
+    font-size: 0.75rem;
+    color: #b91c1c;
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 0.25rem 0.5rem;
+    border-radius: 4px;
+    transition: background-color 0.2s ease;
+}
+
+.clearErrorButton:hover {
+    background-color: rgba(239, 68, 68, 0.1);
+    text-decoration: underline;
+}
+
+.errorMessage {
+    padding: 0.75rem 1rem;
+    margin: 0;
+    font-size: 0.875rem;
+    color: #b91c1c;
+    text-align: left;
+}
+
+/* Footer buttons */
+.buttonGroup {
+    display: flex;
+    justify-content: flex-end;
+    padding: 1rem 1.5rem;
+    background-color: #f7fafc;
+    border-top: 1px solid #edf2f7;
+    gap: 0.75rem;
+}
+
+.cancelButton {
+    padding: 0.75rem 1.25rem;
+    background-color: white;
+    color: #4a5568;
+    border: 1px solid #e2e8f0;
+    border-radius: 8px;
+    font-size: 0.95rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.cancelButton:hover {
+    background-color: #f7fafc;
+}
+
+.cancelButton:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+
+.replaceButton {
+    padding: 0.75rem 1.25rem;
+    background: linear-gradient(135deg, #0ea5e9 0%, #0284c7 100%);
+    color: white;
+    border: none;
+    border-radius: 8px;
+    font-size: 0.95rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    box-shadow: 0 4px 6px rgba(14, 165, 233, 0.1);
+}
+
+.replaceButton:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 12px rgba(14, 165, 233, 0.2);
+}
+
+.replaceButtonDisabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+    transform: none !important;
+    box-shadow: none !important;
+}
+
+.buttonIcon {
+    font-size: 1rem;
+}
+
+.spinningIcon {
+    animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+    from {
+        transform: rotate(0deg);
+    }
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+/* Mobile responsiveness */
+@media (max-width: 480px) {
+    .dialogPanel {
+        margin: 1rem;
+    }
+
+    .buttonGroup {
+        flex-direction: column-reverse;
+    }
+
+    .replaceButton, .cancelButton {
+        width: 100%;
+    }
+
+    .selectedFileContent {
+        flex-direction: column;
+        text-align: center;
+    }
+
+    .fileIconContainer {
+        margin-right: 0;
+        margin-bottom: 0.75rem;
+    }
+
+    .fileDetails {
+        text-align: center;
+    }
+
+    .dropzone {
+        padding: 1.5rem 1rem;
+    }
+}

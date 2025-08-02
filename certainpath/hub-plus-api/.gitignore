@@ -1,0 +1,58 @@
+###> app
+tests/Files/scratch/*
+###<app
+
+###> symfony/framework-bundle ###
+/.env.local
+/.env
+/.env.local.php
+/.env.*.local
+prod_env_base64.txt
+/config/secrets/prod/prod.decrypt.private.php
+/public/bundles/
+/var/
+/vendor/
+###< symfony/framework-bundle ###
+
+###> phpunit/phpunit ###
+/phpunit.xml
+.phpunit.result.cache
+###< phpunit/phpunit ###
+
+###< symfony/phpunit-bridge ###
+.idea/
+.DS_Store
+docker/postgres
+
+###> squizlabs/php_codesniffer ###
+/.phpcs-cache
+/phpcs.xml
+###< squizlabs/php_codesniffer ###
+
+###> phpstan/phpstan ###
+phpstan.neon
+###< phpstan/phpstan ###
+
+###> friendsofphp/php-cs-fixer ###
+/.php-cs-fixer.php
+/.php-cs-fixer.dist.php
+/.php-cs-fixer.cache
+###< friendsofphp/php-cs-fixer ###
+
+# Session notes (APM infrastructure)
+.apm/session_notes/
+.apm/rules/
+.apm/
+.claude/
+
+# AP Mapping generated files
+.apm/CLAUDE.md
+harmonization.log
+
+# Piper TTS installation (project-local)
+.piper/
+
+LICENSE
+VERSION
+
+installer/

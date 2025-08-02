@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+    <key>Label</key>
+    <string>com.mcp-proxy</string>
+    
+    <key>ProgramArguments</key>
+    <array>
+        <string>/usr/local/bin/node</string>
+        <string>USER_HOME/code/ai/mcp_proxy/dist/index.js</string>
+    </array>
+    
+    <key>WorkingDirectory</key>
+    <string>USER_HOME/code/ai/mcp_proxy</string>
+    
+    <key>EnvironmentVariables</key>
+    <dict>
+        <key>NODE_ENV</key>
+        <string>production</string>
+        <key>MCP_PROXY_WEB_PASSWORD</key>
+        <string>changeme</string>
+        <key>MCP_PROXY_SESSION_SECRET</key>
+        <string>change-this-secret-key</string>
+    </dict>
+    
+    <key>RunAtLoad</key>
+    <true/>
+    
+    <key>KeepAlive</key>
+    <dict>
+        <key>SuccessfulExit</key>
+        <false/>
+    </dict>
+    
+    <key>StandardOutPath</key>
+    <string>USER_HOME/Library/Logs/mcp-proxy/stdout.log</string>
+    
+    <key>StandardErrorPath</key>
+    <string>USER_HOME/Library/Logs/mcp-proxy/stderr.log</string>
+    
+    <key>ThrottleInterval</key>
+    <integer>10</integer>
+</dict>
+</plist>

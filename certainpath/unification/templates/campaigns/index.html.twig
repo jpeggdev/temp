@@ -1,0 +1,58 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}My Campaigns{% endblock %}
+{% block page_heading %}My Campaigns{% endblock %}
+
+
+{% block body %}
+    <div class="px-4 sm:px-6 lg:px-8">
+        <div class="sm:flex sm:items-center">
+            <div class="sm:flex-auto">
+                <h1 class="text-base font-semibold leading-6 text-gray-900">My Campaigns</h1>
+                <p class="mt-2 text-sm text-gray-700">A list of campaigns you can manage.</p>
+            </div>
+        </div>
+        <div class="mt-8 flow-root">
+            <div class="-mx-4 -my-2 overflow-x-auto sm:-mx-6 lg:-mx-8">
+                <div class="inline-block min-w-full py-2 align-middle sm:px-6 lg:px-8">
+                    <table class="min-w-full divide-y divide-gray-300">
+                        <thead>
+                        <tr>
+                            <th scope="col" class="py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 sm:pl-0">Campaign name</th>
+                            <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">Campaign Description</th>
+                            <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">Company</th>
+                            <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">Start Date</th>
+                            <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">End Date</th>
+                            <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">Mail Package</th>
+                            <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">Frequency (weeks)</th>
+                            <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">Action</th>
+                        </tr>
+                        </thead>
+                        <tbody class="divide-y divide-gray-200">
+                        {% for campaign in campaigns %}
+                            <tr>
+                                <td class="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium text-gray-900 sm:pl-0">{{ campaign.name }}</td>
+                                <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">{{ campaign.description }}</td>
+                                <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">{{ campaign.company.identifier }}</td>
+                                <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">{{ campaign.startDate|date('Y-m-d') }}</td>
+                                <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">{{ campaign.endDate|date('Y-m-d') }}</td>
+                                <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">{{ campaign.mailPackage.name }}</td>
+                                <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">{{ campaign.mailingFrequencyWeeks }}</td>
+                                <td>
+                                    <a
+                                            type="button"
+                                            href="{{ path('app_campaign_iterations', {'campaignId': campaign.id}) }}"
+                                            class="block rounded-md bg-indigo-500 px-3 py-2 text-center text-sm font-semibold text-white shadow-sm hover:bg-indigo-400 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-500"
+                                    >
+                                        View Iterations
+                                    </a>
+                                </td>
+                            </tr>
+                        {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

@@ -1,0 +1,168 @@
+roles:
+  - internal_name: 'ROLE_SUPER_ADMIN'
+    label: 'Super Admin'
+    description: 'Has full access to all system functions.'
+  - internal_name: 'ROLE_OWNER_GM'
+    label: 'Owner/General Manager'
+    description: 'Manages company settings and high-level functions.'
+  - internal_name: 'ROLE_MANAGER'
+    label: 'Manager'
+    description: 'Oversees team members and daily operations.'
+  - internal_name: 'ROLE_HR_RECRUITING'
+    label: 'HR Recruiting'
+    description: 'Handles recruitment and HR tasks.'
+  - internal_name: 'ROLE_FINANCE_BACK_OFFICE'
+    label: 'Finance/Back Office'
+    description: 'Manages financial records and back-office operations.'
+  - internal_name: 'ROLE_TECHNICIAN'
+    label: 'Technician'
+    description: 'Handles technical tasks and field work.'
+  - internal_name: 'ROLE_MARKETING'
+    label: 'Marketing'
+    description: 'Oversees marketing campaigns and strategies.'
+  - internal_name: 'ROLE_CALL_CENTER'
+    label: 'Call Center'
+    description: 'Manages customer calls and support.'
+  - internal_name: 'ROLE_SALES'
+    label: 'Sales'
+    description: 'Handles sales operations and client relationships.'
+
+permission_groups:
+  - name: 'Universal Access'
+    description: 'Site-wide permissions that allow users to switch between companies and manage system-wide operations.'
+    isCertainPath: true
+    permissions:
+      - internal_name: 'CAN_SWITCH_COMPANY_ALL'
+        label: 'Can Switch Company (All)'
+        description: 'Allows the user to switch their session to any company within Certain Path, temporarily assuming the same role they have in Certain Path across the selected company.'
+        roles:
+          - 'ROLE_SUPER_ADMIN'
+        isCertainPath: true
+      - internal_name: 'CAN_SWITCH_COMPANY_MARKETING_ONLY'
+        label: 'Can Switch Company (Marketing Only)'
+        description: 'Allows the user to switch their session to a marketing-enabled company within Certain Path, temporarily assuming the same role they have in Certain Path across the selected company.'
+        roles:
+          - 'ROLE_SUPER_ADMIN'
+          - 'ROLE_MARKETING'
+        isCertainPath: true
+
+  - name: 'User Management'
+    description: 'Manage users and their roles.'
+    permissions:
+      - internal_name: 'CAN_MANAGE_USERS'
+        label: 'Can Manage Users'
+        description: 'Able to create, update, delete users and manage their permissions and roles for the company.'
+        roles:
+          - 'ROLE_SUPER_ADMIN'
+          - 'ROLE_OWNER_GM'
+          - 'ROLE_MANAGER'
+          - 'ROLE_HR_RECRUITING'
+      - internal_name: 'CAN_VIEW_USERS'
+        label: 'Can View Users'
+        description: 'Able to view user information, roles, and permissions for the company.'
+        roles:
+          - 'ROLE_SUPER_ADMIN'
+      - internal_name: 'CAN_CREATE_USERS'
+        label: 'Can Create Users'
+        description: 'Able to create new users for the company.'
+        roles:
+          - 'ROLE_SUPER_ADMIN'
+
+  - name: 'Document Management'
+    description: 'Access and manage company documents.'
+    permissions:
+      - internal_name: 'CAN_ACCESS_DOCUMENT_LIBRARY'
+        label: 'Can Access Document Library'
+        description: 'Able to download and view reports such as monthly balance sheet, profit and loss, and transactions for company.'
+        roles:
+          - 'ROLE_SUPER_ADMIN'
+          - 'ROLE_OWNER_GM'
+          - 'ROLE_MANAGER'
+          - 'ROLE_FINANCE_BACK_OFFICE'
+          - 'ROLE_TECHNICIAN'
+      - internal_name: 'CAN_ACCESS_MONTHLY_BALANCE_SHEET'
+        label: 'Can Access Monthly Balance Sheet'
+        description: 'Able to download and view the monthly balance sheet for the company.'
+        roles:
+          - 'ROLE_SUPER_ADMIN'
+          - 'ROLE_OWNER_GM'
+          - 'ROLE_FINANCE_BACK_OFFICE'
+          - 'ROLE_TECHNICIAN'
+      - internal_name: 'CAN_ACCESS_PROFIT_AND_LOSS'
+        label: 'Can Access Profit and Loss'
+        description: 'Able to download and view the profit and loss statement for the company.'
+        roles:
+          - 'ROLE_SUPER_ADMIN'
+          - 'ROLE_OWNER_GM'
+          - 'ROLE_FINANCE_BACK_OFFICE'
+      - internal_name: 'CAN_ACCESS_TRANSACTION_LIST'
+        label: 'Can Access Transaction List'
+        description: 'Able to download and view the transaction list for the company.'
+        roles:
+          - 'ROLE_SUPER_ADMIN'
+          - 'ROLE_OWNER_GM'
+          - 'ROLE_FINANCE_BACK_OFFICE'
+
+  - name: 'Data Access'
+    description: 'Access company data and connectors.'
+    permissions:
+      - internal_name: 'CAN_ACCESS_DATA_CONNECTOR'
+        label: 'Can Access Data Connector'
+        description: 'Able to access Hot Glue data connector for company.'
+        roles:
+          - 'ROLE_SUPER_ADMIN'
+          - 'ROLE_FINANCE_BACK_OFFICE'
+          - 'ROLE_MARKETING'
+          - 'ROLE_HR_RECRUITING'
+
+  - name: 'Stochastic Management'
+    description: 'Manage and view stochastic prospects and customers for the company.'
+    permissions:
+      - internal_name: 'CAN_MANAGE_PROSPECTS'
+        label: 'Can Manage Prospects'
+        description: 'Able to manage and view stochastic prospects for company.'
+        roles:
+          - 'ROLE_SUPER_ADMIN'
+          - 'ROLE_OWNER_GM'
+          - 'ROLE_MANAGER'
+          - 'ROLE_CALL_CENTER'
+          - 'ROLE_MARKETING'
+          - 'ROLE_SALES'
+      - internal_name: 'CAN_MANAGE_CUSTOMERS'
+        label: 'Can Manage Customers'
+        description: 'Able to manage and view stochastic customers for company.'
+        roles:
+          - 'ROLE_SUPER_ADMIN'
+          - 'ROLE_OWNER_GM'
+          - 'ROLE_MANAGER'
+          - 'ROLE_CALL_CENTER'
+          - 'ROLE_TECHNICIAN'
+          - 'ROLE_SALES'
+          - 'ROLE_MARKETING'
+
+  - name: 'Event Registration Management'
+    description: 'Manage event registration content.'
+    permissions:
+      - internal_name: 'CAN_MANAGE_EVENT_REGISTRATION'
+        label: 'Can Manage Event Registration'
+        description: 'Able to manage event registration content.'
+        roles:
+          - 'ROLE_SUPER_ADMIN'
+
+  - name: 'Company Management'
+    description: 'Manage company settings.'
+    permissions:
+      - internal_name: 'CAN_MANAGE_COMPANIES_ALL'
+        label: 'Can Manage Company (All)'
+        description: 'Able to manage company settings.'
+        roles:
+          - 'ROLE_SUPER_ADMIN'
+
+  - name: 'Campaign Management'
+    description: 'Manage campaigns.'
+    permissions:
+      - internal_name: 'CAN_MANAGE_CAMPAIGNS'
+        label: 'Can Manage Campaigns'
+        description: 'Able to manage campaigns.'
+        roles:
+          - 'ROLE_SUPER_ADMIN'

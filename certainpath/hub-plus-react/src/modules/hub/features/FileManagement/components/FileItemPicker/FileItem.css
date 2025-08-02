@@ -1,0 +1,46 @@
+/* src/modules/hub/features/FileManagement/components/FileItem/FileItem.css */
+.file-item-grid,
+.file-item-list {
+    position: relative;
+}
+
+.file-icon svg {
+    width: 24px;
+    height: 24px;
+}
+
+.file-item-grid:hover .file-actions,
+.file-item-list:hover .file-actions {
+    opacity: 1;
+}
+
+.file-actions {
+    opacity: 0;
+    transition: opacity 0.2s ease-in-out;
+}
+
+/* For context menu specific styles */
+[data-radix-popper-content-wrapper] {
+    z-index: 50 !important;
+}
+
+/* Adding a subtle feedback on right click */
+.file-item-grid.right-clicked,
+.file-item-list.right-clicked {
+    box-shadow: 0 0 0 2px rgba(59, 130, 246, 0.5);
+}
+
+@keyframes fade-in {
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.fade-in {
+    animation: fade-in 0.3s ease-out;
+}

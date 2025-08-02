@@ -1,0 +1,178 @@
+<?php
+
+declare(strict_types=1);
+
+namespace DoctrineMigrations;
+
+use Doctrine\DBAL\Schema\Schema;
+use Doctrine\Migrations\AbstractMigration;
+
+final class Version20240923210203 extends AbstractMigration
+{
+    public function up(Schema $schema): void
+    {
+        // this up() migration is auto-generated, please modify it to your needs
+        $this->addSql('ALTER TABLE email DROP CONSTRAINT fk_e7927c749b6b5fba');
+        $this->addSql('ALTER TABLE address DROP CONSTRAINT fk_d4e6f819b6b5fba');
+        $this->addSql('ALTER TABLE saved_query DROP CONSTRAINT fk_496e6ef29b6b5fba');
+        $this->addSql('ALTER TABLE business_unit DROP CONSTRAINT fk_8c200e5e9b6b5fba');
+        $this->addSql('ALTER TABLE customer DROP CONSTRAINT fk_81398e099b6b5fba');
+        $this->addSql('ALTER TABLE location DROP CONSTRAINT fk_5e9e89cb9b6b5fba');
+        $this->addSql('ALTER TABLE prospect DROP CONSTRAINT fk_c9ce8c7d9b6b5fba');
+        $this->addSql('ALTER TABLE phone DROP CONSTRAINT fk_444f97dd9b6b5fba');
+        $this->addSql('ALTER TABLE invoice DROP CONSTRAINT fk_906517449b6b5fba');
+        $this->addSql('ALTER TABLE subscription DROP CONSTRAINT fk_a3c664d39b6b5fba');
+        $this->addSql('DROP SEQUENCE account_id_seq CASCADE');
+        $this->addSql('CREATE SEQUENCE company_id_seq INCREMENT BY 1 MINVALUE 1 START 1');
+        $this->addSql('CREATE TABLE company (id INT NOT NULL, identifier TEXT NOT NULL, name TEXT NOT NULL, is_active BOOLEAN DEFAULT true NOT NULL, is_deleted BOOLEAN DEFAULT false NOT NULL, created TIMESTAMP(0) WITHOUT TIME ZONE NOT NULL, updated TIMESTAMP(0) WITHOUT TIME ZONE NOT NULL, PRIMARY KEY(id))');
+        $this->addSql('CREATE UNIQUE INDEX UNIQ_4FBF094F772E836A ON company (identifier)');
+        $this->addSql('COMMENT ON COLUMN company.created IS \'(DC2Type:datetime_immutable)\'');
+        $this->addSql('COMMENT ON COLUMN company.updated IS \'(DC2Type:datetime_immutable)\'');
+        $this->addSql('CREATE TABLE user_company (user_id INT NOT NULL, company_id INT NOT NULL, PRIMARY KEY(user_id, company_id))');
+        $this->addSql('CREATE INDEX IDX_17B21745A76ED395 ON user_company (user_id)');
+        $this->addSql('CREATE INDEX IDX_17B21745979B1AD6 ON user_company (company_id)');
+        $this->addSql('ALTER TABLE user_company ADD CONSTRAINT FK_17B21745A76ED395 FOREIGN KEY (user_id) REFERENCES users (id) ON DELETE CASCADE NOT DEFERRABLE INITIALLY IMMEDIATE');
+        $this->addSql('ALTER TABLE user_company ADD CONSTRAINT FK_17B21745979B1AD6 FOREIGN KEY (company_id) REFERENCES company (id) ON DELETE CASCADE NOT DEFERRABLE INITIALLY IMMEDIATE');
+        $this->addSql('ALTER TABLE user_account DROP CONSTRAINT fk_253b48aea76ed395');
+        $this->addSql('ALTER TABLE user_account DROP CONSTRAINT fk_253b48ae9b6b5fba');
+        $this->addSql('DROP TABLE account');
+        $this->addSql('DROP TABLE user_account');
+        $this->addSql('DROP INDEX idx_d4e6f819b6b5fba');
+        $this->addSql('ALTER TABLE address RENAME COLUMN account_id TO company_id');
+        $this->addSql('ALTER TABLE address ADD CONSTRAINT FK_D4E6F81979B1AD6 FOREIGN KEY (company_id) REFERENCES company (id) NOT DEFERRABLE INITIALLY IMMEDIATE');
+        $this->addSql('CREATE INDEX IDX_D4E6F81979B1AD6 ON address (company_id)');
+        $this->addSql('DROP INDEX idx_8c200e5e9b6b5fba');
+        $this->addSql('ALTER TABLE business_unit RENAME COLUMN account_id TO company_id');
+        $this->addSql('ALTER TABLE business_unit ADD CONSTRAINT FK_8C200E5E979B1AD6 FOREIGN KEY (company_id) REFERENCES company (id) NOT DEFERRABLE INITIALLY IMMEDIATE');
+        $this->addSql('CREATE INDEX IDX_8C200E5E979B1AD6 ON business_unit (company_id)');
+        $this->addSql('DROP INDEX idx_81398e099b6b5fba');
+        $this->addSql('ALTER TABLE customer RENAME COLUMN account_id TO company_id');
+        $this->addSql('ALTER TABLE customer ADD CONSTRAINT FK_81398E09979B1AD6 FOREIGN KEY (company_id) REFERENCES company (id) NOT DEFERRABLE INITIALLY IMMEDIATE');
+        $this->addSql('CREATE INDEX IDX_81398E09979B1AD6 ON customer (company_id)');
+        $this->addSql('DROP INDEX idx_e7927c749b6b5fba');
+        $this->addSql('ALTER TABLE email RENAME COLUMN account_id TO company_id');
+        $this->addSql('ALTER TABLE email ADD CONSTRAINT FK_E7927C74979B1AD6 FOREIGN KEY (company_id) REFERENCES company (id) NOT DEFERRABLE INITIALLY IMMEDIATE');
+        $this->addSql('CREATE INDEX IDX_E7927C74979B1AD6 ON email (company_id)');
+        $this->addSql('DROP INDEX idx_906517449b6b5fba');
+        $this->addSql('DROP INDEX invoice_account_identifier_idx');
+        $this->addSql('DROP INDEX invoice_account_external_uniq');
+        $this->addSql('ALTER TABLE invoice RENAME COLUMN account_id TO company_id');
+        $this->addSql('ALTER TABLE invoice ADD CONSTRAINT FK_90651744979B1AD6 FOREIGN KEY (company_id) REFERENCES company (id) NOT DEFERRABLE INITIALLY IMMEDIATE');
+        $this->addSql('CREATE INDEX IDX_90651744979B1AD6 ON invoice (company_id)');
+        $this->addSql('CREATE INDEX invoice_company_identifier_idx ON invoice (company_id, identifier)');
+        $this->addSql('CREATE UNIQUE INDEX invoice_company_external_uniq ON invoice (company_id, external_id)');
+        $this->addSql('DROP INDEX idx_5e9e89cb9b6b5fba');
+        $this->addSql('ALTER TABLE location RENAME COLUMN account_id TO company_id');
+        $this->addSql('ALTER TABLE location ADD CONSTRAINT FK_5E9E89CB979B1AD6 FOREIGN KEY (company_id) REFERENCES company (id) NOT DEFERRABLE INITIALLY IMMEDIATE');
+        $this->addSql('CREATE INDEX IDX_5E9E89CB979B1AD6 ON location (company_id)');
+        $this->addSql('DROP INDEX idx_444f97dd9b6b5fba');
+        $this->addSql('ALTER TABLE phone RENAME COLUMN account_id TO company_id');
+        $this->addSql('ALTER TABLE phone ADD CONSTRAINT FK_444F97DD979B1AD6 FOREIGN KEY (company_id) REFERENCES company (id) NOT DEFERRABLE INITIALLY IMMEDIATE');
+        $this->addSql('CREATE INDEX IDX_444F97DD979B1AD6 ON phone (company_id)');
+        $this->addSql('DROP INDEX idx_c9ce8c7d9b6b5fba');
+        $this->addSql('DROP INDEX prospect_account_postal_code_idx');
+        $this->addSql('DROP INDEX prospect_account_postal_code_short_idx');
+        $this->addSql('DROP INDEX prospect_account_city_idx');
+        $this->addSql('DROP INDEX prospect_account_state_idx');
+        $this->addSql('DROP INDEX prospect_account_external_uniq');
+        $this->addSql('ALTER TABLE prospect RENAME COLUMN account_id TO company_id');
+        $this->addSql('ALTER TABLE prospect ADD CONSTRAINT FK_C9CE8C7D979B1AD6 FOREIGN KEY (company_id) REFERENCES company (id) NOT DEFERRABLE INITIALLY IMMEDIATE');
+        $this->addSql('CREATE INDEX IDX_C9CE8C7D979B1AD6 ON prospect (company_id)');
+        $this->addSql('CREATE INDEX prospect_company_postal_code_idx ON prospect (company_id, postal_code)');
+        $this->addSql('CREATE INDEX prospect_company_postal_code_short_idx ON prospect (company_id, postal_code_short)');
+        $this->addSql('CREATE INDEX prospect_company_city_idx ON prospect (company_id, city)');
+        $this->addSql('CREATE INDEX prospect_company_state_idx ON prospect (company_id, state)');
+        $this->addSql('CREATE UNIQUE INDEX prospect_company_external_uniq ON prospect (company_id, external_id)');
+        $this->addSql('DROP INDEX idx_496e6ef29b6b5fba');
+        $this->addSql('ALTER TABLE saved_query RENAME COLUMN account_id TO company_id');
+        $this->addSql('ALTER TABLE saved_query ADD CONSTRAINT FK_496E6EF2979B1AD6 FOREIGN KEY (company_id) REFERENCES company (id) NOT DEFERRABLE INITIALLY IMMEDIATE');
+        $this->addSql('CREATE INDEX IDX_496E6EF2979B1AD6 ON saved_query (company_id)');
+        $this->addSql('DROP INDEX idx_a3c664d39b6b5fba');
+        $this->addSql('ALTER TABLE subscription RENAME COLUMN account_id TO company_id');
+        $this->addSql('ALTER TABLE subscription ADD CONSTRAINT FK_A3C664D3979B1AD6 FOREIGN KEY (company_id) REFERENCES company (id) NOT DEFERRABLE INITIALLY IMMEDIATE');
+        $this->addSql('CREATE INDEX IDX_A3C664D3979B1AD6 ON subscription (company_id)');
+    }
+
+    public function down(Schema $schema): void
+    {
+        $this->addSql('ALTER TABLE address DROP CONSTRAINT FK_D4E6F81979B1AD6');
+        $this->addSql('ALTER TABLE business_unit DROP CONSTRAINT FK_8C200E5E979B1AD6');
+        $this->addSql('ALTER TABLE customer DROP CONSTRAINT FK_81398E09979B1AD6');
+        $this->addSql('ALTER TABLE email DROP CONSTRAINT FK_E7927C74979B1AD6');
+        $this->addSql('ALTER TABLE invoice DROP CONSTRAINT FK_90651744979B1AD6');
+        $this->addSql('ALTER TABLE location DROP CONSTRAINT FK_5E9E89CB979B1AD6');
+        $this->addSql('ALTER TABLE phone DROP CONSTRAINT FK_444F97DD979B1AD6');
+        $this->addSql('ALTER TABLE prospect DROP CONSTRAINT FK_C9CE8C7D979B1AD6');
+        $this->addSql('ALTER TABLE saved_query DROP CONSTRAINT FK_496E6EF2979B1AD6');
+        $this->addSql('ALTER TABLE subscription DROP CONSTRAINT FK_A3C664D3979B1AD6');
+        $this->addSql('DROP SEQUENCE company_id_seq CASCADE');
+        $this->addSql('CREATE SEQUENCE account_id_seq INCREMENT BY 1 MINVALUE 1 START 1');
+        $this->addSql('CREATE TABLE account (id INT NOT NULL, identifier TEXT NOT NULL, name TEXT NOT NULL, is_active BOOLEAN DEFAULT true NOT NULL, is_deleted BOOLEAN DEFAULT false NOT NULL, created TIMESTAMP(0) WITHOUT TIME ZONE NOT NULL, updated TIMESTAMP(0) WITHOUT TIME ZONE NOT NULL, PRIMARY KEY(id))');
+        $this->addSql('CREATE UNIQUE INDEX uniq_7d3656a4772e836a ON account (identifier)');
+        $this->addSql('COMMENT ON COLUMN account.created IS \'(DC2Type:datetime_immutable)\'');
+        $this->addSql('COMMENT ON COLUMN account.updated IS \'(DC2Type:datetime_immutable)\'');
+        $this->addSql('CREATE TABLE user_account (user_id INT NOT NULL, account_id INT NOT NULL, PRIMARY KEY(user_id, account_id))');
+        $this->addSql('CREATE INDEX idx_253b48aea76ed395 ON user_account (user_id)');
+        $this->addSql('CREATE INDEX idx_253b48ae9b6b5fba ON user_account (account_id)');
+        $this->addSql('ALTER TABLE user_account ADD CONSTRAINT fk_253b48aea76ed395 FOREIGN KEY (user_id) REFERENCES users (id) ON DELETE CASCADE NOT DEFERRABLE INITIALLY IMMEDIATE');
+        $this->addSql('ALTER TABLE user_account ADD CONSTRAINT fk_253b48ae9b6b5fba FOREIGN KEY (account_id) REFERENCES account (id) ON DELETE CASCADE NOT DEFERRABLE INITIALLY IMMEDIATE');
+        $this->addSql('ALTER TABLE user_company DROP CONSTRAINT FK_17B21745A76ED395');
+        $this->addSql('ALTER TABLE user_company DROP CONSTRAINT FK_17B21745979B1AD6');
+        $this->addSql('DROP TABLE company');
+        $this->addSql('DROP TABLE user_company');
+        $this->addSql('DROP INDEX IDX_E7927C74979B1AD6');
+        $this->addSql('ALTER TABLE email RENAME COLUMN company_id TO account_id');
+        $this->addSql('ALTER TABLE email ADD CONSTRAINT fk_e7927c749b6b5fba FOREIGN KEY (account_id) REFERENCES account (id) NOT DEFERRABLE INITIALLY IMMEDIATE');
+        $this->addSql('CREATE INDEX idx_e7927c749b6b5fba ON email (account_id)');
+        $this->addSql('DROP INDEX IDX_D4E6F81979B1AD6');
+        $this->addSql('ALTER TABLE address RENAME COLUMN company_id TO account_id');
+        $this->addSql('ALTER TABLE address ADD CONSTRAINT fk_d4e6f819b6b5fba FOREIGN KEY (account_id) REFERENCES account (id) NOT DEFERRABLE INITIALLY IMMEDIATE');
+        $this->addSql('CREATE INDEX idx_d4e6f819b6b5fba ON address (account_id)');
+        $this->addSql('DROP INDEX IDX_496E6EF2979B1AD6');
+        $this->addSql('ALTER TABLE saved_query RENAME COLUMN company_id TO account_id');
+        $this->addSql('ALTER TABLE saved_query ADD CONSTRAINT fk_496e6ef29b6b5fba FOREIGN KEY (account_id) REFERENCES account (id) NOT DEFERRABLE INITIALLY IMMEDIATE');
+        $this->addSql('CREATE INDEX idx_496e6ef29b6b5fba ON saved_query (account_id)');
+        $this->addSql('DROP INDEX IDX_8C200E5E979B1AD6');
+        $this->addSql('ALTER TABLE business_unit RENAME COLUMN company_id TO account_id');
+        $this->addSql('ALTER TABLE business_unit ADD CONSTRAINT fk_8c200e5e9b6b5fba FOREIGN KEY (account_id) REFERENCES account (id) NOT DEFERRABLE INITIALLY IMMEDIATE');
+        $this->addSql('CREATE INDEX idx_8c200e5e9b6b5fba ON business_unit (account_id)');
+        $this->addSql('DROP INDEX IDX_81398E09979B1AD6');
+        $this->addSql('ALTER TABLE customer RENAME COLUMN company_id TO account_id');
+        $this->addSql('ALTER TABLE customer ADD CONSTRAINT fk_81398e099b6b5fba FOREIGN KEY (account_id) REFERENCES account (id) NOT DEFERRABLE INITIALLY IMMEDIATE');
+        $this->addSql('CREATE INDEX idx_81398e099b6b5fba ON customer (account_id)');
+        $this->addSql('DROP INDEX IDX_5E9E89CB979B1AD6');
+        $this->addSql('ALTER TABLE location RENAME COLUMN company_id TO account_id');
+        $this->addSql('ALTER TABLE location ADD CONSTRAINT fk_5e9e89cb9b6b5fba FOREIGN KEY (account_id) REFERENCES account (id) NOT DEFERRABLE INITIALLY IMMEDIATE');
+        $this->addSql('CREATE INDEX idx_5e9e89cb9b6b5fba ON location (account_id)');
+        $this->addSql('DROP INDEX IDX_C9CE8C7D979B1AD6');
+        $this->addSql('DROP INDEX prospect_company_postal_code_idx');
+        $this->addSql('DROP INDEX prospect_company_postal_code_short_idx');
+        $this->addSql('DROP INDEX prospect_company_city_idx');
+        $this->addSql('DROP INDEX prospect_company_state_idx');
+        $this->addSql('DROP INDEX prospect_company_external_uniq');
+        $this->addSql('ALTER TABLE prospect RENAME COLUMN company_id TO account_id');
+        $this->addSql('ALTER TABLE prospect ADD CONSTRAINT fk_c9ce8c7d9b6b5fba FOREIGN KEY (account_id) REFERENCES account (id) NOT DEFERRABLE INITIALLY IMMEDIATE');
+        $this->addSql('CREATE INDEX idx_c9ce8c7d9b6b5fba ON prospect (account_id)');
+        $this->addSql('CREATE INDEX prospect_account_postal_code_idx ON prospect (account_id, postal_code)');
+        $this->addSql('CREATE INDEX prospect_account_postal_code_short_idx ON prospect (account_id, postal_code_short)');
+        $this->addSql('CREATE INDEX prospect_account_city_idx ON prospect (account_id, city)');
+        $this->addSql('CREATE INDEX prospect_account_state_idx ON prospect (account_id, state)');
+        $this->addSql('CREATE UNIQUE INDEX prospect_account_external_uniq ON prospect (account_id, external_id)');
+        $this->addSql('DROP INDEX IDX_444F97DD979B1AD6');
+        $this->addSql('ALTER TABLE phone RENAME COLUMN company_id TO account_id');
+        $this->addSql('ALTER TABLE phone ADD CONSTRAINT fk_444f97dd9b6b5fba FOREIGN KEY (account_id) REFERENCES account (id) NOT DEFERRABLE INITIALLY IMMEDIATE');
+        $this->addSql('CREATE INDEX idx_444f97dd9b6b5fba ON phone (account_id)');
+        $this->addSql('DROP INDEX IDX_90651744979B1AD6');
+        $this->addSql('DROP INDEX invoice_company_identifier_idx');
+        $this->addSql('DROP INDEX invoice_company_external_uniq');
+        $this->addSql('ALTER TABLE invoice RENAME COLUMN company_id TO account_id');
+        $this->addSql('ALTER TABLE invoice ADD CONSTRAINT fk_906517449b6b5fba FOREIGN KEY (account_id) REFERENCES account (id) NOT DEFERRABLE INITIALLY IMMEDIATE');
+        $this->addSql('CREATE INDEX idx_906517449b6b5fba ON invoice (account_id)');
+        $this->addSql('CREATE INDEX invoice_account_identifier_idx ON invoice (account_id, identifier)');
+        $this->addSql('CREATE UNIQUE INDEX invoice_account_external_uniq ON invoice (account_id, external_id)');
+        $this->addSql('DROP INDEX IDX_A3C664D3979B1AD6');
+        $this->addSql('ALTER TABLE subscription RENAME COLUMN company_id TO account_id');
+        $this->addSql('ALTER TABLE subscription ADD CONSTRAINT fk_a3c664d39b6b5fba FOREIGN KEY (account_id) REFERENCES account (id) NOT DEFERRABLE INITIALLY IMMEDIATE');
+        $this->addSql('CREATE INDEX idx_a3c664d39b6b5fba ON subscription (account_id)');
+    }
+}

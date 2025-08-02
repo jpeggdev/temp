@@ -1,0 +1,51 @@
+{
+  "servers": {
+    "filesystem": {
+      "command": "npx",
+      "args": ["-y", "@modelcontextprotocol/server-filesystem", "/tmp"],
+      "description": "File system server for /tmp directory",
+      "env": {}
+    },
+    "git": {
+      "command": "npx", 
+      "args": ["-y", "@modelcontextprotocol/server-git", "--repository", "."],
+      "description": "Git server for current repository",
+      "env": {}
+    },
+    "sqlite": {
+      "command": "npx",
+      "args": ["-y", "@modelcontextprotocol/server-sqlite", "--db-path", "./example.db"],
+      "description": "SQLite database server",
+      "env": {}
+    },
+    "python-example": {
+      "command": "uv",
+      "args": ["run", "python", "-m", "my_mcp_server"],
+      "description": "Example Python MCP server using uv",
+      "env": {
+        "PYTHONPATH": "./python-servers"
+      }
+    },
+    "custom-server": {
+      "command": "node",
+      "args": ["./custom-mcp-server/dist/index.js"],
+      "description": "Custom Node.js MCP server",
+      "env": {
+        "NODE_ENV": "production"
+      }
+    }
+  },
+  "proxy": {
+    "host": "localhost",
+    "port": 3000,
+    "cors": {
+      "enabled": true,
+      "origins": ["http://localhost:3001", "http://127.0.0.1:3001"]
+    },
+    "logging": {
+      "level": "info",
+      "requests": true,
+      "responses": false
+    }
+  }
+}
